@@ -16,6 +16,7 @@
 		B48EE0141F04963000668DFD /* VictoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0131F04963000668DFD /* VictoryTests.swift */; };
 		B48EE01F1F04963000668DFD /* VictoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE01E1F04963000668DFD /* VictoryUITests.swift */; };
 		B48EE02F1F049A4A00668DFD /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE02E1F049A4A00668DFD /* Run.swift */; };
+		B48EE0311F049BF000668DFD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0301F049BF000668DFD /* Location.swift */; };
 		CE4D4632FEFFA6D7920643D6 /* Pods_VictoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447831D7F05D16B2E10AB92E /* Pods_VictoryTests.framework */; };
 		D18CA73B839A0BC799DA4C77 /* Pods_Victory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		B48EE01E1F04963000668DFD /* VictoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryUITests.swift; sourceTree = "<group>"; };
 		B48EE0201F04963000668DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48EE02E1F049A4A00668DFD /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		B48EE0301F049BF000668DFD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E3E0F4A01F832959A82426FB /* Pods-VictoryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VictoryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VictoryTests/Pods-VictoryTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 		B48EDFFD1F04963000668DFD /* Victory */ = {
 			isa = PBXGroup;
 			children = (
+				B48EE0321F049E7D00668DFD /* Services */,
 				B48EE02D1F049A3700668DFD /* Models */,
 				B48EE02C1F0499E800668DFD /* ViewControllers */,
 				B48EDFFE1F04963000668DFD /* AppDelegate.swift */,
@@ -180,8 +183,16 @@
 			isa = PBXGroup;
 			children = (
 				B48EE02E1F049A4A00668DFD /* Run.swift */,
+				B48EE0301F049BF000668DFD /* Location.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B48EE0321F049E7D00668DFD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,6 +475,7 @@
 			files = (
 				B48EE0011F04963000668DFD /* ViewController.swift in Sources */,
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
+				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
 				B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
