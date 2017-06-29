@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ListViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EGz-G4-TgX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="runCell" id="EGz-G4-TgX" customClass="RunCell" customModule="Victory" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EGz-G4-TgX" id="X0Q-VI-QP4">
@@ -44,17 +44,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HKv-Eh-qeh">
-                        <barButtonItem key="rightBarButtonItem" title="New Run" id="PqE-dS-Wot"/>
+                        <barButtonItem key="rightBarButtonItem" title="New Run" id="PqE-dS-Wot">
+                            <connections>
+                                <segue destination="LIc-Ck-xZT" kind="presentation" id="wF5-CR-RjM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="1fU-T7-Zww" id="EnG-ki-ll1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Run Detail View Controller-->
         <scene sceneID="0pT-BZ-SMm">
             <objects>
-                <viewController id="LIc-Ck-xZT" sceneMemberID="viewController">
+                <viewController id="LIc-Ck-xZT" customClass="RunDetailViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BXW-g0-Ftj"/>
                         <viewControllerLayoutGuide type="bottom" id="xBm-va-KDF"/>
@@ -67,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zbr-Zq-tSz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1434" y="139"/>
+            <point key="canvasLocation" x="1271" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dyN-av-wSb">
