@@ -10,10 +10,28 @@ import Foundation
 import RealmSwift
 
 class Location: Object {
-
+    
+    // MARK: - Init
+    
+    convenience init(latitude: Double, longitude: Double, timestamp: Date, run: Run) {
+        self.init()
+        self.latitude = latitude
+        self.longitude = longitude
+        self.timestamp = timestamp
+        self.run = run
+    }
+    
+    // MARK: - Persisted Properties
+    
     @objc dynamic var latitude: Double = 0.0
     @objc dynamic var longitude: Double = 0.0
     @objc dynamic var timestamp: Date = Date()
     @objc dynamic var run = Run()
+    
+    // MARK: - Functions
+    
+    override class func primaryKey() -> String? {
+        return "timestamp"
+    }
     
 }

@@ -1,5 +1,5 @@
 //
-//  ListViewController.swift
+//  MainViewController.swift
 //  Victory
 //
 //  Created by Ian Rahman on 6/28/17.
@@ -8,45 +8,50 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
-class ListViewController: UIViewController {
-
+class MainViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var tableView: UITableView!
     let runCellIdentifier = "runCell"
+    let locationManager = CLLocationManager()
     let realm = try! Realm()
+    let runs = [Run]()
+    
+    // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(RunCell.self, forCellReuseIdentifier: runCellIdentifier)
     }
     
-    
-
 }
 
 // MARK: - TableView Delegate
 
-extension ListViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+//        let runs = realm.objects(Run.self).sorted(byKeyPath: "date")
+//        let run = runs(indexPath.row)
+//        let runDetailVC = RunDetailViewController(run: run)
+//        presen
     }
     
 }
 
 // MARK: - TableView Data Source
 
-extension ListViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return realm.objects(Run.self).count
+        // return realm.objects(Run.self).count
+        return runs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath) as? RunCell
-        else {
-            return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         return cell
     }
     

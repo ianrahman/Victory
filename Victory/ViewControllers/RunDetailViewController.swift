@@ -10,6 +10,25 @@ import UIKit
 
 class RunDetailViewController: UIViewController {
     
+    // MARK: - Properties
     
+    var run: Run!
+    
+    // MARK: - Init
+    
+    init(run: Run) {
+        super.init(nibName: "RunDetail", bundle: nil)
+        self.run = run
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - VC Lifecycle
+    
+    override func viewDidLoad() {
+        
+    }
     
 }
