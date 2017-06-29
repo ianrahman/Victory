@@ -11,9 +11,9 @@ import RealmSwift
 
 class Location: Object {
 
-    dynamic var latitude: Double = 0.0
-    dynamic var longitude: Double = 0.0
-    dynamic var timestamp: Date = Date()
-    dynamic var run = Run()
+    @objc dynamic var latitude: Double = 0.0
+    @objc dynamic var longitude: Double = 0.0
+    @objc dynamic var timestamp: Date = Date()
+    @objc dynamic var run = Run()
     
 }

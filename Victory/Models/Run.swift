@@ -11,9 +11,17 @@ import RealmSwift
 
 class Run: Object {
     
-    dynamic var distance: Double = 0.0
-    dynamic var duration: Int = 0
-    dynamic var startTime: Date = Date()
-    dynamic var locations = List<Location>()
+    // MARK: - Init
+    convenience init(distance: Double) {
+        self.init()
+        self.distance = distance
+    }
+    
+    // MARK: - Properties
+    
+    @objc dynamic var distance: Double = 0.0
+    @objc dynamic var duration: Int = 0
+    @objc dynamic var startTime: Date = Date()
+    let locations = List<Location>()
     
 }
