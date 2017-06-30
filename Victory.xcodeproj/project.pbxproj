@@ -11,7 +11,6 @@
 		B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EB51F059C5E00C37AFE /* LocationManager.swift */; };
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
 		B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */; };
-		B40E5ECA1F068BD900C37AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC91F068BD900C37AFE /* Extensions.swift */; };
 		B40E5ECC1F068C3A00C37AFE /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECB1F068C3A00C37AFE /* ViewControllerDelegate.swift */; };
 		B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */; };
 		B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EDFFE1F04963000668DFD /* AppDelegate.swift */; };
@@ -56,13 +55,11 @@
 		863B4A97021AAB0E95DADAA6 /* Pods-Victory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Victory.release.xcconfig"; path = "Pods/Target Support Files/Pods-Victory/Pods-Victory.release.xcconfig"; sourceTree = "<group>"; };
 		A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Victory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40E5EB51F059C5E00C37AFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		B40E5EBC1F0688A500C37AFE /* ExampleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCoordinator.swift; sourceTree = "<group>"; };
+		B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunCoordinator.swift; sourceTree = "<group>"; };
 		B40E5EBD1F0688A500C37AFE /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
-		B40E5EBE1F0688A500C37AFE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = "../../../ios-sapling/sapling/services/Services.swift"; sourceTree = "<group>"; };
 		B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
-		B40E5EC91F068BD900C37AFE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B40E5ECB1F068C3A00C37AFE /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
 		B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		B48EDFFB1F04963000668DFD /* Victory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Victory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,9 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */,
-				B40E5EBE1F0688A500C37AFE /* AppCoordinator.swift */,
 				B40E5EBD1F0688A500C37AFE /* RootViewCoordinator.swift */,
-				B40E5EBC1F0688A500C37AFE /* ExampleCoordinator.swift */,
+				B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -151,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				B48EDFFE1F04963000668DFD /* AppDelegate.swift */,
-				B40E5EC91F068BD900C37AFE /* Extensions.swift */,
 				B48EE0051F04963000668DFD /* Assets.xcassets */,
 				B48EE0071F04963000668DFD /* LaunchScreen.storyboard */,
 				B48EE00A1F04963000668DFD /* Info.plist */,
@@ -537,7 +532,6 @@
 				B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */,
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
-				B40E5ECA1F068BD900C37AFE /* Extensions.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
 				B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */,
 				B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */,

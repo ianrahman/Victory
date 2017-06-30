@@ -7,7 +7,7 @@ target 'Victory' do
 
   # Pods for Victory
   pod 'RealmSwift'
-
+  
   target 'VictoryTests' do
     inherit! :search_paths
     # Pods for testing
