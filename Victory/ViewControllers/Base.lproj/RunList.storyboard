@@ -13,10 +13,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Main View Controller-->
+        <!--Run List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RunListViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -66,13 +66,10 @@
                     <navigationItem key="navigationItem" id="HKv-Eh-qeh">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PqE-dS-Wot">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <segue destination="M6x-y1-jzN" kind="presentation" id="t3a-Yp-8hO"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="1fU-T7-Zww" id="YEA-XT-PDX"/>
+                        <outlet property="tableView" destination="1fU-T7-Zww" id="mTI-Ns-i5l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

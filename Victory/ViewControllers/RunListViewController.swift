@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  RunListViewController.swift
 //  Victory
 //
 //  Created by Ian Rahman on 6/28/17.
@@ -8,9 +8,8 @@
 
 import UIKit
 import RealmSwift
-import CoreLocation
 
-class MainViewController: UIViewController {
+class RunListViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -26,24 +25,27 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - Functions
+    
+    
 }
 
 // MARK: - TableView Delegate
 
-extension MainViewController: UITableViewDelegate {
+extension RunListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let runs = realm.objects(Run.self).sorted(byKeyPath: "date")
 //        let run = runs(indexPath.row)
 //        let runDetailVC = RunDetailViewController(run: run)
-//        presen
+//        present
     }
     
 }
 
 // MARK: - TableView Data Source
 
-extension MainViewController: UITableViewDataSource {
+extension RunListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return realm.objects(Run.self).count

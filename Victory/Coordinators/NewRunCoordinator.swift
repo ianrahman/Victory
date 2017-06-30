@@ -2,18 +2,19 @@ import UIKit
 
 protocol NewRunCoordinatorDelegate: class {
     
-    func newRunCoordinatorDidRequestCancel(newOrderCoordinator: NewRunCoordinator)
-    func newRunCoordinator(newRunCoordinator: NewRunCoordinator, didAddOrder orderPayload: NewRunCoordinatorPayload)
+    func newRunCoordinatorDidRequestCancel(newRunCoordinator: NewRunCoordinator)
+    func newRunCoordinator(newRunCoordinator: NewRunCoordinator, didAddRun runPayload: NewRunCoordinatorPayload)
     
 }
 
 final class NewRunCoordinatorPayload {
-    var property: String?
+    var run: Run?
 }
 
 final class NewRunCoordinator: RootViewCoordinator {
     
     // MARK: - Properties
+    
     let services: Services
     var childCoordinators: [Coordinator] = []
     
@@ -21,9 +22,9 @@ final class NewRunCoordinator: RootViewCoordinator {
         return self.navigationController
     }
     
-    weak var delegate: ExampleCoordinatorDelegate?
+    weak var delegate: RunCoordinatorDelegate?
     
-    var examplePayload: ExampleCoordinatorPayload?
+    var payload: RunCoordinatorPayload?
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
@@ -31,11 +32,13 @@ final class NewRunCoordinator: RootViewCoordinator {
     }()
     
     // MARK: - Init
+    
     init(with services: Services) {
         self.services = services
     }
     
     // MARK: - Functions
+    
     func start() {
         let viewController = ViewController(services: self.services)
         viewController.delegate = self
@@ -51,6 +54,7 @@ final class NewRunCoordinator: RootViewCoordinator {
 }
 
 // MARK: - ViewControllerDelegate
+
 extension NewRunCoordinator: ViewControllerDelegate {
     
     func viewControllerDidLoad(viewController: ViewController) {

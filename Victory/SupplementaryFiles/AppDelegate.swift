@@ -46,11 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func showHomeViewController() {
+        
         let homeViewController = NewRunViewController(services: self.services, delegate: self)
         self.navigationController.viewControllers = [homeViewController]
     }
     
 }
+
+// MARK: - CoordinatorProtocoldelegate
+
+extension AppDelegate: Coordinator { }
 
 // MARK: - ViewControllerDelegate
 
@@ -70,26 +75,25 @@ extension AppDelegate: ViewControllerDelegate {
 // MARK: - NewRunCoordinatorDelegate
 //extension AppDelegate: NewRunCoordinatorDelegate {
 //
-//    func newRunCoordinatorDidRequestCancel(newRunCoordinator: NewOrderCoordinator) {
+//    func newRunCoordinatorDidRequestCancel(newRunCoordinator: NewRunCoordinator) {
 //
 //        newRunCoordinator.rootViewController.dismiss(animated: true)
 //        self.removeChildCoordinator(newRunCoordinator)
 //
 //    }
 //
-//    func newOrderCoordinator(newOrderCoordinator: NewOrderCoordinator, didAddOrder orderPayload: NewOrderCoordinatorPayload) {
+//    func newRunCoordinator(newRunCoordinator: NewRunCoordinator, didAddRun runPayload: NewRunCoordinatorPayload) {
 //
-//        guard let drinkType = orderPayload.selectedDrinkType,
-//            let snackType = orderPayload.selectedSnackType else {
+//        guard let drinkType = runPayload.selectedDrinkType,
+//            let snackType = runPayload.selectedSnackType else {
 //                return
 //        }
 //
-//        let order = Order(drinkType: drinkType, snackType: snackType)
+//        let run = Run()
 //
-//        self.services.dataService.orders.append(order)
+//        self.services.dataService.runs.append(run)
 //
-//        newOrderCoordinator.rootViewController.dismiss(animated: true)
-//        self.removeChildCoordinator(newOrderCoordinator)
+//        newRunCoordinator.rootViewController.dismiss(animated: true)
+//        self.removeChildCoordinator(newRunCoordinator)
 //    }
 //}
-
