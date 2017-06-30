@@ -82,7 +82,7 @@
         <!--RunDetail-->
         <scene sceneID="bCs-WO-rCG">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="RunDetail" id="M6x-y1-jzN" userLabel="RunDetail" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="RunDetail" storyboardName="RunDetail" id="M6x-y1-jzN" userLabel="RunDetail" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSm-sW-1Db" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1303" y="139"/>

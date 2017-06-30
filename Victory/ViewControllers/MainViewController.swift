@@ -52,6 +52,8 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
+        cell.textLabel?.text = "\(indexPath.row)"
+        cell.detailTextLabel?.text = "devil"
         return cell
     }
     

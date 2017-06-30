@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Run Detail View Controller-->
+        <!--Run Details-->
         <scene sceneID="F4m-D0-wmH">
             <objects>
-                <viewController storyboardIdentifier="RunDetail" id="S7a-8C-Uyc" customClass="RunDetailViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RunDetail" title="Run Details" id="S7a-8C-Uyc" customClass="RunDetailViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q6Y-na-NdK"/>
                         <viewControllerLayoutGuide type="bottom" id="UCp-ho-zxf"/>

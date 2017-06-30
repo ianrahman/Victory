@@ -32,9 +32,9 @@ class Run: Object {
     }
     
     // MARK: - Functions
-    
-    override class func primaryKey() -> String? {
-        return "date"
-    }
+//    
+//    override class func primaryKey() -> String? {
+//        return "date"
+//    }
     
 }

@@ -26,12 +26,12 @@ class Location: Object {
     @objc dynamic var latitude: Double = 0.0
     @objc dynamic var longitude: Double = 0.0
     @objc dynamic var timestamp: Date = Date()
-    @objc dynamic var run = Run()
+    @objc dynamic var run: Run?
     
     // MARK: - Functions
     
-    override class func primaryKey() -> String? {
-        return "timestamp"
-    }
-    
+//    override class func primaryKey() -> String? {
+//        return "timestamp"
+//    }
+//
 }

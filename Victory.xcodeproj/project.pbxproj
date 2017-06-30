@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		17751DA17D0BC13498DC75F4 /* Pods_VictoryUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CE821D7431E89F0EC5450B /* Pods_VictoryUITests.framework */; };
 		B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EB51F059C5E00C37AFE /* LocationManager.swift */; };
+		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
+		B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */; };
+		B40E5ECA1F068BD900C37AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC91F068BD900C37AFE /* Extensions.swift */; };
+		B40E5ECC1F068C3A00C37AFE /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECB1F068C3A00C37AFE /* ViewControllerDelegate.swift */; };
+		B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */; };
 		B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EDFFE1F04963000668DFD /* AppDelegate.swift */; };
 		B48EE0011F04963000668DFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0001F04963000668DFD /* MainViewController.swift */; };
 		B48EE0041F04963000668DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48EE0021F04963000668DFD /* Main.storyboard */; };
@@ -51,6 +56,15 @@
 		863B4A97021AAB0E95DADAA6 /* Pods-Victory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Victory.release.xcconfig"; path = "Pods/Target Support Files/Pods-Victory/Pods-Victory.release.xcconfig"; sourceTree = "<group>"; };
 		A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Victory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40E5EB51F059C5E00C37AFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		B40E5EBC1F0688A500C37AFE /* ExampleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCoordinator.swift; sourceTree = "<group>"; };
+		B40E5EBD1F0688A500C37AFE /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
+		B40E5EBE1F0688A500C37AFE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = "../../../ios-sapling/sapling/services/Services.swift"; sourceTree = "<group>"; };
+		B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
+		B40E5EC91F068BD900C37AFE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B40E5ECB1F068C3A00C37AFE /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
+		B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		B48EDFFB1F04963000668DFD /* Victory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Victory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48EDFFE1F04963000668DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48EE0001F04963000668DFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +136,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B40E5EB81F06886200C37AFE /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */,
+				B40E5EBE1F0688A500C37AFE /* AppCoordinator.swift */,
+				B40E5EBD1F0688A500C37AFE /* RootViewCoordinator.swift */,
+				B40E5EBC1F0688A500C37AFE /* ExampleCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		B40E5EC81F068B9A00C37AFE /* SupplementaryFiles */ = {
+			isa = PBXGroup;
+			children = (
+				B48EDFFE1F04963000668DFD /* AppDelegate.swift */,
+				B40E5EC91F068BD900C37AFE /* Extensions.swift */,
+				B48EE0051F04963000668DFD /* Assets.xcassets */,
+				B48EE0071F04963000668DFD /* LaunchScreen.storyboard */,
+				B48EE00A1F04963000668DFD /* Info.plist */,
+			);
+			path = SupplementaryFiles;
+			sourceTree = "<group>";
+		};
 		B48EDFF21F04963000668DFD = {
 			isa = PBXGroup;
 			children = (
@@ -147,14 +184,12 @@
 		B48EDFFD1F04963000668DFD /* Victory */ = {
 			isa = PBXGroup;
 			children = (
+				B40E5EB81F06886200C37AFE /* Coordinators */,
 				B48EE0321F049E7D00668DFD /* Services */,
 				B48EE02D1F049A3700668DFD /* Models */,
 				B4B95A5D1F0550E900FE8C22 /* Views */,
 				B48EE02C1F0499E800668DFD /* ViewControllers */,
-				B48EDFFE1F04963000668DFD /* AppDelegate.swift */,
-				B48EE0051F04963000668DFD /* Assets.xcassets */,
-				B48EE0071F04963000668DFD /* LaunchScreen.storyboard */,
-				B48EE00A1F04963000668DFD /* Info.plist */,
+				B40E5EC81F068B9A00C37AFE /* SupplementaryFiles */,
 			);
 			path = Victory;
 			sourceTree = "<group>";
@@ -180,10 +215,13 @@
 		B48EE02C1F0499E800668DFD /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */,
+				B40E5ECB1F068C3A00C37AFE /* ViewControllerDelegate.swift */,
 				B48EE0001F04963000668DFD /* MainViewController.swift */,
 				B48EE0021F04963000668DFD /* Main.storyboard */,
 				B4B95A5B1F054FB200FE8C22 /* RunDetailViewController.swift */,
 				B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */,
+				B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -200,6 +238,7 @@
 		B48EE0321F049E7D00668DFD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B40E5EC21F06896800C37AFE /* Services.swift */,
 				B40E5EB51F059C5E00C37AFE /* LocationManager.swift */,
 			);
 			path = Services;
@@ -491,11 +530,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */,
 				B48EE0011F04963000668DFD /* MainViewController.swift in Sources */,
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
+				B40E5ECC1F068C3A00C37AFE /* ViewControllerDelegate.swift in Sources */,
 				B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */,
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
+				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
+				B40E5ECA1F068BD900C37AFE /* Extensions.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
+				B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */,
 				B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,6 +615,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -626,6 +672,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -659,10 +707,10 @@
 			baseConfigurationReference = 1E05D73EF8AC4B4BB96A41E6 /* Pods-Victory.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2C8QT4S3BM;
-				INFOPLIST_FILE = Victory/Info.plist;
+				DEVELOPMENT_TEAM = SH59RXV6F9;
+				INFOPLIST_FILE = "$(SRCROOT)/Victory/SupplementaryFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.Arseek;
+				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.Victory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -674,10 +722,10 @@
 			baseConfigurationReference = 863B4A97021AAB0E95DADAA6 /* Pods-Victory.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2C8QT4S3BM;
-				INFOPLIST_FILE = Victory/Info.plist;
+				DEVELOPMENT_TEAM = SH59RXV6F9;
+				INFOPLIST_FILE = "$(SRCROOT)/Victory/SupplementaryFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.Arseek;
+				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.Victory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
