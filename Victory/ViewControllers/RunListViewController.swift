@@ -25,9 +25,7 @@ class RunListViewController: UIViewController {
     init(services: Services, delegate: ViewControllerDelegate) {
         self.services = services
         self.delegate = delegate
-//        let storyboard = Storyboard(storyboard: .runList)
-        
-        super.init(nibName: "RunList", bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,6 +37,7 @@ class RunListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hi i guess run list should be loaded")
+        let storyboard = Storybard(name: "RunList", bundle: bundle)
     }
     
     // MARK: - Functions

@@ -8,7 +8,6 @@
 
 import UIKit
 
-/// The AppCoordinator is our first coordinator
 final class AppCoordinator: RootViewCoordinator {
     
     // MARK: - Properties
@@ -22,7 +21,7 @@ final class AppCoordinator: RootViewCoordinator {
     
     let window: UIWindow
     
-    private lazy var navigationController: UINavigationController = {
+    fileprivate lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         navigationController.isNavigationBarHidden = true
         return navigationController
@@ -40,15 +39,13 @@ final class AppCoordinator: RootViewCoordinator {
     
     // MARK: - Functions
     
-    /// Starts the coordinator
     public func start() {
-        self.showSplashViewController()
+        self.showInitialViewController()
     }
     
-    /// Creates a new SplashViewController and places it into the navigation controller
-    private func showSplashViewController() {
-        let splashViewController = RunListViewController(services: self.services, delegate: self)
-        self.navigationController.viewControllers = [splashViewController]
+    fileprivate func showInitialViewController() {
+        let initialViewController = RunListViewController(services: self.services, delegate: self)
+        self.navigationController.viewControllers = [initialViewController]
     }
     
 }

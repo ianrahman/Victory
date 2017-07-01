@@ -35,7 +35,7 @@ final class NewRunViewController: UIViewController {
         self.updateView()
     }
     
-    private func updateView() {
+    fileprivate func updateView() {
         
     }
     
