@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let services = Services()
-    var childCoordinators = [Coordinator]()
+//    var childCoordinators: [Coordinator]?
     
     var rootViewController: UIViewController {
         return navigationController
@@ -33,42 +33,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = self.rootViewController
-        window.makeKeyAndVisible()
+        window?.rootViewController = self.rootViewController
+        window?.makeKeyAndVisible()
         
-        appCoordinator.start()
+        start()
         
         return true
     }
     
-    public func start() {
+    func start() {
         self.showHomeViewController()
     }
     
     private func showHomeViewController() {
-        
-        let homeViewController = NewRunViewController(services: self.services, delegate: self)
+        let homeViewController = RunListViewController(services: services, delegate: self)
         self.navigationController.viewControllers = [homeViewController]
     }
     
 }
 
-// MARK: - CoordinatorProtocoldelegate
+// MARK: - Coordinator
 
-extension AppDelegate: Coordinator { }
+//extension AppDelegate: Coordinator { }
 
 // MARK: - ViewControllerDelegate
 
 extension AppDelegate: ViewControllerDelegate {
     
-    func viewControllerDidLoad(viewController: ViewControllerProtocol) {
-        
-        let newRunCoordinator = NewRunCoordinator(with: self.services)
-        newRunCoordinator.delegate = self
-        newRunCoordinator.start()
-        self.addChildCoordinator(newRunCoordinator)
-        self.rootViewController.present(newRunCoordinator.rootViewController, animated: true, completion: nil)
-    }
+//    func viewControllerDidLoad(viewController: ViewControllerProtocol) {
+//        let newRunCoordinator = NewRunCoordinator(with: self.services)
+//        newRunCoordinator.delegate = self
+//        newRunCoordinator.start()
+//        self.addChildCoordinator(newRunCoordinator)
+//        self.rootViewController.present(newRunCoordinator.rootViewController, animated: true, completion: nil)
+//    }
     
 }
 

@@ -13,16 +13,31 @@ class RunListViewController: UIViewController {
     
     // MARK: - Properties
     
+    let services: Services
+    weak var delegate: ViewControllerDelegate?
     @IBOutlet weak var tableView: UITableView!
     let runCellIdentifier = "runCell"
-    let locationManager = CLLocationManager()
     let realm = try! Realm()
     let runs = [Run]()
+    
+    // MARK: - Init
+    
+    init(services: Services, delegate: ViewControllerDelegate) {
+        self.services = services
+        self.delegate = delegate
+        let storyboard = Storyboard(storyboard: .runList)
+        super.init(nibName: "RunList", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - VC Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("hi i guess run list should be loaded")
     }
     
     // MARK: - Functions
@@ -31,7 +46,7 @@ class RunListViewController: UIViewController {
 }
 
 // MARK: - TableView Delegate
-
+    
 extension RunListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -60,3 +75,4 @@ extension RunListViewController: UITableViewDataSource {
     }
     
 }
+

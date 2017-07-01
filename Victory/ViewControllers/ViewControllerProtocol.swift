@@ -12,6 +12,10 @@ protocol ViewControllerProtocol where Self: UIViewController {
     
     init(services: Services, delegate: ViewControllerDelegate)
     var services: Services { get }
-    weak var delegate: ViewControllerDelegate? { get set }
+    weak var delegate: ViewControllerDelegate? { get }
     
 }
+
+protocol ViewControllerDelegate: class { }
+
+
