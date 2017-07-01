@@ -17,5 +17,3 @@ protocol ViewControllerProtocol where Self: UIViewController {
 }
 
 protocol ViewControllerDelegate: class { }
-
-

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Evergreen Labs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol Coordinator: class {
     
@@ -27,3 +27,4 @@ extension Coordinator {
     }
     
 }
+

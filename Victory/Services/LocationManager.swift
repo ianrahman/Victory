@@ -6,8 +6,8 @@
 //  Copyright © 2017 Evergreen Labs. All rights reserved.
 //
 
-import CoreLocation
-
+//import CoreLocation
+//
 //final class LocationManager {
 //    
 //    static let shared = CLLocationManager()

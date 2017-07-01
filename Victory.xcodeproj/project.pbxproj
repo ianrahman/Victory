@@ -13,6 +13,10 @@
 		B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */; };
 		B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
+		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
+		B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */; };
+		B456AE211F074BC200627D8E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC11F06892E00C37AFE /* Coordinator.swift */; };
+		B456AE221F074BD800627D8E /* NewRunCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */; };
 		B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EDFFE1F04963000668DFD /* AppDelegate.swift */; };
 		B48EE0011F04963000668DFD /* RunListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0001F04963000668DFD /* RunListViewController.swift */; };
 		B48EE0041F04963000668DFD /* RunList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48EE0021F04963000668DFD /* RunList.storyboard */; };
@@ -56,11 +60,13 @@
 		A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Victory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40E5EB51F059C5E00C37AFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunCoordinator.swift; sourceTree = "<group>"; };
-		B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		B40E5EC11F06892E00C37AFE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = "../../../ios-sapling/sapling/services/Services.swift"; sourceTree = "<group>"; };
 		B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
 		B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		B44D1EE31F07418200A37106 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
+		B44D1EE51F0745B900A37106 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
 		B48EDFFB1F04963000668DFD /* Victory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Victory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48EDFFE1F04963000668DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B48EE0001F04963000668DFD /* RunListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunListViewController.swift; sourceTree = "<group>"; };
@@ -136,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				B48EDFFE1F04963000668DFD /* AppDelegate.swift */,
-				B40E5EC11F06892E00C37AFE /* CoordinatorProtocol.swift */,
+				B44D1EE51F0745B900A37106 /* AppCoordinator.swift */,
 				B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -158,6 +164,15 @@
 				B44D1EE31F07418200A37106 /* UIKit.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B44D1EE71F07478100A37106 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B40E5EC11F06892E00C37AFE /* Coordinator.swift */,
+				B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B48EDFF21F04963000668DFD = {
@@ -185,6 +200,7 @@
 		B48EDFFD1F04963000668DFD /* Victory */ = {
 			isa = PBXGroup;
 			children = (
+				B44D1EE71F07478100A37106 /* Protocols */,
 				B44D1EE21F07417700A37106 /* Extensions */,
 				B40E5EB81F06886200C37AFE /* Coordinators */,
 				B48EE0321F049E7D00668DFD /* Services */,
@@ -329,6 +345,11 @@
 				TargetAttributes = {
 					B48EDFFA1F04963000668DFD = {
 						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					B48EE00E1F04963000668DFD = {
 						CreatedOnToolsVersion = 9.0;
@@ -531,12 +552,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */,
 				B44D1EE41F07418200A37106 /* UIKit.swift in Sources */,
+				B456AE211F074BC200627D8E /* Coordinator.swift in Sources */,
 				B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */,
 				B48EE0011F04963000668DFD /* RunListViewController.swift in Sources */,
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
 				B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */,
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
+				B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */,
+				B456AE221F074BD800627D8E /* NewRunCoordinator.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
 				B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */,
