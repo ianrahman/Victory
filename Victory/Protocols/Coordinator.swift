@@ -13,6 +13,7 @@ protocol Coordinator: class {
     var services: Services { get }
     var childCoordinators: [Coordinator] { get set }
     var rootViewController: UIViewController { get }
+    func start()
     
 }
 

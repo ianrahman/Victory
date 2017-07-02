@@ -9,23 +9,42 @@
 import UIKit
 import MapKit
 
+protocol RunDetailViewControllerDelegate {
+    
+    func startStopButtonTapped()
+    
+}
+
 final class RunDetailViewController: UIViewController {
     
     // MARK: - Properties
+    
+    weak var coordinator: RunDetailCoordinator?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
-    
     @IBOutlet weak var startStopButton: UIButton!
     
+    lazy var closeBarButtonItem: UIBarButtonItem = {
+        let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeButtonTapped))
+        return closeBarButtonItem
+    }()
     
     // MARK: - Functions
     
-    @IBAction func startStopButtonTapped(_ sender: Any) {
+    override func viewDidLoad() {
+        navigationItem.leftBarButtonItem = closeBarButtonItem
     }
     
+    @IBAction func startStopButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @objc private func closeButtonTapped() {
+        
+    }
     
     // TODO: - Finish implementation
     func layout(for run: Run) {
@@ -35,5 +54,3 @@ final class RunDetailViewController: UIViewController {
     }
     
 }
-
-extension RunDetailViewController: DependencyInjectableVC { }

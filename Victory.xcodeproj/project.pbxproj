@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EB51F059C5E00C37AFE /* LocationManager.swift */; };
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
-		B40E5ECE1F068D0700C37AFE /* DependencyInjectableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */; };
-		B41710891F09633E00129BA8 /* RunDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41710881F09633E00129BA8 /* RunDetailViewModel.swift */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
 		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
 		B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */; };
@@ -42,8 +40,6 @@
 		B40E5EB51F059C5E00C37AFE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B40E5EC11F06892E00C37AFE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = "../../../ios-sapling/sapling/services/Services.swift"; sourceTree = "<group>"; };
-		B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectableVC.swift; sourceTree = "<group>"; };
-		B41710881F09633E00129BA8 /* RunDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunDetailViewModel.swift; sourceTree = "<group>"; };
 		B44D1EE31F07418200A37106 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		B44D1EE51F0745B900A37106 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
@@ -133,7 +129,6 @@
 			children = (
 				B40E5EC11F06892E00C37AFE /* Coordinator.swift */,
 				B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */,
-				B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */,
 				B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */,
 			);
 			path = Protocols;
@@ -161,12 +156,12 @@
 			isa = PBXGroup;
 			children = (
 				B44D1EE71F07478100A37106 /* Protocols */,
-				B44D1EE21F07417700A37106 /* Extensions */,
-				B40E5EB81F06886200C37AFE /* Coordinators */,
 				B48EE0321F049E7D00668DFD /* Services */,
 				B48EE02D1F049A3700668DFD /* Models */,
-				B4B95A5D1F0550E900FE8C22 /* Views */,
+				B40E5EB81F06886200C37AFE /* Coordinators */,
 				B48EE02C1F0499E800668DFD /* ViewControllers */,
+				B44D1EE21F07417700A37106 /* Extensions */,
+				B4B95A5D1F0550E900FE8C22 /* Views */,
 				B40E5EC81F068B9A00C37AFE /* Supplementary */,
 			);
 			path = Victory;
@@ -186,7 +181,6 @@
 			children = (
 				B48EE02E1F049A4A00668DFD /* Run.swift */,
 				B48EE0301F049BF000668DFD /* Location.swift */,
-				B41710881F09633E00129BA8 /* RunDetailViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,13 +335,11 @@
 				B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */,
 				B44D1EE41F07418200A37106 /* UIKit.swift in Sources */,
 				B456AE211F074BC200627D8E /* Coordinator.swift in Sources */,
-				B40E5ECE1F068D0700C37AFE /* DependencyInjectableVC.swift in Sources */,
 				B48EE0011F04963000668DFD /* RunListViewController.swift in Sources */,
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
 				B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */,
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
 				B4C34CEA1F09367D00644A23 /* RunListCoordinator.swift in Sources */,
-				B41710891F09633E00129BA8 /* RunDetailViewModel.swift in Sources */,
 				B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */,
 				B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
