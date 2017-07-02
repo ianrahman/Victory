@@ -34,30 +34,38 @@
                                 <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQQ-Wo-gv8">
-                                        <rect key="frame" x="70.5" y="0.0" width="234.5" height="110.5"/>
+                                        <rect key="frame" x="70.5" y="0.0" width="234.5" height="105"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOO-rx-Bcg">
-                                        <rect key="frame" x="144" y="110.5" width="87.5" height="74.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                        <rect key="frame" x="122" y="105" width="131.5" height="105.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLe-CA-pZg">
-                                        <rect key="frame" x="142.5" y="185" width="90.5" height="74"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                        <rect key="frame" x="153.5" y="210.5" width="68" height="52.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCq-Me-tdQ">
-                                        <rect key="frame" x="145.5" y="259" width="84" height="74.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="du4-Ka-pIx">
+                                        <rect key="frame" x="0.0" y="263" width="375" height="70.5"/>
+                                        <color key="backgroundColor" red="0.78783312179999998" green="0.036849190609999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                        <state key="normal" title="Start/Stop">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startStopButtonTapped:" destination="S7a-8C-Uyc" eventType="touchUpInside" id="ZLF-NT-zrG"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="du4-Ka-pIx" firstAttribute="width" secondItem="0lm-YT-xc7" secondAttribute="width" id="JwJ-hS-hjc"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.79607843140000001" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,10 +81,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateLabel" destination="TCq-Me-tdQ" id="XH9-Tt-Doi"/>
                         <outlet property="distanceLabel" destination="fQQ-Wo-gv8" id="4QP-9B-ugN"/>
                         <outlet property="mapView" destination="x3N-le-1SS" id="aoo-E1-sXC"/>
                         <outlet property="paceLabel" destination="jLe-CA-pZg" id="lRq-8Z-vP5"/>
+                        <outlet property="startStopButton" destination="du4-Ka-pIx" id="nE8-E4-4Gh"/>
                         <outlet property="timeLabel" destination="OOO-rx-Bcg" id="AD6-79-LDe"/>
                     </connections>
                 </viewController>

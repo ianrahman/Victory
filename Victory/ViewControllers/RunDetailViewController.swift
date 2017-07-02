@@ -17,14 +17,23 @@ final class RunDetailViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var startStopButton: UIButton!
+    
     
     // MARK: - Functions
     
+    @IBAction func startStopButtonTapped(_ sender: Any) {
+    }
+    
+    
     // TODO: - Finish implementation
     func layout(for run: Run) {
-        distanceLabel.text = String(run.distance)
-        timeLabel.text = String(run.duration)
+        title = "\(run.date)"
+        distanceLabel.text = "\(run.distance)"
+        timeLabel.text = "\(run.duration)"
     }
     
 }
+
+extension RunDetailViewController: DependencyInjectableVC { }
