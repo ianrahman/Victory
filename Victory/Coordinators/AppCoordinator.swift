@@ -79,6 +79,7 @@ extension AppCoordinator: RunListCoordinatorDelegate {
 extension AppCoordinator: RunDetailCoordinatorDelegate {
     
     func closeButtonTapped(runDetailCoordinator: RunDetailCoordinator) {
+        runDetailCoordinator.rootViewController.dismiss(animated: true)
         removeChildCoordinator(runDetailCoordinator)
     }
     

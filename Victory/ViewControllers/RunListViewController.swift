@@ -11,6 +11,7 @@ import UIKit
 protocol RunListViewControllerDelegate: class {
     
     func didTapNewRunButton()
+    func didSelectRowAt(indexPath: IndexPath)
     
 }
 
@@ -35,12 +36,7 @@ final class RunListViewController: UIViewController {
 extension RunListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let coordinator = coordinator else { return }
-        let run = coordinator.services.data.runs[indexPath.row]
-        let storyboard = UIStoryboard(.RunDetail)
-        let vc: RunDetailViewController = storyboard.instantiateViewController()
-        vc.layout(for: run)
-        present(vc, animated: true)
+        coordinator?.didSelectRowAt(indexPath: indexPath)
     }
     
 }

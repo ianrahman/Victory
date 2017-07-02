@@ -61,4 +61,8 @@ extension RunListCoordinator: RunListViewControllerDelegate {
         delegate?.didTapNewRunButton()
     }
     
+    func didSelectRowAt(indexPath: IndexPath) {
+        let run = services.data.runs[indexPath.row]
+        delegate?.didTapRunCell(with: run)
+    }
 }
