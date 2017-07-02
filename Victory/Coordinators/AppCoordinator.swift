@@ -44,13 +44,32 @@ final class AppCoordinator: RootViewCoordinator {
     }
     
     fileprivate func showInitialViewController() {
-        let initialViewController = RunListViewController(services: self.services, delegate: self)
-        self.navigationController.viewControllers = [initialViewController]
+//        let initialViewController = RunListViewController(services: self.services, delegate: self)
+//        self.navigationController.viewControllers = [initialViewController]
+        
+        let storyboard = UIStoryboard(.RunList)
+        let vc: RunListViewController = storyboard.instantiateViewController()
+        navigationController.viewControllers = [vc]
     }
     
 }
 
-extension AppCoordinator: ViewControllerDelegate {
+extension AppCoordinator: NewRunCoordinatorDelegate {
     
-    // TODO: Handle payloads from ViewControllers, if necessary
+    func newRunDiscarded(newRunCoordinator: NewRunCoordinator) {
+        <#code#>
+    }
+    
+    func newRunSaved(newRunCoordinator: NewRunCoordinator) {
+        <#code#>
+    }
+    
+}
+
+extension AppCoordinator: RunDetailCoordinatorDelegate {
+    
+    func closeButtonTapped(runDetailCoordinator: RunDetailCoordinator) {
+        <#code#>
+    }
+    
 }

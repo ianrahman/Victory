@@ -36,12 +36,12 @@ class RunListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Runs"
+        
         print("hi i guess run list should be loaded")
-        let storyboard = Storybard(name: "RunList", bundle: bundle)
+        
     }
-    
-    // MARK: - Functions
-    
     
 }
 
@@ -50,6 +50,11 @@ class RunListViewController: UIViewController {
 extension RunListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let run = runs[indexPath.row]
+        let storyboard = UIStoryboard(.RunDetail)
+        let vc: RunDetailViewController = storyboard.instantiateViewController()
+        vc.run = run
+        present(vc, animated: true)
 //        let runs = realm.objects(Run.self).sorted(byKeyPath: "date")
 //        let run = runs(indexPath.row)
 //        let runDetailVC = RunDetailViewController(run: run)

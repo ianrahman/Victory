@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S7a-8C-Uyc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291m" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S7a-8C-Uyc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Run Details-->
+        <!--Run Detail View Controller-->
         <scene sceneID="F4m-D0-wmH">
             <objects>
-                <viewController storyboardIdentifier="RunDetail" title="Run Details" id="S7a-8C-Uyc" customClass="RunDetailViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RunDetail" id="S7a-8C-Uyc" customClass="RunDetailViewController" customModule="Victory" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q6Y-na-NdK"/>
                         <viewControllerLayoutGuide type="bottom" id="UCp-ho-zxf"/>
@@ -71,6 +72,13 @@
                             <constraint firstItem="x3N-le-1SS" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="t21-Xf-m3H"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="TCq-Me-tdQ" id="XH9-Tt-Doi"/>
+                        <outlet property="distanceLabel" destination="fQQ-Wo-gv8" id="4QP-9B-ugN"/>
+                        <outlet property="mapView" destination="x3N-le-1SS" id="aoo-E1-sXC"/>
+                        <outlet property="paceLabel" destination="jLe-CA-pZg" id="lRq-8Z-vP5"/>
+                        <outlet property="timeLabel" destination="OOO-rx-Bcg" id="AD6-79-LDe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJg-iZ-eQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

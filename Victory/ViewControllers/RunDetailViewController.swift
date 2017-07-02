@@ -7,28 +7,25 @@
 //
 
 import UIKit
+import MapKit
 
 class RunDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    var run: Run!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
-    // MARK: - Init
+    // MARK: - Functions
     
-    init(run: Run) {
-        super.init(nibName: "RunDetail", bundle: nil)
-        self.run = run
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - VC Lifecycle
-    
-    override func viewDidLoad() {
-        
+    // TODO: - Finish implementation
+    func layout(for run: Run) {
+        distanceLabel.text = String(run.distance)
+        timeLabel.text = String(run.duration)
+//        dateLabel.text = String(run.locations[0].timestamp)
     }
     
 }

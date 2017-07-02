@@ -8,18 +8,19 @@
 
 import UIKit
 
-// MARK - UIStoryboard
+// MARK: - UIStoryboard
+
 extension UIStoryboard {
     
     // Enumeration of all storyboard names used in the app
     enum Storyboard: String {
-        case runList
-        case runDetail
-        case newRun
+        case RunList
+        case RunDetail
+        case NewRun
         
         /// The name of the storyboard's file, returned with capitalization applied
         var filename: String {
-            return rawValue.capitalized
+            return rawValue
         }
     }
     
@@ -27,5 +28,17 @@ extension UIStoryboard {
         self.init(name: storyboard.filename, bundle: bundle)
     }
     
+    /// Creates an instance of a view controller from a storyboard identifier
+    func instantiateViewController<T: UIViewController>() -> T where T: StoryboardIdentifiable {
+        guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
+            fatalError("Couldn't instantiate view controller with identifier \(T.storyboardIdentifier) ")
+        }
+        
+        return viewController
+    }
+    
 }
 
+// MARK: - UIViewController
+
+extension UIViewController: StoryboardIdentifiable { }

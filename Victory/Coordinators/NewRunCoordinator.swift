@@ -8,11 +8,20 @@
 
 import UIKit
 
+protocol NewRunCoordinatorDelegate: class {
+    
+    func newRunDiscarded(newRunCoordinator: NewRunCoordinator)
+    
+    func newRunSaved(newRunCoordinator: NewRunCoordinator)
+    
+}
+
 final class NewRunCoordinator: Coordinator {
     
     // MARK: - Properties
     
     let services: Services
+    
     var childCoordinators: [Coordinator] = []
     
     var rootViewController: UIViewController {
@@ -33,8 +42,11 @@ final class NewRunCoordinator: Coordinator {
     // MARK: - Functions
     
     func start() {
-        let viewController = NewRunViewController(services: self.services, delegate: self)
-        self.navigationController.viewControllers = [viewController]
+        let storyboard = UIStoryboard(.NewRun)
+        let vc: NewRunViewController = storyboard.instantiateViewController()
+        
+//        let viewController = NewRunViewController(services: self.services, delegate: self)
+//        self.navigationController.viewControllers = [viewController]
     }
     
     func showViewController() {

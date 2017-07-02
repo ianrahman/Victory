@@ -8,11 +8,24 @@
 
 import UIKit
 
-protocol ViewControllerProtocol where Self: UIViewController {
+// TODO: - Re-implement the following line
+//protocol ViewControllerProtocol where Self: UIViewController {
+protocol DependencyInjectableVC: class {
     
+    /// Initialize with dependency injection
     init(services: Services, delegate: ViewControllerDelegate)
-    var services: Services { get }
-    weak var delegate: ViewControllerDelegate? { get }
+    
+    var services: Services { get set }
+    weak var delegate: ViewControllerDelegate? { get set }
+    
+}
+
+extension DependencyInjectableVC where Self: DependencyInjectableVC {
+    
+    init(services: Services, delegate: ViewControllerDelegate) {
+        self.services = services
+        self.delegate = delegate
+    }
     
 }
 
