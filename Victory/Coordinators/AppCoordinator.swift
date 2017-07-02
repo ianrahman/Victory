@@ -57,11 +57,12 @@ final class AppCoordinator: RootViewCoordinator {
 extension AppCoordinator: NewRunCoordinatorDelegate {
     
     func newRunDiscarded(newRunCoordinator: NewRunCoordinator) {
-        <#code#>
+        removeChildCoordinator(newRunCoordinator)
     }
     
     func newRunSaved(newRunCoordinator: NewRunCoordinator) {
-        <#code#>
+        
+        removeChildCoordinator(newRunCoordinator)
     }
     
 }
@@ -69,7 +70,7 @@ extension AppCoordinator: NewRunCoordinatorDelegate {
 extension AppCoordinator: RunDetailCoordinatorDelegate {
     
     func closeButtonTapped(runDetailCoordinator: RunDetailCoordinator) {
-        <#code#>
+        removeChildCoordinator(runDetailCoordinator)
     }
     
 }

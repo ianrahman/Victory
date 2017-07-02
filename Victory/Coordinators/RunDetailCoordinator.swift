@@ -48,6 +48,7 @@ class RunDetailCoordinator: RootViewCoordinator {
 //        let vc = RunDetailViewController(run: run)
         let storyboard = UIStoryboard(.RunDetail)
         let vc: RunDetailViewController = storyboard.instantiateViewController()
+        vc.layout(for: run)
         
     }
     

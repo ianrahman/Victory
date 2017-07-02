@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class RunDetailViewController: UIViewController {
+final class RunDetailViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -25,8 +25,6 @@ class RunDetailViewController: UIViewController {
     func layout(for run: Run) {
         distanceLabel.text = String(run.distance)
         timeLabel.text = String(run.duration)
-//        dateLabel.text = String(run.locations[0].timestamp)
     }
     
 }
-

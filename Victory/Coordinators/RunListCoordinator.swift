@@ -10,6 +10,7 @@ import UIKit
 
 protocol RunListCoordinator: class {
     
-    
+    func didTapNewRun(from runList: RunListViewController)
+    func didTapRunCell(from runList: RunListViewController)
     
 }

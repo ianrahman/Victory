@@ -10,7 +10,8 @@
 		B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EB51F059C5E00C37AFE /* LocationManager.swift */; };
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
 		B40E5EC51F068A5100C37AFE /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */; };
-		B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */; };
+		B40E5ECE1F068D0700C37AFE /* DependencyInjectableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */; };
+		B41710871F0960CE00129BA8 /* NewRun.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41710861F0960CE00129BA8 /* NewRun.storyboard */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
 		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
 		B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */; };
@@ -45,7 +46,8 @@
 		B40E5EC11F06892E00C37AFE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Services.swift; path = "../../../ios-sapling/sapling/services/Services.swift"; sourceTree = "<group>"; };
 		B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
-		B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
+		B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectableVC.swift; sourceTree = "<group>"; };
+		B41710861F0960CE00129BA8 /* NewRun.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewRun.storyboard; sourceTree = "<group>"; };
 		B44D1EE31F07418200A37106 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		B44D1EE51F0745B900A37106 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		B48EE0301F049BF000668DFD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		B4B95A5B1F054FB200FE8C22 /* RunDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailViewController.swift; sourceTree = "<group>"; };
-		B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RunDetail.storyboard; sourceTree = "<group>"; };
+		B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = RunDetail.storyboard; path = ../ViewControllers/RunDetail.storyboard; sourceTree = "<group>"; };
 		B4C34CE91F09367D00644A23 /* RunListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunListCoordinator.swift; sourceTree = "<group>"; };
 		B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailCoordinator.swift; sourceTree = "<group>"; };
 		E3E0F4A01F832959A82426FB /* Pods-VictoryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VictoryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VictoryTests/Pods-VictoryTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,8 +108,8 @@
 			children = (
 				B44D1EE51F0745B900A37106 /* AppCoordinator.swift */,
 				B4C34CE91F09367D00644A23 /* RunListCoordinator.swift */,
-				B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */,
 				B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */,
+				B40E5EBC1F0688A500C37AFE /* NewRunCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -136,7 +138,7 @@
 			children = (
 				B40E5EC11F06892E00C37AFE /* Coordinator.swift */,
 				B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */,
-				B40E5ECD1F068D0700C37AFE /* ViewControllerProtocol.swift */,
+				B40E5ECD1F068D0700C37AFE /* DependencyInjectableVC.swift */,
 				B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */,
 			);
 			path = Protocols;
@@ -179,9 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				B48EE0001F04963000668DFD /* RunListViewController.swift */,
-				B48EE0021F04963000668DFD /* RunList.storyboard */,
 				B4B95A5B1F054FB200FE8C22 /* RunDetailViewController.swift */,
-				B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */,
 				B40E5EC41F068A5100C37AFE /* NewRunViewController.swift */,
 			);
 			path = ViewControllers;
@@ -208,6 +208,9 @@
 		B4B95A5D1F0550E900FE8C22 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B48EE0021F04963000668DFD /* RunList.storyboard */,
+				B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */,
+				B41710861F0960CE00129BA8 /* NewRun.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B48EE0091F04963000668DFD /* LaunchScreen.storyboard in Resources */,
+				B41710871F0960CE00129BA8 /* NewRun.storyboard in Resources */,
 				B48EE0061F04963000668DFD /* Assets.xcassets in Resources */,
 				B48EE0041F04963000668DFD /* RunList.storyboard in Resources */,
 				B4B95A631F058FEF00FE8C22 /* RunDetail.storyboard in Resources */,
@@ -344,7 +348,7 @@
 				B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */,
 				B44D1EE41F07418200A37106 /* UIKit.swift in Sources */,
 				B456AE211F074BC200627D8E /* Coordinator.swift in Sources */,
-				B40E5ECE1F068D0700C37AFE /* ViewControllerProtocol.swift in Sources */,
+				B40E5ECE1F068D0700C37AFE /* DependencyInjectableVC.swift in Sources */,
 				B48EE0011F04963000668DFD /* RunListViewController.swift in Sources */,
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
 				B40E5EB61F059C5E00C37AFE /* LocationManager.swift in Sources */,
@@ -370,6 +374,7 @@
 				B48EE0031F04963000668DFD /* Base */,
 			);
 			name = RunList.storyboard;
+			path = ../ViewControllers;
 			sourceTree = "<group>";
 		};
 		B48EE0071F04963000668DFD /* LaunchScreen.storyboard */ = {

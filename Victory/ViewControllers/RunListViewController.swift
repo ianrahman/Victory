@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class RunListViewController: UIViewController {
+final class RunListViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -18,7 +18,6 @@ class RunListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let runCellIdentifier = "runCell"
     let realm = try! Realm()
-    let runs = [Run]()
     
     // MARK: - Init
     
@@ -50,15 +49,11 @@ class RunListViewController: UIViewController {
 extension RunListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let run = runs[indexPath.row]
+        let run = services.data.runs[indexPath.row]
         let storyboard = UIStoryboard(.RunDetail)
         let vc: RunDetailViewController = storyboard.instantiateViewController()
-        vc.run = run
+        vc.layout(for: run)
         present(vc, animated: true)
-//        let runs = realm.objects(Run.self).sorted(byKeyPath: "date")
-//        let run = runs(indexPath.row)
-//        let runDetailVC = RunDetailViewController(run: run)
-//        present
     }
     
 }
@@ -68,14 +63,13 @@ extension RunListViewController: UITableViewDelegate {
 extension RunListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return realm.objects(Run.self).count
-        return runs.count
+        return services.data.runs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.detailTextLabel?.text = "devil"
+        cell.textLabel?.text = "\(services.data.runs[indexPath.row].date)"
+        cell.detailTextLabel?.text = "\(services.data.runs[indexPath.row].distance) miles"
         return cell
     }
     

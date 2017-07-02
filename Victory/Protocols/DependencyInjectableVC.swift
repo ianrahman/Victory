@@ -1,5 +1,5 @@
 //
-//  ViewControllerProtocol.swift
+//  DependencyInjectableVC.swift
 //  Victory
 //
 //  Created by Ian Rahman on 6/30/17.
@@ -13,20 +13,18 @@ import UIKit
 protocol DependencyInjectableVC: class {
     
     /// Initialize with dependency injection
-    init(services: Services, delegate: ViewControllerDelegate)
+    init(services: Services, coordinator: Coordinator)
     
     var services: Services { get set }
-    weak var delegate: ViewControllerDelegate? { get set }
+    weak var coordinator: Coordinator? { get set }
     
 }
 
-extension DependencyInjectableVC where Self: DependencyInjectableVC {
+extension DependencyInjectableVC {
     
-    init(services: Services, delegate: ViewControllerDelegate) {
+    init(services: Services, coordinator: Coordinator) {
         self.services = services
-        self.delegate = delegate
+        self.coordinator = coordinator
     }
     
 }
-
-protocol ViewControllerDelegate: class { }
