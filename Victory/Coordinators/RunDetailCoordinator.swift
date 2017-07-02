@@ -84,10 +84,14 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func startStopButtonTapped() {
         print("Button Tapped!")
-        guard let vc = rootViewController.presentedViewController as? RunDetailViewController else { return }
+        guard let viewController = rootViewController.presentedViewController as? RunDetailViewController else { return }
         let title = running ? "Stop" : "Start"
         running = !running
-        vc.startStopButton.setTitle(title, for: .normal)
+        viewController.startStopButton.setTitle(title, for: .normal)
+    }
+    
+    func closeButtonTapped() {
+        delegate?.closeButtonTapped(runDetailCoordinator: self)
     }
     
 }

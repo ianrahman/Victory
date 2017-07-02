@@ -53,5 +53,4 @@ class RunListCoordinator: RootViewCoordinator {
         navigationController.viewControllers = [runListViewController]
     }
     
-    
 }

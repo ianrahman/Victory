@@ -12,6 +12,7 @@ import MapKit
 protocol RunDetailViewControllerDelegate {
     
     func startStopButtonTapped()
+    func closeButtonTapped()
     
 }
 

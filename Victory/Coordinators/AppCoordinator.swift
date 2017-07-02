@@ -46,8 +46,8 @@ final class AppCoordinator: RootViewCoordinator {
     /// Populate navigation controller with initial view controller
     private func showInitialViewController() {
         let storyboard = UIStoryboard(.RunList)
-        let runListViewController: RunListViewController = storyboard.instantiateViewController()
-        navigationController.viewControllers = [runListViewController]
+        let viewController: RunListViewController = storyboard.instantiateViewController()
+        navigationController.viewControllers = [viewController]
     }
     
 }
