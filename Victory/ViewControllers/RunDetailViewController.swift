@@ -29,7 +29,7 @@ final class RunDetailViewController: UIViewController {
     weak var coordinator: RunDetailCoordinator?
 
     lazy var closeBarButtonItem: UIBarButtonItem = {
-        let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeButtonTapped))
+        let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
         return closeBarButtonItem
     }()
     
@@ -43,7 +43,7 @@ final class RunDetailViewController: UIViewController {
         coordinator?.startStopButtonTapped()
     }
     
-    @objc private func closeButtonTapped() {
+    @objc private func didTapCloseButton() {
         coordinator?.closeButtonTapped()
     }
     

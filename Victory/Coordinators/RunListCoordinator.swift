@@ -49,8 +49,9 @@ class RunListCoordinator: RootViewCoordinator {
     
     func start() {
         let storyboard = UIStoryboard(.RunDetail)
-        let runListViewController: RunListViewController = storyboard.instantiateViewController()
-        navigationController.viewControllers = [runListViewController]
+        let viewController: RunListViewController = storyboard.instantiateViewController()
+        navigationController.viewControllers = [viewController]
+        viewController.coordinator = self
     }
     
 }

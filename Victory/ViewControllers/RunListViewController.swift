@@ -29,6 +29,21 @@ final class RunListViewController: UIViewController {
         coordinator?.didTapNewRunButton()
     }
     
+    lazy var newRunBarButtonItem: UIBarButtonItem = {
+        let newRunBarButtonItem = UIBarButtonItem(title: "New Run", style: .plain, target: self, action: #selector(didTapNewRunButton))
+        return newRunBarButtonItem
+    }()
+    
+    // MARK: - Functions
+    
+    override func viewDidLoad() {
+        navigationItem.rightBarButtonItem = newRunBarButtonItem
+    }
+    
+    @objc private func didTapNewRunButton() {
+        coordinator?.didTapNewRunButton()
+    }
+    
 }
 
 // MARK: - TableView Delegate

@@ -14,8 +14,6 @@ protocol StoryboardIdentifiable {
     
 }
 
-// MARK: - Extension for UIViewControllers
-
 extension StoryboardIdentifiable where Self: UIViewController {
     
     static var storyboardIdentifier: String {

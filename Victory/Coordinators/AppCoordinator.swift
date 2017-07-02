@@ -23,7 +23,7 @@ final class AppCoordinator: RootViewCoordinator {
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
+//        navigationController.isNavigationBarHidden = true
         return navigationController
     }()
     
