@@ -9,7 +9,9 @@
 import UIKit
 
 protocol RunListViewControllerDelegate: class {
-    func didTapAddButton(from runList: RunListViewController)
+    
+    func didTapNewRunButton()
+    
 }
 
 final class RunListViewController: UIViewController {
@@ -23,8 +25,7 @@ final class RunListViewController: UIViewController {
     let runCellIdentifier = "runCell"
     
     @IBAction func didTapAddButton(_ sender: Any) {
-        guard let coordinator = coordinator else { return }
-        coordinator.services.data.runs.append(Run())
+        coordinator?.didTapNewRunButton()
     }
     
 }

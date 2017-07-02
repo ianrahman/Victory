@@ -10,7 +10,7 @@ import UIKit
 
 protocol RunListCoordinatorDelegate: class {
     
-    func didTapNewRun()
+    func didTapNewRunButton()
     func didTapRunCell(with run: Run)
     
 }
@@ -25,7 +25,7 @@ class RunListCoordinator: RootViewCoordinator {
         return self.navigationController
     }
     
-    weak var delegate: RunDetailCoordinatorDelegate?
+    weak var delegate: RunListCoordinatorDelegate?
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
@@ -39,7 +39,7 @@ class RunListCoordinator: RootViewCoordinator {
     
     // MARK: - Init
     
-    init(with services: Services, delegate: RunDetailCoordinatorDelegate, type: RunDetailType) {
+    init(with services: Services, delegate: RunListCoordinatorDelegate, type: RunDetailType) {
         self.services = services
         self.delegate = delegate
         self.type = type
@@ -51,6 +51,14 @@ class RunListCoordinator: RootViewCoordinator {
         let storyboard = UIStoryboard(.RunDetail)
         let runListViewController: RunListViewController = storyboard.instantiateViewController()
         navigationController.viewControllers = [runListViewController]
+    }
+    
+}
+
+extension RunListCoordinator: RunListViewControllerDelegate {
+    
+    func didTapNewRunButton() {
+        delegate?.didTapNewRunButton()
     }
     
 }

@@ -56,7 +56,7 @@ final class AppCoordinator: RootViewCoordinator {
 
 extension AppCoordinator: RunListCoordinatorDelegate {
 
-    func didTapNewRun() {
+    func didTapNewRunButton() {
         let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
         startAndPresent(runDetailCoordinator)
     }
