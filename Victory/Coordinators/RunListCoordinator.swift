@@ -32,23 +32,21 @@ class RunListCoordinator: RootViewCoordinator {
         return navigationController
     }()
     
-    let type: RunDetailType
     var run: Run?
     var running = false
     var newRun = false
     
     // MARK: - Init
     
-    init(with services: Services, delegate: RunListCoordinatorDelegate, type: RunDetailType) {
+    init(with services: Services, delegate: RunListCoordinatorDelegate) {
         self.services = services
         self.delegate = delegate
-        self.type = type
     }
     
     // MARK: - Functions
     
     func start() {
-        let storyboard = UIStoryboard(.RunDetail)
+        let storyboard = UIStoryboard(.RunList)
         let viewController: RunListViewController = storyboard.instantiateViewController()
         navigationController.viewControllers = [viewController]
         viewController.coordinator = self
