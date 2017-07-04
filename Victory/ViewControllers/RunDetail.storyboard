@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291m" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S7a-8C-Uyc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r1c-Ra-xuf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,31 +28,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="x3N-le-1SS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="333.5"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0lm-YT-xc7">
-                                <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                                <rect key="frame" x="0.0" y="377.5" width="375" height="289.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQQ-Wo-gv8">
-                                        <rect key="frame" x="70.5" y="0.0" width="234.5" height="105"/>
+                                        <rect key="frame" x="70.5" y="0.0" width="234.5" height="91.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOO-rx-Bcg">
-                                        <rect key="frame" x="122" y="105" width="131.5" height="105.5"/>
+                                        <rect key="frame" x="122" y="91.5" width="131.5" height="91"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLe-CA-pZg">
-                                        <rect key="frame" x="153.5" y="210.5" width="68" height="52.5"/>
+                                        <rect key="frame" x="153.5" y="182.5" width="68" height="45.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="du4-Ka-pIx">
-                                        <rect key="frame" x="0.0" y="263" width="375" height="70.5"/>
+                                        <rect key="frame" x="0.0" y="228" width="375" height="61.5"/>
                                         <color key="backgroundColor" red="0.78783312179999998" green="0.036849190609999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <state key="normal" title="Start/Stop">
@@ -74,12 +74,13 @@
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="centerX" secondItem="X6K-50-Eya" secondAttribute="centerX" id="4YW-Za-EbI"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="height" secondItem="X6K-50-Eya" secondAttribute="height" multiplier="0.5" id="6S9-hK-PPv"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="centerX" secondItem="X6K-50-Eya" secondAttribute="centerX" id="Lm8-Wj-8Cf"/>
-                            <constraint firstItem="0lm-YT-xc7" firstAttribute="height" secondItem="X6K-50-Eya" secondAttribute="height" multiplier="0.5" id="RXI-Jq-tb2"/>
+                            <constraint firstItem="0lm-YT-xc7" firstAttribute="top" secondItem="x3N-le-1SS" secondAttribute="bottom" id="QzX-gN-HOk"/>
                             <constraint firstItem="UCp-ho-zxf" firstAttribute="top" secondItem="0lm-YT-xc7" secondAttribute="bottom" id="aI2-ti-RlS"/>
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="bzj-ac-zk8"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="t21-Xf-m3H"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="IRf-Dn-tpP"/>
                     <connections>
                         <outlet property="distanceLabel" destination="fQQ-Wo-gv8" id="4QP-9B-ugN"/>
                         <outlet property="mapView" destination="x3N-le-1SS" id="aoo-E1-sXC"/>
@@ -90,7 +91,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJg-iZ-eQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472.80000000000001" y="-187.55622188905548"/>
+            <point key="canvasLocation" x="812" y="-187.55622188905548"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cIv-jj-FLH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1c-Ra-xuf" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xy2-1n-gw3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="S7a-8C-Uyc" kind="relationship" relationship="rootViewController" id="uTC-4P-cgo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eda-dG-lrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="17" y="-188"/>
         </scene>
     </scenes>
 </document>
