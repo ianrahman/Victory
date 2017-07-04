@@ -56,25 +56,14 @@ class RunDetailCoordinator: RootViewCoordinator {
     func start() {
         let storyboard = UIStoryboard(.RunDetail)
         let viewController: RunDetailViewController = storyboard.instantiateViewController()
-        
-        switch type {
-        case .newRun:
-            configureAndPresentNewRun(with: viewController)
-        case .previousRun(let run):
-            configureAndPresentPreviousRun(with: viewController, run: run)
+        configureAndPresent(viewController: viewController, run: run)
+    }
+    
+    private func configureAndPresent(viewController: RunDetailViewController, run: Run?) {
+        if let run = run {
+            viewController.layout(for: run)
         }
-    }
-    
-    private func configureAndPresentNewRun(with viewController: RunDetailViewController) {
-//        viewController.startStopButton.isHidden = true
-//        viewController.startStopButton.isEnabled = false
-        rootViewController.present(viewController, animated: true)
-        viewController.coordinator = self
-    }
-    
-    private func configureAndPresentPreviousRun(with viewController: RunDetailViewController, run: Run) {
-        viewController.layout(for: run)
-        rootViewController.present(viewController, animated: true)
+        navigationController.viewControllers = [viewController]
         viewController.coordinator = self
     }
     
