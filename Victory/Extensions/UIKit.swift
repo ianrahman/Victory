@@ -43,3 +43,24 @@ extension UIStoryboard {
 // MARK: - View Controller
 
 extension UIViewController: StoryboardIdentifiable { }
+
+// MARK: - Navigation Controller
+
+extension UINavigationController {
+    
+    override open func viewDidLoad() {
+        self.navigationBar.barTintColor = #colorLiteral(red: 0.6399999857, green: 0, blue: 0, alpha: 1)
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        let configuration = Services().configuration
+        self.navigationBar.titleTextAttributes = [
+            NSAttributedStringKey.font.rawValue: configuration.victoryTitleFont,
+            NSAttributedStringKey.foregroundColor.rawValue: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        ]
+    }
+    
+    override open var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+}

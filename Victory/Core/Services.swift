@@ -21,6 +21,9 @@ final class Services {
 struct ConfigurationService {
     
     let tableViewRowHeight: CGFloat = 55
+    let victoryTitleFont = UIFont(name: "Helvetica Neue", size: 24)!
+    let victoryBodyFont = UIFont(name: "Helvetica Neue", size: 20)!
+    let victoryDetailFont = UIFont(name: "Helvetica Neue", size: 16)!
     
 }
 

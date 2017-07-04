@@ -27,7 +27,6 @@ final class RunListViewController: UIViewController {
     
     lazy var newRunBarButtonItem: UIBarButtonItem = {
         let newRunBarButtonItem = UIBarButtonItem(title: "New Run", style: .plain, target: self, action: #selector(didTapNewRunButton))
-        newRunBarButtonItem.tintColor = .red
         return newRunBarButtonItem
     }()
     
@@ -46,6 +45,8 @@ final class RunListViewController: UIViewController {
     }
     
     private func layoutViewController() {
+        title = "Victory"
+        
         navigationItem.rightBarButtonItem = newRunBarButtonItem
         tableView.rowHeight = coordinator?.services.configuration.tableViewRowHeight ?? 0
     }
@@ -73,6 +74,7 @@ extension RunListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let coordinator = coordinator else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
+        cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         cell.textLabel?.text = "\(coordinator.services.data.runs[indexPath.row].date)"
         cell.detailTextLabel?.text = "\(coordinator.services.data.runs[indexPath.row].distance) miles"
         return cell

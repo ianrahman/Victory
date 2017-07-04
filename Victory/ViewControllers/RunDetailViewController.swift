@@ -32,7 +32,6 @@ final class RunDetailViewController: UIViewController {
     
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
-        closeBarButtonItem.tintColor = .white
         return closeBarButtonItem
     }()
     
@@ -54,6 +53,7 @@ final class RunDetailViewController: UIViewController {
     
     private func layoutViewController() {
         navigationItem.leftBarButtonItem = closeBarButtonItem
+        view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         guard let type = type else { return }
         switch type {
         case .previousRun(let run):
@@ -64,7 +64,7 @@ final class RunDetailViewController: UIViewController {
             startStopButton.isEnabled = false
             startStopButton.isHidden = true
         case .newRun:
-            break
+            title = "Let's go!"
         }
     }
     
