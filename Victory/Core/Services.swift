@@ -6,27 +6,30 @@
 //  Copyright © 2017 Evergreen Labs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
-class Services {
+final class Services {
     
-    let data: DataService
-    let location: LocationService
+    let configuration = ConfigurationService()
+    let data = DataService()
+    let location = LocationService()
     
-    public init() {
-        self.data = DataService()
-        self.location = LocationService()
-    }
 }
 
-class DataService {
+struct ConfigurationService {
+    
+    let tableViewRowHeight: CGFloat = 55
+    
+}
+
+final class DataService {
     
     var runs = [Run]()
     
 }
 
-class LocationService {
+final class LocationService {
     
     static let manager = CLLocationManager()
     

@@ -21,16 +21,13 @@ final class RunListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    weak var coordinator: RunListCoordinator?
-    
     let runCellIdentifier = "runCell"
     
-    @IBAction func didTapAddButton(_ sender: Any) {
-        coordinator?.didTapNewRunButton()
-    }
+    weak var coordinator: RunListCoordinator?
     
     lazy var newRunBarButtonItem: UIBarButtonItem = {
         let newRunBarButtonItem = UIBarButtonItem(title: "New Run", style: .plain, target: self, action: #selector(didTapNewRunButton))
+        newRunBarButtonItem.tintColor = .red
         return newRunBarButtonItem
     }()
     
@@ -38,6 +35,8 @@ final class RunListViewController: UIViewController {
     
     override func viewDidLoad() {
         navigationItem.rightBarButtonItem = newRunBarButtonItem
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     @objc private func didTapNewRunButton() {
@@ -61,8 +60,11 @@ extension RunListViewController: UITableViewDelegate {
 extension RunListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let coordinator = coordinator else { return 0 }
-        return coordinator.services.data.runs.count
+        return coordinator?.services.data.runs.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return coordinator?.services.configuration.tableViewRowHeight ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,4 +76,3 @@ extension RunListViewController: UITableViewDataSource {
     }
     
 }
-

@@ -30,7 +30,7 @@ extension UIStoryboard {
     
     /// Creates an instance of a view controller from a storyboard identifier
     /// Note: - The storyboard identifier must be set to the full view controller name
-    func instantiateViewController<T: UIViewController>() -> T where T: StoryboardIdentifiable {
+    func instantiateViewController<T: UIViewController>() -> T {
         guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             fatalError("Couldn't instantiate view controller with identifier \(T.storyboardIdentifier) ")
         }

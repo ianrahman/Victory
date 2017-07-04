@@ -39,6 +39,9 @@ final class AppCoordinator: RootViewCoordinator {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
+        let run = Run()
+        services.data.runs.append(run)
+        
         showInitialViewController()
     }
     

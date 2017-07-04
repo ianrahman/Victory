@@ -12,29 +12,30 @@ import RealmSwift
 class Run: Object {
     
     // MARK: - Init
-    convenience init(distance: Double, duration: Int, locations: List<Location>) {
+    convenience init(distance: Double, duration: Int, date: Date, locations: List<Location>) {
         self.init()
         self.distance = distance
         self.duration = duration
+        self.date = date
         self.locations = locations
     }
     
-    // MARK: - Persisted Properties
+    // MARK: - Properties
     
     @objc dynamic var distance: Double = 0.0
     @objc dynamic var duration: Int = 0
+    @objc dynamic var date: Date = Date()
+    @objc dynamic var id: Int = 0
     var locations = List<Location>()
     
-    // MARK: - Computed Properties
+    // MARK: - Functions
     
-    var date: Date {
-        return locations.first?.timestamp ?? Date()
+    override class func primaryKey() -> String? {
+        return "id"
     }
     
-    // MARK: - Functions
-//    
-//    override class func primaryKey() -> String? {
-//        return "date"
-//    }
+    override static func indexedProperties() -> [String] {
+        return ["date"]
+    }
     
 }
