@@ -63,9 +63,9 @@
                             <constraint firstItem="x3N-le-1SS" firstAttribute="height" secondItem="X6K-50-Eya" secondAttribute="height" multiplier="0.5" id="6S9-hK-PPv"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="centerX" secondItem="X6K-50-Eya" secondAttribute="centerX" id="Lm8-Wj-8Cf"/>
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="top" secondItem="x3N-le-1SS" secondAttribute="bottom" id="QzX-gN-HOk"/>
-                            <constraint firstItem="UCp-ho-zxf" firstAttribute="top" secondItem="0lm-YT-xc7" secondAttribute="bottom" id="aI2-ti-RlS"/>
+                            <constraint firstItem="0lm-YT-xc7" firstAttribute="bottom" secondItem="X6K-50-Eya" secondAttribute="bottom" id="aI2-ti-RlS"/>
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="bzj-ac-zk8"/>
-                            <constraint firstItem="x3N-le-1SS" firstAttribute="top" secondItem="q6Y-na-NdK" secondAttribute="bottom" id="eh5-TE-xfY"/>
+                            <constraint firstItem="x3N-le-1SS" firstAttribute="top" secondItem="X6K-50-Eya" secondAttribute="top" id="eh5-TE-xfY"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="t21-Xf-m3H"/>
                         </constraints>
                     </view>

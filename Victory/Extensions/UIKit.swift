@@ -44,6 +44,30 @@ extension UIStoryboard {
 
 extension UIViewController: StoryboardIdentifiable { }
 
+// MARK: - Table View Cell
+
+extension UITableViewCell: StoryboardIdentifiable { }
+
+// MARK: - Table View
+
+extension UITableView {
+    
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: T.storyboardIdentifier, for: indexPath) as? T else {
+            fatalError("Could not find table view cell with identifier \(T.storyboardIdentifier)")
+        }
+        return cell
+    }
+    
+    func cellForRow<T: UITableViewCell>(at indexPath: IndexPath) -> T {
+        guard let cell = cellForRow(at: indexPath) as? T else {
+            fatalError("Could not get cell as type \(T.self)")
+        }
+        return cell
+    }
+    
+}
+
 // MARK: - Navigation Controller
 
 extension UINavigationController {
@@ -54,7 +78,7 @@ extension UINavigationController {
         self.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let configuration = Services().configuration
         self.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font.rawValue: configuration.victoryTitleFont,
+            NSAttributedStringKey.font.rawValue: configuration.titleFont,
             NSAttributedStringKey.foregroundColor.rawValue: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         ]
     }

@@ -14,7 +14,19 @@ protocol StoryboardIdentifiable {
     
 }
 
+// MARK: - View Controller
+
 extension StoryboardIdentifiable where Self: UIViewController {
+    
+    static var storyboardIdentifier: String {
+        return String(describing: self)
+    }
+    
+}
+
+// MARK: - Table View Cell
+
+extension StoryboardIdentifiable where Self: UITableViewCell {
     
     static var storyboardIdentifier: String {
         return String(describing: self)

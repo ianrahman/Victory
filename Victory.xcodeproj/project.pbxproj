@@ -24,6 +24,8 @@
 		B4B95A631F058FEF00FE8C22 /* RunDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */; };
 		B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */; };
 		B4C46EFC1F0BFD0F0076DCF5 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C46EFB1F0BFD0F0076DCF5 /* Foundation.swift */; };
+		B4C46EFE1F0C11AE0076DCF5 /* MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C46EFD1F0C11AE0076DCF5 /* MapKit.swift */; };
+		B4C46F001F0C28110076DCF5 /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C46EFF1F0C28110076DCF5 /* SegueHandlerType.swift */; };
 		D18CA73B839A0BC799DA4C77 /* Pods_Victory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		B4B95A621F058FEF00FE8C22 /* RunDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = RunDetail.storyboard; path = ../ViewControllers/RunDetail.storyboard; sourceTree = "<group>"; };
 		B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailCoordinator.swift; sourceTree = "<group>"; };
 		B4C46EFB1F0BFD0F0076DCF5 /* Foundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		B4C46EFD1F0C11AE0076DCF5 /* MapKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKit.swift; sourceTree = "<group>"; };
+		B4C46EFF1F0C28110076DCF5 /* SegueHandlerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
 		E3E0F4A01F832959A82426FB /* Pods-VictoryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VictoryTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-VictoryTests/Pods-VictoryTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +121,7 @@
 			children = (
 				B44D1EE31F07418200A37106 /* UIKit.swift */,
 				B4C46EFB1F0BFD0F0076DCF5 /* Foundation.swift */,
+				B4C46EFD1F0C11AE0076DCF5 /* MapKit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 				B40E5EC11F06892E00C37AFE /* Coordinator.swift */,
 				B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */,
 				B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */,
+				B4C46EFF1F0C28110076DCF5 /* SegueHandlerType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -237,6 +243,9 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
 							};
@@ -338,9 +347,11 @@
 				B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */,
 				B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
+				B4C46EFE1F0C11AE0076DCF5 /* MapKit.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
 				B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */,
 				B4B1A9141F07FB64000E3639 /* StoryboardIdentifiable.swift in Sources */,
+				B4C46F001F0C28110076DCF5 /* SegueHandlerType.swift in Sources */,
 				B4C46EFC1F0BFD0F0076DCF5 /* Foundation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

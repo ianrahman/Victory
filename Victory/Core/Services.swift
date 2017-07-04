@@ -21,9 +21,9 @@ final class Services {
 struct ConfigurationService {
     
     let tableViewRowHeight: CGFloat = 55
-    let victoryTitleFont = UIFont(name: "Helvetica Neue", size: 24)!
-    let victoryBodyFont = UIFont(name: "Helvetica Neue", size: 20)!
-    let victoryDetailFont = UIFont(name: "Helvetica Neue", size: 16)!
+    let titleFont = UIFont(name: "Helvetica Neue", size: 24)!
+    let bodyFont = UIFont(name: "Helvetica Neue", size: 20)!
+    let detailFont = UIFont(name: "Helvetica Neue", size: 16)!
     
 }
 
@@ -36,6 +36,6 @@ final class DataService {
 
 final class LocationService {
     
-    static let manager = CLLocationManager()
+    let manager = CLLocationManager()
     
 }

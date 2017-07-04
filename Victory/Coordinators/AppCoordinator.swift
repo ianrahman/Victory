@@ -54,6 +54,10 @@ final class AppCoordinator: RootViewCoordinator {
         navigationController.viewControllers = [viewController]
     }
     
+    private func setGeneralAppearance() {
+        UILabel.appearance().font = services.configuration.bodyFont
+    }
+    
 }
 
 // MARK: - Run List View Controller Delegate
@@ -61,7 +65,7 @@ final class AppCoordinator: RootViewCoordinator {
 extension AppCoordinator: RunListCoordinator {
 
     func didTapNewRunButton() {
-        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun(run: Run()))
+        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
         startAndPresent(runDetailCoordinator)
     }
     
@@ -83,7 +87,7 @@ extension AppCoordinator: RunListCoordinator {
 
 extension AppCoordinator: RunDetailCoordinatorDelegate {
     
-    func closeButtonTapped(runDetailCoordinator: RunDetailCoordinator) {
+    func didTapCloseButton(runDetailCoordinator: RunDetailCoordinator) {
         runDetailCoordinator.rootViewController.dismiss(animated: true)
         removeChildCoordinator(runDetailCoordinator)
     }
