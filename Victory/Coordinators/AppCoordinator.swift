@@ -23,6 +23,7 @@ final class AppCoordinator: RootViewCoordinator {
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
+        navigationController.navigationBar.backgroundColor = UIColor(named: "SecondaryRed")
         return navigationController
     }()
     

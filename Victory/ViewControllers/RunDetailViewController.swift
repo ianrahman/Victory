@@ -32,7 +32,7 @@ final class RunDetailViewController: UIViewController {
     
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
-        closeBarButtonItem.tintColor = .red
+        closeBarButtonItem.tintColor = .white
         return closeBarButtonItem
     }()
     
