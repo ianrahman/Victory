@@ -27,7 +27,7 @@ final class RunDetailViewController: UIViewController {
     @IBOutlet weak var startStopButton: UIButton!
     
     weak var coordinator: RunDetailCoordinator?
-
+    
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
         return closeBarButtonItem

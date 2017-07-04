@@ -66,8 +66,8 @@ class RunDetailCoordinator: RootViewCoordinator {
     }
     
     private func configureAndPresentNewRun(with viewController: RunDetailViewController) {
-        viewController.startStopButton.isHidden = true
-        viewController.startStopButton.isEnabled = false
+//        viewController.startStopButton.isHidden = true
+//        viewController.startStopButton.isEnabled = false
         rootViewController.present(viewController, animated: true)
         viewController.coordinator = self
     }

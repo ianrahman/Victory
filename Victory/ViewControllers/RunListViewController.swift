@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RunListViewControllerDelegate: class {
+protocol RunListCoordinator: Coordinator {
     
     func didTapNewRunButton()
     func didSelectRowAt(indexPath: IndexPath)

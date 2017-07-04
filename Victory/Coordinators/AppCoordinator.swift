@@ -23,7 +23,6 @@ final class AppCoordinator: RootViewCoordinator {
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
-//        navigationController.isNavigationBarHidden = true
         return navigationController
     }()
     
@@ -32,42 +31,38 @@ final class AppCoordinator: RootViewCoordinator {
     public init(window: UIWindow, services: Services) {
         self.services = services
         self.window = window
-        
-        self.window.rootViewController = self.rootViewController
-        self.window.makeKeyAndVisible()
     }
     
     // MARK: - Functions
     
     func start() {
-        self.showInitialViewController()
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+        
+        showInitialViewController()
     }
     
     /// Populate navigation controller with initial view controller
     private func showInitialViewController() {
-        let coordinator = RunListCoordinator(with: services, delegate: self)
-        coordinator.start()
-        
-        addChildCoordinator(coordinator)
-        
-//        addChildCoordinator(coordinator)
-//        let storyboard = UIStoryboard(.RunList)
-//        let viewController: RunListViewController = storyboard.instantiateViewController()
-//        navigationController.viewControllers = [viewController]
+        let storyboard = UIStoryboard(.RunList)
+        let viewController: RunListViewController = storyboard.instantiateViewController()
+        viewController.coordinator = self
+        navigationController.viewControllers = [viewController]
     }
     
 }
 
-// MARK: - Run List Coordinator Delegate
+// MARK: - Run List View Controller Delegate
 
-extension AppCoordinator: RunListCoordinatorDelegate {
+extension AppCoordinator: RunListCoordinator {
 
     func didTapNewRunButton() {
         let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
         startAndPresent(runDetailCoordinator)
     }
     
-    func didTapRunCell(with run: Run) {
+    func didSelectRowAt(indexPath: IndexPath) {
+        let run = services.data.runs[indexPath.row]
         let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .previousRun(run: run))
         startAndPresent(runDetailCoordinator)
     }
