@@ -38,11 +38,6 @@ final class AppCoordinator: RootViewCoordinator {
     func start() {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
-        
-        // TODO: - Remove test data
-        let run = Run()
-        services.data.runs.append(run)
-        
         showInitialViewController()
     }
     
@@ -70,7 +65,7 @@ extension AppCoordinator: RunListCoordinator {
     }
     
     func didSelectRowAt(indexPath: IndexPath) {
-        let run = services.data.runs[indexPath.row]
+        let run = services.realm.objects(Run.self)[indexPath.row]
         let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .previousRun(run: run))
         startAndPresent(runDetailCoordinator)
     }

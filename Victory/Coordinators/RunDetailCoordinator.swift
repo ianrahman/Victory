@@ -53,7 +53,9 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private var timer: Timer?
     private var seconds: Int = 0
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
-    var locationList = [CLLocation]()
+    private lazy var measurementFormatter = MeasurementFormatter()
+    private lazy var dateFormatter = DateComponentsFormatter()
+    private lazy var locationList = [CLLocation]()
     
     // MARK: - Init
     
@@ -117,13 +119,25 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func stopRun() {
-        timer?.invalidate()
         services.location.manager.stopUpdatingLocation()
         askUserIfDone()
     }
     
     private func saveRun() {
-        services.data.realm.add(run)
+        run.id = services.realm.objects(Run.self).count
+        run.duration = seconds
+        run.distance = distance.value
+        
+        for location in locationList {
+            let locationObject = Location(latitude: location.coordinate.latitude,
+                                          longitude: location.coordinate.longitude,
+                                          timestamp: location.timestamp, run: run)
+            run.locations.append(locationObject)
+        }
+        
+        try! services.realm.write {
+            services.realm.add(run)
+        }
     }
     
     private func eachSecond() {
@@ -137,13 +151,16 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func updateDistanceLabel() {
-        let formattedDistance = FormatDisplay.distance(distance)
-        runDetailViewController.distanceLabel.text = "Distance:  \(formattedDistance)"
+        let formattedDistance = measurementFormatter.string(from: distance)
+        runDetailViewController.distanceLabel.text = "Distance: \(formattedDistance)"
     }
     
     private func updateDurationLabel() {
-        let formattedTime = FormatDisplay.time(seconds)
-        runDetailViewController.durationLabel.text = "Time:  \(formattedTime)"
+        dateFormatter.allowedUnits = [.hour, .minute, .second]
+        dateFormatter.unitsStyle = .positional
+        dateFormatter.zeroFormattingBehavior = .pad
+        let formattedTime = dateFormatter.string(from: TimeInterval(seconds))!
+        runDetailViewController.timeLabel.text = "Time: \(formattedTime)"
     }
     
 }
@@ -154,6 +171,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func startStopButtonTapped() {
         if running {
+            timer?.invalidate()
             askUserIfDone()
         } else {
             startRun()
@@ -166,7 +184,6 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     }
     
 }
-
 
 // MARK: - Location Manager Delegate
 

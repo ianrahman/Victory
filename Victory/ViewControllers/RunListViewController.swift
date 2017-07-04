@@ -67,15 +67,15 @@ extension RunListViewController: UITableViewDelegate {
 extension RunListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coordinator?.services.data.runs.count ?? 0
+        return coordinator?.services.realm.objects(Run.self).count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let coordinator = coordinator else { return UITableViewCell() }
+        guard let runs = coordinator?.services.realm.objects(Run.self) else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-        cell.textLabel?.text = "\(coordinator.services.data.runs[indexPath.row].date.pretty)"
-        cell.detailTextLabel?.text = "\(coordinator.services.data.runs[indexPath.row].distance) miles"
+        cell.textLabel?.text = "\(runs[indexPath.row].date.pretty)"
+        cell.detailTextLabel?.text = "\(runs[indexPath.row].distance) miles"
         return cell
     }
     

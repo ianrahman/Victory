@@ -13,7 +13,7 @@ import CoreLocation
 final class Services {
     
     let configuration = ConfigurationService()
-    let data = DataService()
+    let realm = try! Realm()
     let location = LocationService()
     
 }
@@ -24,13 +24,6 @@ struct ConfigurationService {
     let titleFont = UIFont(name: "Helvetica Neue", size: 24)!
     let bodyFont = UIFont(name: "Helvetica Neue", size: 20)!
     let detailFont = UIFont(name: "Helvetica Neue", size: 16)!
-    
-}
-
-final class DataService {
-    
-    var runs = [Run]()
-    let realm = try! Realm()
     
 }
 
