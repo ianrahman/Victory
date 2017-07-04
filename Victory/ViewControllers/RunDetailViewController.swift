@@ -23,7 +23,6 @@ final class RunDetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     
     weak var coordinator: RunDetailCoordinator?
@@ -54,13 +53,18 @@ final class RunDetailViewController: UIViewController {
     private func layoutViewController() {
         navigationItem.leftBarButtonItem = closeBarButtonItem
         view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        distanceLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        timeLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        startStopButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        startStopButton.backgroundColor = #colorLiteral(red: 0.6399999857, green: 0, blue: 0, alpha: 1)
+        
         guard let type = type else { return }
+        
         switch type {
         case .previousRun(let run):
-            title = "\(run.date)"
+            title = run.date.pretty
             distanceLabel.text = "\(run.distance) mi"
             timeLabel.text = "\(run.duration)"
-            paceLabel.text = "pace in space"
             startStopButton.isEnabled = false
             startStopButton.isHidden = true
         case .newRun:

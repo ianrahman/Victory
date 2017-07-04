@@ -75,7 +75,7 @@ extension RunListViewController: UITableViewDataSource {
         guard let coordinator = coordinator else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-        cell.textLabel?.text = "\(coordinator.services.data.runs[indexPath.row].date)"
+        cell.textLabel?.text = "\(coordinator.services.data.runs[indexPath.row].date.pretty)"
         cell.detailTextLabel?.text = "\(coordinator.services.data.runs[indexPath.row].distance) miles"
         return cell
     }
