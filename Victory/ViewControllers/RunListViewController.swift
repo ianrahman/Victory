@@ -41,12 +41,11 @@ final class RunListViewController: UIViewController {
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
-        layoutViewController()
+        setUI()
     }
     
-    private func layoutViewController() {
+    private func setUI() {
         title = "Victory"
-        
         navigationItem.rightBarButtonItem = newRunBarButtonItem
         tableView.rowHeight = coordinator?.services.configuration.tableViewRowHeight ?? 0
     }

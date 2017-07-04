@@ -47,11 +47,12 @@ final class RunDetailViewController: UIViewController {
     // MARK: - Functions
     
     override func viewDidLoad() {
-        layoutViewController()
+        setUI()
     }
     
-    private func layoutViewController() {
+    private func setUI() {
         navigationItem.leftBarButtonItem = closeBarButtonItem
+        
         view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         distanceLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         timeLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -63,12 +64,17 @@ final class RunDetailViewController: UIViewController {
         switch type {
         case .previousRun(let run):
             title = run.date.pretty
-            distanceLabel.text = "\(run.distance) mi"
+            distanceLabel.text = "\(run.distance) miles"
             timeLabel.text = "\(run.duration)"
             startStopButton.isEnabled = false
             startStopButton.isHidden = true
-        case .newRun:
+        case .newRun(_):
             title = "Let's go!"
+            distanceLabel.text = "Distance"
+            timeLabel.text = "Duration"
+            startStopButton.isEnabled = true
+            startStopButton.isHidden = false
+            startStopButton.setTitle("Start", for: .normal)
         }
     }
     

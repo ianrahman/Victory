@@ -10,7 +10,7 @@ import UIKit
 
 enum RunDetailType {
     
-    case newRun
+    case newRun(run: Run)
     case previousRun(run: Run)
     
 }
@@ -64,6 +64,23 @@ class RunDetailCoordinator: RootViewCoordinator {
         navigationController.viewControllers = [viewController]
     }
     
+    private func setButtonTitle() {
+        guard let viewController = navigationController.viewControllers
+            .filter({ $0.self is RunDetailViewController })
+            .first as? RunDetailViewController else { return }
+        let title = running ?  "Continue" : "Stop"
+        running = !running
+        viewController.startStopButton.setTitle(title, for: .normal)
+    }
+    
+    private func updateDistance() {
+        
+    }
+    
+    private func updateDuration() {
+        
+    }
+    
 }
 
 // MARK: - Run Detail View Controller Delegate
@@ -71,11 +88,7 @@ class RunDetailCoordinator: RootViewCoordinator {
 extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func startStopButtonTapped() {
-        print("Button Tapped!")
-        guard let viewController = rootViewController.presentedViewController as? RunDetailViewController else { return }
-        let title = running ? "Stop" : "Start"
-        running = !running
-        viewController.startStopButton.setTitle(title, for: .normal)
+        setButtonTitle()
     }
     
     func closeButtonTapped() {

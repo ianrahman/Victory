@@ -39,6 +39,7 @@ final class AppCoordinator: RootViewCoordinator {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
+        // TODO: - Remove test data
         let run = Run()
         services.data.runs.append(run)
         
@@ -60,7 +61,7 @@ final class AppCoordinator: RootViewCoordinator {
 extension AppCoordinator: RunListCoordinator {
 
     func didTapNewRunButton() {
-        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
+        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun(run: Run()))
         startAndPresent(runDetailCoordinator)
     }
     
