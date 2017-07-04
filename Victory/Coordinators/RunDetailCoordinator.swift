@@ -39,7 +39,6 @@ class RunDetailCoordinator: RootViewCoordinator {
     }()
     
     let type: RunDetailType
-    var run: Run?
     var running = false
     var newRun = false
     
@@ -56,15 +55,13 @@ class RunDetailCoordinator: RootViewCoordinator {
     func start() {
         let storyboard = UIStoryboard(.RunDetail)
         let viewController: RunDetailViewController = storyboard.instantiateViewController()
-        configureAndPresent(viewController: viewController, run: run)
+        configureAndPresent(viewController: viewController)
     }
     
-    private func configureAndPresent(viewController: RunDetailViewController, run: Run?) {
-        if let run = run {
-            viewController.layout(for: run)
-        }
-        navigationController.viewControllers = [viewController]
+    private func configureAndPresent(viewController: RunDetailViewController) {
+        viewController.type = type
         viewController.coordinator = self
+        navigationController.viewControllers = [viewController]
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: - UIStoryboard
+// MARK: - Storyboard
 
 extension UIStoryboard {
     
@@ -40,6 +40,6 @@ extension UIStoryboard {
     
 }
 
-// MARK: - UIViewController
+// MARK: - View Controller
 
 extension UIViewController: StoryboardIdentifiable { }

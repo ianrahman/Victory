@@ -28,16 +28,15 @@ final class RunDetailViewController: UIViewController {
     
     weak var coordinator: RunDetailCoordinator?
     
+    var type: RunDetailType?
+    
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
+        closeBarButtonItem.tintColor = .red
         return closeBarButtonItem
     }()
     
-    // MARK: - Functions
-    
-    override func viewDidLoad() {
-        navigationItem.leftBarButtonItem = closeBarButtonItem
-    }
+    // MARK: - Actions
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
         coordinator?.startStopButtonTapped()
@@ -47,11 +46,26 @@ final class RunDetailViewController: UIViewController {
         coordinator?.closeButtonTapped()
     }
     
-    // TODO: - Finish implementation
-    func layout(for run: Run) {
-        title = "\(run.date)"
-        distanceLabel.text = "\(run.distance)"
-        timeLabel.text = "\(run.duration)"
+    // MARK: - Functions
+    
+    override func viewDidLoad() {
+        layoutViewController()
+    }
+    
+    private func layoutViewController() {
+        navigationItem.leftBarButtonItem = closeBarButtonItem
+        guard let type = type else { return }
+        switch type {
+        case .previousRun(let run):
+            title = "\(run.date)"
+            distanceLabel.text = "\(run.distance) mi"
+            timeLabel.text = "\(run.duration)"
+            paceLabel.text = "pace in space"
+            startStopButton.isEnabled = false
+            startStopButton.isHidden = true
+        case .newRun:
+            break
+        }
     }
     
 }

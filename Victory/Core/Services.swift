@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import CoreLocation
 
 final class Services {
@@ -20,12 +21,16 @@ final class Services {
 struct ConfigurationService {
     
     let tableViewRowHeight: CGFloat = 55
+    let primaryColor = UIColor(red:0.84, green:0.00, blue:0.00, alpha:1.0)
+    let secondaryColor = UIColor(red:0.61, green:0.00, blue:0.00, alpha:1.0)
+    let textColor: UIColor = .white
     
 }
 
 final class DataService {
     
     var runs = [Run]()
+    let realm = try! Realm()
     
 }
 

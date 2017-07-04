@@ -31,16 +31,23 @@ final class RunListViewController: UIViewController {
         return newRunBarButtonItem
     }()
     
-    // MARK: - Functions
-    
-    override func viewDidLoad() {
-        navigationItem.rightBarButtonItem = newRunBarButtonItem
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
+    // MARK: - Actions
     
     @objc private func didTapNewRunButton() {
         coordinator?.didTapNewRunButton()
+    }
+    
+    // MARK: - Functions
+    
+    override func viewDidLoad() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        layoutViewController()
+    }
+    
+    private func layoutViewController() {
+        navigationItem.rightBarButtonItem = newRunBarButtonItem
+        tableView.rowHeight = coordinator?.services.configuration.tableViewRowHeight ?? 0
     }
     
 }
@@ -61,10 +68,6 @@ extension RunListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coordinator?.services.data.runs.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return coordinator?.services.configuration.tableViewRowHeight ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
