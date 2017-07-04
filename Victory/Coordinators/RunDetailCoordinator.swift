@@ -88,37 +88,18 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     private func setButtonTitle() {
         let title = running ?  "Continue" : "Stop"
-        running = !running
         runDetailViewController.startStopButton.setTitle(title, for: .normal)
     }
     
-    private func askUserIfDone() {
-        let alertController = UIAlertController(title: "Nice Run!",
-                                                message: "Want to keep going?",
-                                                preferredStyle: .actionSheet)
-        alertController.addAction(UIAlertAction(title: "Continue Run", style: .default) { _ in
-            self.startRun()
-        })
-        alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
-            self.saveRun()
-            self.didTapCloseButton()
-        })
-        alertController.addAction(UIAlertAction(title: "Discard Run", style: .destructive) { _ in
-            self.didTapCloseButton()
-        })
-        
-        rootViewController.present(alertController, animated: true)
-    }
-    
     private func startRun() {
+        running = true
         updateDisplay()
-        services.location.manager.startUpdatingLocation()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.eachSecond()
-        }
+        startLocationUpdates()
+        startTimer()
     }
     
     private func stopRun() {
+        running = false
         services.location.manager.stopUpdatingLocation()
         askUserIfDone()
     }
@@ -138,6 +119,39 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         try! services.realm.write {
             services.realm.add(run)
         }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            self.eachSecond()
+        }
+    }
+    
+    private func startLocationUpdates() {
+        services.location.manager.delegate = self
+        services.location.manager.activityType = .fitness
+        services.location.manager.distanceFilter = 10
+        services.location.manager.startUpdatingLocation()
+    }
+    
+    private func askUserIfDone() {
+        let alertController = UIAlertController(title: "Nice Run!",
+                                                message: "Want to keep going?",
+                                                preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Continue Run", style: .default) { _ in
+            self.running = true
+            self.startTimer()
+            self.startLocationUpdates()
+        })
+        alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
+            self.saveRun()
+            self.didTapCloseButton()
+        })
+        alertController.addAction(UIAlertAction(title: "Discard Run", style: .destructive) { _ in
+            self.didTapCloseButton()
+        })
+        
+        rootViewController.present(alertController, animated: true)
     }
     
     private func eachSecond() {
@@ -170,13 +184,16 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
 extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func startStopButtonTapped() {
+        setButtonTitle()
+        
         if running {
+            services.location.manager.stopUpdatingLocation()
             timer?.invalidate()
+            timer = nil
             askUserIfDone()
         } else {
             startRun()
         }
-        setButtonTitle()
     }
     
     func didTapCloseButton() {

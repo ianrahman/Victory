@@ -26,6 +26,13 @@ final class AppCoordinator: RootViewCoordinator {
         return navigationController
     }()
     
+    private lazy var runListViewController: RunListViewController = {
+        let runListViewController = self.navigationController.viewControllers
+            .filter({ $0.self is RunListViewController })
+            .first as! RunListViewController
+        return runListViewController
+    }()
+    
     // MARK: - Init
     
     public init(window: UIWindow, services: Services) {
@@ -75,6 +82,10 @@ extension AppCoordinator: RunListCoordinator {
         addChildCoordinator(runDetailCoordinator)
         rootViewController.present(runDetailCoordinator.rootViewController, animated: true)
     }
+    
+    func reloadData() {
+        runListViewController.tableView.reloadData()
+    }
 
 }
 
@@ -85,6 +96,7 @@ extension AppCoordinator: RunDetailCoordinatorDelegate {
     func didTapCloseButton(runDetailCoordinator: RunDetailCoordinator) {
         runDetailCoordinator.rootViewController.dismiss(animated: true)
         removeChildCoordinator(runDetailCoordinator)
+        reloadData()
     }
     
 }
