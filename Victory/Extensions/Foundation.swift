@@ -63,4 +63,9 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    /// Get the year, month, day, hour, minute, and second concatinated as an Int
+    public var id: Int? {
+        let s = "\(year)\(month)\(day)\(hour)\(minute)\(second)"
+        return Int(s)
+    }
 }

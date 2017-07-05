@@ -29,13 +29,8 @@ class Location: Object {
     @objc dynamic var longitude: Double = 0.0
     @objc dynamic var timestamp: Date = Date()
     @objc dynamic var run: Run?
-    @objc dynamic var id: Int = 0
     
     // MARK: - Functions
-    
-    override class func primaryKey() -> String? {
-        return "id"
-    }
     
     override static func indexedProperties() -> [String] {
         return ["timestamp"]

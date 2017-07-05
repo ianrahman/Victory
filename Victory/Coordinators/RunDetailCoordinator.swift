@@ -85,6 +85,11 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         navigationController.viewControllers = [viewController]
     }
     
+    private func startRun(_ viewController: RunDetailViewController) {
+        locationList.removeAll()
+        continueRun(viewController)
+    }
+    
     private func stopRun(_ viewController: RunDetailViewController) {
         running = false
         updateDisplay(for: viewController)
@@ -101,7 +106,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func saveRun() {
-        run.id = services.realm.objects(Run.self).count
+        run.id = Date().id ?? Int(Date().timeIntervalSince1970)
         run.duration = seconds
         run.distance = distance.value
         
@@ -255,6 +260,7 @@ extension RunDetailCoordinator {
 extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func viewDidLoad(_ viewController: RunDetailViewController) {
+        runDetailViewController = viewController
         setUI(for: viewController)
         requestLocationAccess()
         setUpLocationManager()
@@ -267,13 +273,13 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
             stopTimer()
             askUserIfDone(with: viewController)
         } else {
-            continueRun(viewController)
+            startRun(viewController)
         }
     }
     
     func didTapCloseButton(on viewController: RunDetailViewController) {
         if running {
-            didTapStartStopButton(on: viewController)
+            askUserIfDone(with: viewController)
         } else {
             delegate?.didTapCloseButton(runDetailCoordinator: self)
         }
@@ -286,9 +292,12 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
 extension RunDetailCoordinator: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("location updated at \(seconds) seconds")
         for newLocation in locations {
-            let howRecent = newLocation.timestamp.timeIntervalSinceNow
-            guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
+//            let howRecent = newLocation.timestamp.timeIntervalSinceNow
+            guard newLocation.horizontalAccuracy < 20
+//                && abs(howRecent) < 10
+                else { continue }
             
             if let lastLocation = locationList.last,
                 let viewController = runDetailViewController {
@@ -300,6 +309,7 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
             }
             
             locationList.append(newLocation)
+            print(newLocation)
         }
     }
     
@@ -320,11 +330,18 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
 extension RunDetailCoordinator: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        var region = MKCoordinateRegion()
-        region.center = userLocation.coordinate
-        region.span.latitudeDelta = 0.1
-        region.span.longitudeDelta = 0.1
-        mapView.setRegion(region, animated: true)
+        switch type {
+        case .newRun:
+            if !running {
+                var region = MKCoordinateRegion()
+                region.center = userLocation.coordinate
+                region.span.latitudeDelta = 0.1
+                region.span.longitudeDelta = 0.1
+                mapView.setRegion(region, animated: true)
+            }
+        default:
+            break
+        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
