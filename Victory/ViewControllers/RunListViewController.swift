@@ -44,4 +44,8 @@ final class RunListViewController: UIViewController {
         coordinator?.viewDidLoad(self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
 }

@@ -83,7 +83,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         let storyboard = UIStoryboard(.RunDetail)
         let viewController: RunDetailViewController = storyboard.instantiateViewController()
         configureAndPresent(viewController: viewController)
-        services.location.manager.delegate = self
     }
     
     private func configureAndPresent(viewController: RunDetailViewController) {
@@ -139,10 +138,14 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         timer = nil
     }
     
-    private func startLocationUpdates() {
+    private func setUpLocationManager() {
         services.location.manager.delegate = self
+        services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
         services.location.manager.activityType = .fitness
         services.location.manager.distanceFilter = 10
+    }
+    
+    private func startLocationUpdates() {
         services.location.manager.startUpdatingLocation()
     }
     
@@ -203,6 +206,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     func viewDidLoad(_ viewController: RunDetailViewController) {
         viewController.mapView.delegate = self
         setUI(for: viewController)
+        setUpLocationManager()
     }
     
     func didTapStartStopButton(_ viewController: RunDetailViewController) {
