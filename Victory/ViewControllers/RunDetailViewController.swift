@@ -14,8 +14,8 @@ import MapKit
 protocol RunDetailViewControllerDelegate {
     
     func viewDidLoad(_ viewController: RunDetailViewController)
-    func didTapStartStopButton(_ viewController: RunDetailViewController)
-    func didTapCloseButton()
+    func didTapStartStopButton(on viewController: RunDetailViewController)
+    func didTapCloseButton(on viewController: RunDetailViewController)
     
 }
 
@@ -40,11 +40,11 @@ final class RunDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
-        coordinator?.didTapStartStopButton(self)
+        coordinator?.didTapStartStopButton(on: self)
     }
     
     @objc private func didTapCloseButton() {
-        coordinator?.didTapCloseButton()
+        coordinator?.didTapCloseButton(on: self)
     }
     
     // MARK: - Functions

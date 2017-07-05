@@ -47,7 +47,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     weak var delegate: RunDetailCoordinatorDelegate?
     
-    let run: Run
+    private let run: Run
     private let type: RunDetailType
     private var running = false
     private var newRun = false
@@ -83,18 +83,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private func configureAndPresent(viewController: RunDetailViewController) {
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
-    }
-    
-    private func updateButtonTitle(for viewController: RunDetailViewController) {
-        let title = running ?  "Continue" : "Stop"
-        viewController.startStopButton.setTitle(title, for: .normal)
-    }
-    
-    private func startRun(_ viewController: RunDetailViewController) {
-        let noLocation = CLLocationCoordinate2D()
-        let viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 200, 200)
-        viewController.mapView.setRegion(viewRegion, animated: false)
-        continueRun(viewController)
     }
     
     private func stopRun(_ viewController: RunDetailViewController) {
@@ -145,12 +133,10 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func setUpLocationManager() {
-        if CLLocationManager.locationServicesEnabled() {
-            services.location.manager.delegate = self
-            services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
-            services.location.manager.activityType = .fitness
-            services.location.manager.distanceFilter = 10
-        }
+        services.location.manager.delegate = self
+        services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
+        services.location.manager.activityType = .fitness
+        services.location.manager.distanceFilter = 10
     }
     
     private func startLocationUpdates(_ viewController: RunDetailViewController) {
@@ -165,12 +151,50 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         services.location.manager.stopUpdatingLocation()
     }
     
+}
+
+// MARK: - View Controller Functions
+
+extension RunDetailCoordinator {
+    
+    private func setUI(for viewController: RunDetailViewController) {
+        viewController.navigationItem.leftBarButtonItem = viewController.closeBarButtonItem
+        viewController.view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        viewController.distanceLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        viewController.timeLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        viewController.startStopButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        viewController.startStopButton.backgroundColor = #colorLiteral(red: 0.6399999857, green: 0, blue: 0, alpha: 1)
+        
+        switch type {
+        case .previousRun(let run):
+            viewController.title = run.date.pretty
+            viewController.distanceLabel.text = "\(run.distance) miles"
+            viewController.timeLabel.text = "\(run.duration)"
+            viewController.startStopButton.isEnabled = false
+            viewController.startStopButton.isHidden = true
+            loadMap(for: viewController, run: run)
+        case .newRun(_):
+            viewController.title = "Let's go!"
+            viewController.distanceLabel.text = "Distance"
+            viewController.timeLabel.text = "Duration"
+            viewController.startStopButton.isEnabled = true
+            viewController.startStopButton.isHidden = false
+            viewController.startStopButton.setTitle("Start", for: .normal)
+        }
+    }
+    
+    private func setUpMapView(for viewController: RunDetailViewController) {
+        viewController.mapView.delegate = self
+        viewController.mapView.showsUserLocation = true
+        viewController.mapView.showsBuildings = true
+    }
+    
     private func askUserToEnableLocationServices(with viewController: RunDetailViewController) {
         let alertController = UIAlertController(title: "Oh no!",
                                                 message: "Looks like we can't access your location. Please enable location services for Victory in your Settings app.",
                                                 preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(title: "Continue Run", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         viewController.present(alertController, animated: true)
     }
@@ -186,10 +210,10 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         })
         alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
             self.saveRun()
-            self.didTapCloseButton()
+            self.delegate?.didTapCloseButton(runDetailCoordinator: self)
         })
         alertController.addAction(UIAlertAction(title: "Discard Run", style: .destructive) { _ in
-            self.didTapCloseButton()
+            self.delegate?.didTapCloseButton(runDetailCoordinator: self)
         })
         
         viewController.present(alertController, animated: true)
@@ -219,6 +243,11 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         viewController.timeLabel.text = "Time: \(formattedTime)"
     }
     
+    private func updateButtonTitle(for viewController: RunDetailViewController) {
+        let title = running ?  "Stop" : "Continue"
+        viewController.startStopButton.setTitle(title, for: .normal)
+    }
+    
 }
 
 // MARK: - Run Detail View Controller Delegate
@@ -226,23 +255,28 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
 extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func viewDidLoad(_ viewController: RunDetailViewController) {
-        viewController.mapView.delegate = self
         setUI(for: viewController)
+        requestLocationAccess()
         setUpLocationManager()
+        setUpMapView(for: viewController)
     }
     
-    func didTapStartStopButton(_ viewController: RunDetailViewController) {
+    func didTapStartStopButton(on viewController: RunDetailViewController) {
         if running {
             stopLocationUpdates()
             stopTimer()
             askUserIfDone(with: viewController)
         } else {
-            startRun(viewController)
+            continueRun(viewController)
         }
     }
     
-    func didTapCloseButton() {
-        delegate?.didTapCloseButton(runDetailCoordinator: self)
+    func didTapCloseButton(on viewController: RunDetailViewController) {
+        if running {
+            didTapStartStopButton(on: viewController)
+        } else {
+            delegate?.didTapCloseButton(runDetailCoordinator: self)
+        }
     }
     
 }
@@ -285,6 +319,14 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
 
 extension RunDetailCoordinator: MKMapViewDelegate {
     
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        var region = MKCoordinateRegion()
+        region.center = userLocation.coordinate
+        region.span.latitudeDelta = 0.1
+        region.span.longitudeDelta = 0.1
+        mapView.setRegion(region, animated: true)
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyline = overlay as? MKPolyline else {
             return MKOverlayRenderer(overlay: overlay)
@@ -293,39 +335,6 @@ extension RunDetailCoordinator: MKMapViewDelegate {
         renderer.strokeColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         renderer.lineWidth = 3
         return renderer
-    }
-    
-}
-
-// MARK: - View Controller Functions
-
-extension RunDetailCoordinator {
-    
-    private func setUI(for viewController: RunDetailViewController) {
-        viewController.navigationItem.leftBarButtonItem = viewController.closeBarButtonItem
-        
-        viewController.view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-        viewController.distanceLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        viewController.timeLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        viewController.startStopButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        viewController.startStopButton.backgroundColor = #colorLiteral(red: 0.6399999857, green: 0, blue: 0, alpha: 1)
-        
-        switch type {
-        case .previousRun(let run):
-            viewController.title = run.date.pretty
-            viewController.distanceLabel.text = "\(run.distance) miles"
-            viewController.timeLabel.text = "\(run.duration)"
-            viewController.startStopButton.isEnabled = false
-            viewController.startStopButton.isHidden = true
-            loadMap(for: viewController, run: run)
-        case .newRun(_):
-            viewController.title = "Let's go!"
-            viewController.distanceLabel.text = "Distance"
-            viewController.timeLabel.text = "Duration"
-            viewController.startStopButton.isEnabled = true
-            viewController.startStopButton.isHidden = false
-            viewController.startStopButton.setTitle("Start", for: .normal)
-        }
     }
     
 }
