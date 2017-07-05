@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Segue Handler Type
+
 /// Use in view controllers:
 /// 1) Conform view controller to SegueHandlerType
 /// 2) Add `enum SegueIdentifier: String { }` to conformance
@@ -18,6 +20,8 @@ protocol SegueHandlerType {
     associatedtype SegueIdentifier: RawRepresentable
     
 }
+
+// MARK: - View Controller
 
 extension SegueHandlerType where Self: UIViewController, SegueIdentifier.RawValue == String {
     

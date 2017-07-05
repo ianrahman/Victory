@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Storyboard Identifiable
+
 protocol StoryboardIdentifiable {
     
     static var storyboardIdentifier: String { get }

@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Run List Coordinator
+
 protocol RunListCoordinator: Coordinator {
     
     func didTapNewRunButton()
@@ -15,6 +17,8 @@ protocol RunListCoordinator: Coordinator {
     func reloadData()
     
 }
+
+// MARK: - Run List View Controller
 
 final class RunListViewController: UIViewController {
     

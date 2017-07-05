@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+//  MARK: - Run Detail Type
+
 enum RunDetailType {
     
     case newRun
@@ -16,11 +18,15 @@ enum RunDetailType {
     
 }
 
+//  MARK: - Run Detail Coordinator Delegate
+
 protocol RunDetailCoordinatorDelegate: class {
     
     func didTapCloseButton(runDetailCoordinator: RunDetailCoordinator)
     
 }
+
+//  MARK: - Run Detail Coordinator
 
 class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
@@ -100,7 +106,9 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     private func stopRun() {
         running = false
-        services.location.manager.stopUpdatingLocation()
+        updateDisplay()
+        stopLocationUpdates()
+        stopTimer()
         askUserIfDone()
     }
     
@@ -127,11 +135,20 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         }
     }
     
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
     private func startLocationUpdates() {
         services.location.manager.delegate = self
         services.location.manager.activityType = .fitness
         services.location.manager.distanceFilter = 10
         services.location.manager.startUpdatingLocation()
+    }
+    
+    private func stopLocationUpdates() {
+        services.location.manager.stopUpdatingLocation()
     }
     
     private func askUserIfDone() {
@@ -162,6 +179,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private func updateDisplay() {
         updateDistanceLabel()
         updateDurationLabel()
+        setButtonTitle()
     }
     
     private func updateDistanceLabel() {
@@ -183,13 +201,10 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
 
 extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
-    func startStopButtonTapped() {
-        setButtonTitle()
-        
+    func didTapStartStopButton() {
         if running {
-            services.location.manager.stopUpdatingLocation()
-            timer?.invalidate()
-            timer = nil
+            stopLocationUpdates()
+            stopTimer()
             askUserIfDone()
         } else {
             startRun()

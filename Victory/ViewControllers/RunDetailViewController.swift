@@ -9,12 +9,16 @@
 import UIKit
 import MapKit
 
+// MARK: - Run Detail View Controller Delegate
+
 protocol RunDetailViewControllerDelegate {
     
-    func startStopButtonTapped()
+    func didTapStartStopButton()
     func didTapCloseButton()
     
 }
+
+// MARK: - Run Detail View Controller
 
 final class RunDetailViewController: UIViewController {
     
@@ -42,7 +46,7 @@ final class RunDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
-        coordinator?.startStopButtonTapped()
+        coordinator?.didTapStartStopButton()
     }
     
     @objc private func didTapCloseButton() {
@@ -84,6 +88,12 @@ final class RunDetailViewController: UIViewController {
             startStopButton.setTitle("Start", for: .normal)
         }
     }
+    
+}
+
+// MARK: - Map Functions
+
+extension RunDetailViewController {
     
     func updateMap(with coordinates: [CLLocationCoordinate2D], newLocation: CLLocation) {
         mapView.add(MKPolyline(coordinates: coordinates, count: 2))
@@ -134,25 +144,25 @@ final class RunDetailViewController: UIViewController {
         return MKCoordinateRegion(center: center, span: span)
     }
     
-        private func polyLine() -> [MKPolyline] {
-            guard let locations = run?.locations else { return [] }
-            var coordinates: [(CLLocation, CLLocation)] = []
-            
-            for (first, second) in zip(locations, locations.dropFirst()) {
-                let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
-                let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
-                coordinates.append((start, end))
-            }
-            
-            var segments: [MKPolyline] = []
-            for (start, end) in coordinates {
-                let coords = [start.coordinate, end.coordinate]
-                let segment = MKPolyline(coordinates: coords, count: 2)
-                segments.append(segment)
-            }
-            
-            return segments
+    private func polyLine() -> [MKPolyline] {
+        guard let locations = run?.locations else { return [] }
+        var coordinates: [(CLLocation, CLLocation)] = []
+        
+        for (first, second) in zip(locations, locations.dropFirst()) {
+            let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
+            let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
+            coordinates.append((start, end))
         }
+        
+        var segments: [MKPolyline] = []
+        for (start, end) in coordinates {
+            let coords = [start.coordinate, end.coordinate]
+            let segment = MKPolyline(coordinates: coords, count: 2)
+            segments.append(segment)
+        }
+        
+        return segments
+    }
     
 }
 

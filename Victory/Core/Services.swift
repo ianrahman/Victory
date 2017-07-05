@@ -10,13 +10,17 @@ import UIKit
 import RealmSwift
 import CoreLocation
 
+// MARK: - Services
+
 final class Services {
     
     let configuration = ConfigurationService()
-    let realm = try! Realm()
     let location = LocationService()
+    let realm = try! Realm()
     
 }
+
+// MARK: - Configuration Services
 
 struct ConfigurationService {
     
@@ -26,6 +30,8 @@ struct ConfigurationService {
     let detailFont = UIFont(name: "Helvetica Neue", size: 16)!
     
 }
+
+// MARK: - Location Services
 
 final class LocationService {
     

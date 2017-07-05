@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - Coordinator
+
 protocol Coordinator: class {
     
     var services: Services { get }

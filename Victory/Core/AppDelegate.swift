@@ -10,6 +10,9 @@ import UIKit
 import RealmSwift
 
 @UIApplicationMain
+
+// MARK: - App Delegate
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Properties

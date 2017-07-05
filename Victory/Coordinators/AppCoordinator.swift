@@ -8,6 +8,8 @@
 
 import UIKit
 
+// MARK: - App Coordinator
+
 final class AppCoordinator: RootViewCoordinator {
     
     // MARK: - Properties

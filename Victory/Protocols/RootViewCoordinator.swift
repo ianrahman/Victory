@@ -8,10 +8,14 @@
 
 import UIKit
 
+// MARK: - Root View Controller Provider
+
 protocol RootViewControllerProvider: class {
     
     var rootViewController: UIViewController { get }
     
 }
+
+// MARK: - Root View Coordinator
 
 typealias RootViewCoordinator = Coordinator & RootViewControllerProvider

@@ -9,9 +9,12 @@
 import Foundation
 import RealmSwift
 
+// MARK: - Run
+
 class Run: Object {
     
     // MARK: - Init
+    
     convenience init(distance: Double, duration: Int, date: Date, locations: List<Location>) {
         self.init()
         self.distance = distance

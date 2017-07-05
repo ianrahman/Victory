@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+// MARK: - Location
+
 class Location: Object {
     
     // MARK: - Init
