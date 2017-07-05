@@ -30,13 +30,6 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         return navigationController
     }()
     
-    private lazy var runListViewController: RunListViewController = {
-        let runListViewController = self.navigationController.viewControllers
-            .filter({ $0.self is RunListViewController })
-            .first as! RunListViewController
-        return runListViewController
-    }()
-    
     // MARK: - Init
     
     public init(window: UIWindow, services: Services) {
@@ -64,6 +57,15 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         UILabel.appearance().font = services.configuration.bodyFont
     }
     
+    private func removeRun(at indexPath: IndexPath) {
+        let runs = services.realm.objects(Run.self)
+        let runToDelete = runs[indexPath.row]
+        try! services.realm.write {
+            services.realm.delete(runToDelete)
+        }
+        reloadData()
+    }
+    
 }
 
 // MARK: - Run List View Controller Delegate
@@ -87,8 +89,8 @@ extension AppCoordinator: RunListCoordinator {
         rootViewController.present(runDetailCoordinator.rootViewController, animated: true)
     }
     
-    private func reloadData() {
-        runListViewController.tableView.reloadData()
+    private func reloadData(for viewController: RunListViewController) {
+        viewController.tableView.reloadData()
     }
     
     private func setUI(for viewController: RunListViewController) {
@@ -108,6 +110,18 @@ extension AppCoordinator: UITableViewDelegate {
         startAndPresent(runDetailCoordinator)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            removeRun(at: indexPath)
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - TableView Data Source
