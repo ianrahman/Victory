@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Calendar
+// MARK: - Date
 
 extension Date {
     
@@ -56,7 +56,7 @@ extension Date {
         return Calendar.current.component(.second, from: self)
     }
     
-    /// Get a pretty date format
+    /// Get the date as a string formatted MM/dd/yyyy
     public var pretty: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
