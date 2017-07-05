@@ -38,16 +38,11 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         return self.navigationController
     }
     
+    private var runDetailViewController: RunDetailViewController?
+    
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         return navigationController
-    }()
-    
-    private lazy var runDetailViewController: RunDetailViewController = {
-        let runDetailViewController = self.navigationController.viewControllers
-            .filter({ $0.self is RunDetailViewController })
-            .first as! RunDetailViewController
-        return runDetailViewController
     }()
     
     weak var delegate: RunDetailCoordinatorDelegate?
@@ -90,24 +85,31 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         navigationController.viewControllers = [viewController]
     }
     
-    private func updateButtonTitle() {
+    private func updateButtonTitle(for viewController: RunDetailViewController) {
         let title = running ?  "Continue" : "Stop"
-        runDetailViewController.startStopButton.setTitle(title, for: .normal)
+        viewController.startStopButton.setTitle(title, for: .normal)
     }
     
-    private func startRun() {
-        running = true
-        updateDisplay()
-        startLocationUpdates()
-        startTimer()
+    private func startRun(_ viewController: RunDetailViewController) {
+        let noLocation = CLLocationCoordinate2D()
+        let viewRegion = MKCoordinateRegionMakeWithDistance(noLocation, 200, 200)
+        viewController.mapView.setRegion(viewRegion, animated: false)
+        continueRun(viewController)
     }
     
-    private func stopRun() {
+    private func stopRun(_ viewController: RunDetailViewController) {
         running = false
-        updateDisplay()
+        updateDisplay(for: viewController)
         stopLocationUpdates()
         stopTimer()
-        askUserIfDone()
+        askUserIfDone(with: viewController)
+    }
+    
+    private func continueRun(_ viewController: RunDetailViewController) {
+        running = true
+        updateDisplay(for: viewController)
+        startLocationUpdates(viewController)
+        startTimer(viewController)
     }
     
     private func saveRun() {
@@ -127,9 +129,9 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         }
     }
     
-    private func startTimer() {
+    private func startTimer(_ viewController: RunDetailViewController) {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            self.eachSecond()
+            self.eachSecond(viewController)
         }
     }
     
@@ -138,29 +140,49 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         timer = nil
     }
     
-    private func setUpLocationManager() {
-        services.location.manager.delegate = self
-        services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
-        services.location.manager.activityType = .fitness
-        services.location.manager.distanceFilter = 10
+    private func requestLocationAccess() {
+        services.location.manager.requestWhenInUseAuthorization()
     }
     
-    private func startLocationUpdates() {
-        services.location.manager.startUpdatingLocation()
+    private func setUpLocationManager() {
+        if CLLocationManager.locationServicesEnabled() {
+            services.location.manager.delegate = self
+            services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
+            services.location.manager.activityType = .fitness
+            services.location.manager.distanceFilter = 10
+        }
+    }
+    
+    private func startLocationUpdates(_ viewController: RunDetailViewController) {
+        if CLLocationManager.locationServicesEnabled() {
+            services.location.manager.startUpdatingLocation()
+        } else {
+            askUserToEnableLocationServices(with: viewController)
+        }
     }
     
     private func stopLocationUpdates() {
         services.location.manager.stopUpdatingLocation()
     }
     
-    private func askUserIfDone() {
+    private func askUserToEnableLocationServices(with viewController: RunDetailViewController) {
+        let alertController = UIAlertController(title: "Oh no!",
+                                                message: "Looks like we can't access your location. Please enable location services for Victory in your Settings app.",
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Continue Run", style: .cancel))
+        
+        viewController.present(alertController, animated: true)
+    }
+    
+    private func askUserIfDone(with viewController: RunDetailViewController) {
         let alertController = UIAlertController(title: "Nice Run!",
                                                 message: "Want to keep going?",
                                                 preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Continue Run", style: .default) { _ in
             self.running = true
-            self.startTimer()
-            self.startLocationUpdates()
+            self.startTimer(viewController)
+            self.startLocationUpdates(viewController)
         })
         alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
             self.saveRun()
@@ -170,31 +192,31 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
             self.didTapCloseButton()
         })
         
-        rootViewController.present(alertController, animated: true)
+        viewController.present(alertController, animated: true)
     }
     
-    private func eachSecond() {
+    private func eachSecond(_ viewController: RunDetailViewController) {
         seconds += 1
-        updateDisplay()
+        updateDisplay(for: viewController)
     }
     
-    private func updateDisplay() {
-        updateDistanceLabel()
-        updateDurationLabel()
-        updateButtonTitle()
+    private func updateDisplay(for viewController: RunDetailViewController) {
+        updateDistanceLabel(for: viewController)
+        updateDurationLabel(for: viewController)
+        updateButtonTitle(for: viewController)
     }
     
-    private func updateDistanceLabel() {
+    private func updateDistanceLabel(for viewController: RunDetailViewController) {
         let formattedDistance = measurementFormatter.string(from: distance)
-        runDetailViewController.distanceLabel.text = "Distance: \(formattedDistance)"
+        viewController.distanceLabel.text = "Distance: \(formattedDistance)"
     }
     
-    private func updateDurationLabel() {
+    private func updateDurationLabel(for viewController: RunDetailViewController) {
         dateFormatter.allowedUnits = [.hour, .minute, .second]
         dateFormatter.unitsStyle = .positional
         dateFormatter.zeroFormattingBehavior = .pad
         let formattedTime = dateFormatter.string(from: TimeInterval(seconds))!
-        runDetailViewController.timeLabel.text = "Time: \(formattedTime)"
+        viewController.timeLabel.text = "Time: \(formattedTime)"
     }
     
 }
@@ -213,9 +235,9 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
         if running {
             stopLocationUpdates()
             stopTimer()
-            askUserIfDone()
+            askUserIfDone(with: viewController)
         } else {
-            startRun()
+            startRun(viewController)
         }
     }
     
@@ -234,15 +256,26 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
             let howRecent = newLocation.timestamp.timeIntervalSinceNow
             guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
             
-            if let lastLocation = locationList.last {
+            if let lastLocation = locationList.last,
+                let viewController = runDetailViewController {
                 let delta = newLocation.distance(from: lastLocation)
                 distance = distance + Measurement(value: delta, unit: UnitLength.meters)
                 let coordinates = [lastLocation.coordinate, newLocation.coordinate]
                 
-                updateMap(with: coordinates, newLocation: newLocation)
+                updateMap(on: viewController, with: coordinates, newLocation: newLocation)
             }
             
             locationList.append(newLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            setUpLocationManager()
+        default:
+            guard let viewController = runDetailViewController else { return }
+            askUserToEnableLocationServices(with: viewController)
         }
     }
     
@@ -284,7 +317,7 @@ extension RunDetailCoordinator {
             viewController.timeLabel.text = "\(run.duration)"
             viewController.startStopButton.isEnabled = false
             viewController.startStopButton.isHidden = true
-            loadMap(for: run)
+            loadMap(for: viewController, run: run)
         case .newRun(_):
             viewController.title = "Let's go!"
             viewController.distanceLabel.text = "Distance"
@@ -301,13 +334,13 @@ extension RunDetailCoordinator {
 
 extension RunDetailCoordinator {
     
-    func updateMap(with coordinates: [CLLocationCoordinate2D], newLocation: CLLocation) {
-        runDetailViewController.mapView.add(MKPolyline(coordinates: coordinates, count: 2))
+    func updateMap(on viewController: RunDetailViewController, with coordinates: [CLLocationCoordinate2D], newLocation: CLLocation) {
+        viewController.mapView.add(MKPolyline(coordinates: coordinates, count: 2))
         let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
-        runDetailViewController.mapView.setRegion(region, animated: true)
+        viewController.mapView.setRegion(region, animated: true)
     }
     
-    private func loadMap(for run: Run) {
+    private func loadMap(for viewController: RunDetailViewController, run: Run) {
         let locations = run.locations
         guard
             locations.count > 0,
@@ -317,12 +350,12 @@ extension RunDetailCoordinator {
                                               message: "Looks like there aren't any locations for this run.",
                                               preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Weird", style: .cancel))
-                runDetailViewController.present(alert, animated: true)
+                viewController.present(alert, animated: true)
                 return
         }
         
-        runDetailViewController.mapView.setRegion(region, animated: true)
-        runDetailViewController.mapView.addOverlays(polyLine())
+        viewController.mapView.setRegion(region, animated: true)
+        viewController.mapView.addOverlays(polyLine())
     }
     
     private func mapRegion(for run: Run) -> MKCoordinateRegion? {

@@ -18,6 +18,7 @@
 		B48EE0091F04963000668DFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48EE0071F04963000668DFD /* LaunchScreen.storyboard */; };
 		B48EE02F1F049A4A00668DFD /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE02E1F049A4A00668DFD /* Run.swift */; };
 		B48EE0311F049BF000668DFD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0301F049BF000668DFD /* Location.swift */; };
+		B4ACE4CA1F0D4DB30084A6F3 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4ACE4C91F0D4DB30084A6F3 /* MulticolorPolyline.swift */; };
 		B4B1A9141F07FB64000E3639 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */; };
 		B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B95A5B1F054FB200FE8C22 /* RunDetailViewController.swift */; };
 		B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */; };
@@ -49,6 +50,7 @@
 		B48EE00A1F04963000668DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48EE02E1F049A4A00668DFD /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		B48EE0301F049BF000668DFD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B4ACE4C91F0D4DB30084A6F3 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 		B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		B4B95A5B1F054FB200FE8C22 /* RunDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailViewController.swift; sourceTree = "<group>"; };
 		B4C34CEB1F09368500644A23 /* RunDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		B40E5EC81F068B9A00C37AFE /* Supplementary */ = {
 			isa = PBXGroup;
 			children = (
+				B4ACE4C91F0D4DB30084A6F3 /* MulticolorPolyline.swift */,
 				B48EE0051F04963000668DFD /* Assets.xcassets */,
 				B48EE0071F04963000668DFD /* LaunchScreen.storyboard */,
 				B48EE00A1F04963000668DFD /* Info.plist */,
@@ -339,6 +342,7 @@
 				B48EE02F1F049A4A00668DFD /* Run.swift in Sources */,
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
 				B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */,
+				B4ACE4CA1F0D4DB30084A6F3 /* MulticolorPolyline.swift in Sources */,
 				B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
