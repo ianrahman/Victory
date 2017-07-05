@@ -25,12 +25,12 @@ final class RunDetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var coordinator: RunDetailCoordinator?
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
-    
-    weak var coordinator: RunDetailCoordinator?
     
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))

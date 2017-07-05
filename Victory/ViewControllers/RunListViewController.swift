@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Run List Coordinator
 
-protocol RunListCoordinator: Coordinator {
+protocol RunListCoordinator: Coordinator, UITableViewDelegate, UITableViewDataSource {
     
     func viewDidLoad(_ viewController: RunListViewController)
     func didTapNewRunButton()
@@ -23,9 +23,9 @@ final class RunListViewController: UIViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var tableView: UITableView!
-    
     weak var coordinator: RunListCoordinator?
+    
+    @IBOutlet weak var tableView: UITableView!
     
     lazy var newRunBarButtonItem: UIBarButtonItem = {
         let newRunBarButtonItem = UIBarButtonItem(title: "New Run", style: .plain, target: self, action: #selector(didTapNewRunButton))

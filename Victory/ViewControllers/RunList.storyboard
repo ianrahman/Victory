@@ -68,9 +68,6 @@
                     <navigationItem key="navigationItem" id="HKv-Eh-qeh">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wpe-op-sIB">
                             <color key="tintColor" red="0.78783312179999998" green="0.036849190609999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="didTapAddButton:" destination="BYZ-38-t0r" id="GPy-2v-z9m"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
