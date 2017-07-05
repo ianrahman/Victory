@@ -87,7 +87,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func configureAndPresent(viewController: RunDetailViewController) {
-        viewController.type = type
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
@@ -206,7 +205,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
         setUI(for: viewController)
     }
     
-    func didTapStartStopButton() {
+    func didTapStartStopButton(_ viewController: RunDetailViewController) {
         if running {
             stopLocationUpdates()
             stopTimer()

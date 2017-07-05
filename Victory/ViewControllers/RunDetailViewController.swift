@@ -14,7 +14,7 @@ import MapKit
 protocol RunDetailViewControllerDelegate {
     
     func viewDidLoad(_ viewController: RunDetailViewController)
-    func didTapStartStopButton()
+    func didTapStartStopButton(_ viewController: RunDetailViewController)
     func didTapCloseButton()
     
 }
@@ -30,14 +30,7 @@ final class RunDetailViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var startStopButton: UIButton!
     
-    weak var coordinator: RunDetailCoordinator? {
-        didSet {
-            self.run = coordinator?.run
-        }
-    }
-    
-    var type: RunDetailType?
-    var run: Run?
+    weak var coordinator: RunDetailCoordinator?
     
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(didTapCloseButton))
@@ -47,7 +40,7 @@ final class RunDetailViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
-        coordinator?.didTapStartStopButton()
+        coordinator?.didTapStartStopButton(self)
     }
     
     @objc private func didTapCloseButton() {

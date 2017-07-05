@@ -10,12 +10,14 @@ import UIKit
 
 // MARK: - App Coordinator
 
-final class AppCoordinator: RootViewCoordinator {
+final class AppCoordinator: NSObject, RootViewCoordinator {
     
     // MARK: - Properties
     
     let services: Services
     var childCoordinators: [Coordinator] = []
+    
+    private let runCellIdentifier = "runCell"
     
     var rootViewController: UIViewController {
         return self.navigationController
@@ -67,15 +69,15 @@ final class AppCoordinator: RootViewCoordinator {
 // MARK: - Run List View Controller Delegate
 
 extension AppCoordinator: RunListCoordinator {
-
-    func didTapNewRunButton() {
-        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
-        startAndPresent(runDetailCoordinator)
+    
+    func viewDidLoad(_ viewController: RunListViewController) {
+        viewController.tableView.delegate = self
+        viewController.tableView.dataSource = self
+        setUI(for: viewController)
     }
     
-    func didSelectRowAt(indexPath: IndexPath) {
-        let run = services.realm.objects(Run.self)[indexPath.row]
-        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .previousRun(run: run))
+    func didTapNewRunButton() {
+        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .newRun)
         startAndPresent(runDetailCoordinator)
     }
     
@@ -85,10 +87,47 @@ extension AppCoordinator: RunListCoordinator {
         rootViewController.present(runDetailCoordinator.rootViewController, animated: true)
     }
     
-    func reloadData() {
+    private func reloadData() {
         runListViewController.tableView.reloadData()
     }
+    
+    private func setUI(for viewController: RunListViewController) {
+        viewController.title = "Victory"
+        viewController.navigationItem.rightBarButtonItem = viewController.newRunBarButtonItem
+        viewController.tableView.rowHeight = services.configuration.tableViewRowHeight
+    }
+}
 
+// MARK: - TableView Delegate
+
+extension AppCoordinator: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let run = services.realm.objects(Run.self)[indexPath.row]
+        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .previousRun(run: run))
+        startAndPresent(runDetailCoordinator)
+    }
+    
+}
+
+// MARK: - TableView Data Source
+
+extension AppCoordinator: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let runs = services.realm.objects(Run.self)
+        return runs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let runs = services.realm.objects(Run.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
+        cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        cell.textLabel?.text = "\(runs[indexPath.row].date.pretty)"
+        cell.detailTextLabel?.text = "\(runs[indexPath.row].distance) miles"
+        return cell
+    }
+    
 }
 
 // MARK: - Run Detail Coordinator Delegate
