@@ -98,6 +98,7 @@ extension AppCoordinator: RunListCoordinator {
         viewController.navigationItem.rightBarButtonItem = viewController.newRunBarButtonItem
         viewController.tableView.rowHeight = services.configuration.tableViewRowHeight
     }
+    
 }
 
 // MARK: - TableView Delegate
@@ -135,10 +136,13 @@ extension AppCoordinator: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let runs = services.realm.objects(Run.self)
+        let run = runs[indexPath.row]
+        let distance = Measurement<UnitLength>(value: run.distance, unit: UnitLength.miles)
+        let formattedDistance = services.formatter.measurement.string(from: distance)
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-        cell.textLabel?.text = "\(runs[indexPath.row].date.prettyDate)"
-        cell.detailTextLabel?.text = "\(runs[indexPath.row].distance) miles"
+        cell.textLabel?.text = "\(run.date.prettyDate)"
+        cell.detailTextLabel?.text = "\(formattedDistance)"
         return cell
     }
     
