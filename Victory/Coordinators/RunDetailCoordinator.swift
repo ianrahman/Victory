@@ -343,7 +343,7 @@ extension RunDetailCoordinator: MKMapViewDelegate {
             return MKOverlayRenderer(overlay: overlay)
         }
         let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.strokeColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        renderer.strokeColor = polyline.color
         renderer.lineWidth = 3
         return renderer
     }
@@ -361,9 +361,8 @@ extension RunDetailCoordinator {
     }
     
     private func loadMap(for viewController: RunDetailViewController, run: Run) {
-        let locations = run.locations
         guard
-            locations.count > 0,
+            run.locations.count > 0,
             let region = mapRegion(for: run)
             else {
                 let alert = UIAlertController(title: "Whoops!",
