@@ -404,7 +404,6 @@ extension RunDetailCoordinator {
     }
     
     private func polyLine(for run: Run) -> [MulticolorPolyline] {
-        
         let locations = run.locations
         var coordinates: [(CLLocation, CLLocation)] = []
         var speeds: [Double] = []
