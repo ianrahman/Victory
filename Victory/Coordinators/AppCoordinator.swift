@@ -16,6 +16,16 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
     
     let services: Services
     var childCoordinators: [Coordinator] = []
+    var runs: [Run] {
+        return Array(services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
+    }
+    var distanceRange: (low: Int, mid: Int, high: Int) {
+        let runs = services.realm.objects(Run.self).sorted(byKeyPath: "distance")
+        let low = runs.first?.distance ?? 0
+        let high = runs.last?.distance ?? 0
+        let mid = (low + high) / 2
+        return (low, mid, high)
+    }
     
     private let runCellIdentifier = "runCell"
     
@@ -58,7 +68,6 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func removeRun(for tableView: UITableView, at indexPath: IndexPath) {
-        let runs = services.realm.objects(Run.self)
         let runToDelete = runs[indexPath.row]
         try! services.realm.write {
             services.realm.delete(runToDelete)
@@ -106,7 +115,7 @@ extension AppCoordinator: RunListCoordinator {
 extension AppCoordinator: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let run = services.realm.objects(Run.self)[indexPath.row]
+        let run = runs[indexPath.row]
         let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: self, type: .previousRun(run: run))
         startAndPresent(runDetailCoordinator)
     }
@@ -130,19 +139,20 @@ extension AppCoordinator: UITableViewDelegate {
 extension AppCoordinator: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let runs = services.realm.objects(Run.self)
         return runs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let runs = services.realm.objects(Run.self)
         let run = runs[indexPath.row]
-        let distance = Measurement<UnitLength>(value: run.distance, unit: UnitLength.miles)
+        let distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.meters)
         let formattedDistance = services.formatter.measurement.string(from: distance)
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
-        cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        
         cell.textLabel?.text = "\(run.date.prettyDate)"
         cell.detailTextLabel?.text = "\(formattedDistance)"
+        
+        cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+        
         return cell
     }
     

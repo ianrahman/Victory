@@ -52,7 +52,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private var newRun = false
     private var timer: Timer?
     private var duration: Int = 0
-    private var distance = Measurement(value: 0, unit: UnitLength.miles)
+    private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private lazy var locationList = [CLLocation]()
     
     // MARK: - Init
@@ -100,7 +100,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         let run = Run()
         run.id = Date().id ?? Int(Date().timeIntervalSince1970)
         run.duration = duration
-        run.distance = distance.value
+        run.distance = Int(distance.value)
         
         for location in locationList {
             let locationObject = Location(latitude: location.coordinate.latitude,
@@ -166,7 +166,7 @@ extension RunDetailCoordinator {
         case .previousRun(let run):
             viewController.title = run.date.prettyDate
             duration = run.duration
-            distance = Measurement<UnitLength>(value: run.distance, unit: UnitLength.miles)
+            distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.miles)
             viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
             viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
             viewController.startStopButton.isEnabled = false
@@ -338,7 +338,7 @@ extension RunDetailCoordinator: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard let polyline = overlay as? MKPolyline else {
+        guard let polyline = overlay as? MulticolorPolyline else {
             return MKOverlayRenderer(overlay: overlay)
         }
         let renderer = MKPolylineRenderer(polyline: polyline)
@@ -373,8 +373,8 @@ extension RunDetailCoordinator {
                 return
         }
         
-        viewController.mapView.setRegion(region, animated: true)
         viewController.mapView.addOverlays(polyLine(for: run))
+        viewController.mapView.setRegion(region, animated: true)
     }
     
     private func mapRegion(for run: Run) -> MKCoordinateRegion? {
@@ -429,44 +429,14 @@ extension RunDetailCoordinator {
         for ((start, end), speed) in zip(coordinates, speeds) {
             let coords = [start.coordinate, end.coordinate]
             let segment = MulticolorPolyline(coordinates: coords, count: 2)
-            segment.color = segmentColor(speed: speed,
-                                         midSpeed: midSpeed,
-                                         slowestSpeed: minSpeed,
-                                         fastestSpeed: maxSpeed)
+            segment.color = UIColor.performanceColor(value: Int(speed),
+                                                     mid: Int(midSpeed),
+                                                     low: Int(minSpeed),
+                                                     high: Int(maxSpeed))
             segments.append(segment)
+            print(segment.color)
         }
         return segments
-    }
-    
-    private func segmentColor(speed: Double, midSpeed: Double, slowestSpeed: Double, fastestSpeed: Double) -> UIColor {
-        enum BaseColors {
-            static let r_red: CGFloat = 84/100
-            static let r_green: CGFloat = 0
-            static let r_blue: CGFloat = 0
-            
-            static let y_red: CGFloat = 1
-            static let y_green: CGFloat = 1
-            static let y_blue: CGFloat = 0
-            
-            static let g_red: CGFloat = 46/100
-            static let g_green: CGFloat = 1
-            static let g_blue: CGFloat = 1/100
-        }
-        
-        let red, green, blue: CGFloat
-        
-        if speed < midSpeed {
-            let ratio = CGFloat((speed - slowestSpeed) / (midSpeed - slowestSpeed))
-            red = BaseColors.r_red + ratio * (BaseColors.y_red - BaseColors.r_red)
-            green = BaseColors.r_green + ratio * (BaseColors.y_green - BaseColors.r_green)
-            blue = BaseColors.r_blue + ratio * (BaseColors.y_blue - BaseColors.r_blue)
-        } else {
-            let ratio = CGFloat((speed - midSpeed) / (fastestSpeed - midSpeed))
-            red = BaseColors.y_red + ratio * (BaseColors.g_red - BaseColors.y_red)
-            green = BaseColors.y_green + ratio * (BaseColors.g_green - BaseColors.y_green)
-            blue = BaseColors.y_blue + ratio * (BaseColors.g_blue - BaseColors.y_blue)
-        }
-        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
 }

@@ -15,7 +15,7 @@ class Run: Object {
     
     // MARK: - Init
     
-    convenience init(distance: Double, duration: Int, date: Date, locations: List<Location>) {
+    convenience init(distance: Int, duration: Int, date: Date, locations: List<Location>) {
         self.init()
         self.distance = distance
         self.duration = duration
@@ -25,10 +25,18 @@ class Run: Object {
     
     // MARK: - Properties
     
-    @objc dynamic var distance: Double = 0.0
+    /// Meters
+    @objc dynamic var distance: Int = 0
+    
+    /// Seconds
     @objc dynamic var duration: Int = 0
+    
+    /// Time run was saved
     @objc dynamic var date: Date = Date()
+    
+    /// Concatenation of date components
     @objc dynamic var id: Int = 0
+    
     var locations = List<Location>()
     
     // MARK: - Functions
@@ -38,7 +46,7 @@ class Run: Object {
     }
     
     override static func indexedProperties() -> [String] {
-        return ["date"]
+        return ["date", "distance", "duration"]
     }
     
 }
