@@ -47,7 +47,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     weak var delegate: RunDetailCoordinatorDelegate?
     
-    private let run: Run
     private let type: RunDetailType
     private var running = false
     private var newRun = false
@@ -64,12 +63,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         self.services = services
         self.delegate = delegate
         self.type = type
-        switch type {
-        case .previousRun(let run):
-            self.run = run
-        case .newRun:
-            self.run = Run()
-        }
     }
     
     // MARK: - Functions
@@ -106,6 +99,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func saveRun() {
+        let run = Run()
         run.id = Date().id ?? Int(Date().timeIntervalSince1970)
         run.duration = seconds
         run.distance = distance.value
@@ -380,7 +374,7 @@ extension RunDetailCoordinator {
         }
         
         viewController.mapView.setRegion(region, animated: true)
-        viewController.mapView.addOverlays(polyLine())
+        viewController.mapView.addOverlays(polyLine(for: run))
     }
     
     private func mapRegion(for run: Run) -> MKCoordinateRegion? {
@@ -408,7 +402,7 @@ extension RunDetailCoordinator {
         return MKCoordinateRegion(center: center, span: span)
     }
     
-    private func polyLine() -> [MulticolorPolyline] {
+    private func polyLine(for run: Run) -> [MulticolorPolyline] {
         
         let locations = run.locations
         var coordinates: [(CLLocation, CLLocation)] = []
