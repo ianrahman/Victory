@@ -22,6 +22,12 @@
 	<true/>
 	<key>NSLocationUsageDescription</key>
 	<string>Victory will use your location to track your run.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Victory will use your location to track your run.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Victory will use your location to track your run.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Victory will use your location to track your run.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

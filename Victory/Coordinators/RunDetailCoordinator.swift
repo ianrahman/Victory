@@ -210,6 +210,7 @@ extension RunDetailCoordinator {
         })
         alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
             self.saveRun()
+            self.services.av.playTada()
             self.delegate?.didTapCloseButton(runDetailCoordinator: self)
         })
         alertController.addAction(UIAlertAction(title: "Discard Run", style: .destructive) { _ in

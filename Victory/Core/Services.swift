@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import CoreLocation
+import AVFoundation
 
 // MARK: - Services
 
@@ -18,6 +19,7 @@ final class Services {
     let configuration = ConfigurationService()
     let location = LocationService()
     let formatter = FormatterService()
+    let av = AVService()
     
 }
 
@@ -49,7 +51,7 @@ final class FormatterService {
         formatter.numberFormatter.maximumFractionDigits = 2
         return formatter
     }()
-
+    
     let date: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -57,5 +59,27 @@ final class FormatterService {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }()
+    
+}
+
+// MARK: AV Service
+
+final class AVService {
+    
+    private var player: AVAudioPlayer?
+    
+    func playTada() {
+        
+        if let asset = NSDataAsset(name:"TADA") {
+            
+            do {
+                player = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+                player?.prepareToPlay()
+                player?.play()
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
 }

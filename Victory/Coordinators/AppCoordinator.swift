@@ -106,6 +106,7 @@ extension AppCoordinator: RunListCoordinator {
         viewController.title = "Victory"
         viewController.navigationItem.rightBarButtonItem = viewController.newRunBarButtonItem
         viewController.tableView.rowHeight = services.configuration.tableViewRowHeight
+        viewController.tableView.separatorInset = .zero
     }
     
 }
@@ -150,7 +151,6 @@ extension AppCoordinator: UITableViewDataSource {
         
         cell.textLabel?.text = "\(run.date.prettyDate)"
         cell.detailTextLabel?.text = "\(formattedDistance)"
-        
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         
         return cell

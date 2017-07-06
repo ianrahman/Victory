@@ -27,22 +27,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0lm-YT-xc7">
-                                <rect key="frame" x="0.0" y="301.5" width="375" height="301.5"/>
+                                <rect key="frame" x="19" y="301.5" width="337.5" height="301.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="fQQ-Wo-gv8">
-                                        <rect key="frame" x="70.5" y="0.0" width="234.5" height="113"/>
+                                        <rect key="frame" x="51.5" y="0.0" width="234.5" height="113"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="OOO-rx-Bcg">
-                                        <rect key="frame" x="122" y="113" width="131.5" height="112.5"/>
+                                        <rect key="frame" x="103" y="113" width="131.5" height="112.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="60"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="du4-Ka-pIx">
-                                        <rect key="frame" x="0.0" y="225.5" width="375" height="76"/>
+                                        <rect key="frame" x="0.0" y="225.5" width="337.5" height="76"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <state key="normal" title="Start/Stop"/>
                                         <connections>
@@ -64,7 +64,7 @@
                             <constraint firstItem="x3N-le-1SS" firstAttribute="centerX" secondItem="X6K-50-Eya" secondAttribute="centerX" id="Lm8-Wj-8Cf"/>
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="top" secondItem="x3N-le-1SS" secondAttribute="bottom" id="QzX-gN-HOk"/>
                             <constraint firstItem="0lm-YT-xc7" firstAttribute="bottom" secondItem="X6K-50-Eya" secondAttribute="bottom" id="aI2-ti-RlS"/>
-                            <constraint firstItem="0lm-YT-xc7" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="bzj-ac-zk8"/>
+                            <constraint firstItem="0lm-YT-xc7" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" multiplier="0.9" id="bzj-ac-zk8"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="top" secondItem="X6K-50-Eya" secondAttribute="top" id="eh5-TE-xfY"/>
                             <constraint firstItem="x3N-le-1SS" firstAttribute="width" secondItem="X6K-50-Eya" secondAttribute="width" id="t21-Xf-m3H"/>
                         </constraints>
