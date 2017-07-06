@@ -173,8 +173,10 @@ extension RunDetailCoordinator {
         switch type {
         case .previousRun(let run):
             viewController.title = run.date.pretty
-            viewController.distanceLabel.text = "\(run.distance) miles"
-            viewController.timeLabel.text = "\(run.duration)"
+            let formattedDistance = measurementFormatter.string(from: distance)
+            viewController.distanceLabel.text = "Distance: \(formattedDistance)"
+            let formattedTime = dateFormatter.string(from: TimeInterval(run.duration))!
+            viewController.timeLabel.text = "Distance: \(formattedTime)"
             viewController.startStopButton.isEnabled = false
             viewController.startStopButton.isHidden = true
             loadMap(for: viewController, run: run)
@@ -292,7 +294,6 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
 extension RunDetailCoordinator: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("location updated at \(seconds) seconds")
         for newLocation in locations {
 //            let howRecent = newLocation.timestamp.timeIntervalSinceNow
             guard newLocation.horizontalAccuracy < 20
@@ -307,9 +308,7 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
                 
                 updateMap(on: viewController, with: coordinates, newLocation: newLocation)
             }
-            
             locationList.append(newLocation)
-            print(newLocation)
         }
     }
     
@@ -409,24 +408,71 @@ extension RunDetailCoordinator {
         return MKCoordinateRegion(center: center, span: span)
     }
     
-    private func polyLine() -> [MKPolyline] {
+    private func polyLine() -> [MulticolorPolyline] {
+        
         let locations = run.locations
         var coordinates: [(CLLocation, CLLocation)] = []
+        var speeds: [Double] = []
+        var minSpeed = Double.greatestFiniteMagnitude
+        var maxSpeed = 0.0
         
         for (first, second) in zip(locations, locations.dropFirst()) {
             let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
             let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
             coordinates.append((start, end))
+            
+            let distance = end.distance(from: start)
+            let time = second.timestamp.timeIntervalSince(first.timestamp as Date)
+            let speed = time > 0 ? distance / time : 0
+            speeds.append(speed)
+            minSpeed = min(minSpeed, speed)
+            maxSpeed = max(maxSpeed, speed)
         }
         
-        var segments: [MKPolyline] = []
-        for (start, end) in coordinates {
+        let midSpeed = speeds.reduce(0, +) / Double(speeds.count)
+        
+        var segments: [MulticolorPolyline] = []
+        for ((start, end), speed) in zip(coordinates, speeds) {
             let coords = [start.coordinate, end.coordinate]
-            let segment = MKPolyline(coordinates: coords, count: 2)
+            let segment = MulticolorPolyline(coordinates: coords, count: 2)
+            segment.color = segmentColor(speed: speed,
+                                         midSpeed: midSpeed,
+                                         slowestSpeed: minSpeed,
+                                         fastestSpeed: maxSpeed)
             segments.append(segment)
         }
-        
         return segments
+    }
+    
+    private func segmentColor(speed: Double, midSpeed: Double, slowestSpeed: Double, fastestSpeed: Double) -> UIColor {
+        enum BaseColors {
+            static let r_red: CGFloat = 84/100
+            static let r_green: CGFloat = 0
+            static let r_blue: CGFloat = 0
+            
+            static let y_red: CGFloat = 1
+            static let y_green: CGFloat = 1
+            static let y_blue: CGFloat = 0
+            
+            static let g_red: CGFloat = 46/100
+            static let g_green: CGFloat = 1
+            static let g_blue: CGFloat = 1/100
+        }
+        
+        let red, green, blue: CGFloat
+        
+        if speed < midSpeed {
+            let ratio = CGFloat((speed - slowestSpeed) / (midSpeed - slowestSpeed))
+            red = BaseColors.r_red + ratio * (BaseColors.y_red - BaseColors.r_red)
+            green = BaseColors.r_green + ratio * (BaseColors.y_green - BaseColors.r_green)
+            blue = BaseColors.r_blue + ratio * (BaseColors.y_blue - BaseColors.r_blue)
+        } else {
+            let ratio = CGFloat((speed - midSpeed) / (fastestSpeed - midSpeed))
+            red = BaseColors.y_red + ratio * (BaseColors.g_red - BaseColors.y_red)
+            green = BaseColors.y_green + ratio * (BaseColors.g_green - BaseColors.y_green)
+            blue = BaseColors.y_blue + ratio * (BaseColors.g_blue - BaseColors.y_blue)
+        }
+        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
 }
