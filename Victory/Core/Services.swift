@@ -14,13 +14,14 @@ import CoreLocation
 
 final class Services {
     
+    let realm = try! Realm()
     let configuration = ConfigurationService()
     let location = LocationService()
-    let realm = try! Realm()
+    let formatter = FormatterService()
     
 }
 
-// MARK: - Configuration Services
+// MARK: - Configuration Service
 
 struct ConfigurationService {
     
@@ -31,10 +32,30 @@ struct ConfigurationService {
     
 }
 
-// MARK: - Location Services
+// MARK: - Location Service
 
 final class LocationService {
     
     let manager = CLLocationManager()
+    
+}
+
+// MARK: - Formatter Service
+
+final class FormatterService {
+    
+    let measurement: MeasurementFormatter = {
+        let formatter = MeasurementFormatter()
+        formatter.numberFormatter.maximumFractionDigits = 2
+        return formatter
+    }()
+
+    let date: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
     
 }

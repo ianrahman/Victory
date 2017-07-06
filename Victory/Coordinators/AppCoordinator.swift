@@ -137,7 +137,7 @@ extension AppCoordinator: UITableViewDataSource {
         let runs = services.realm.objects(Run.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-        cell.textLabel?.text = "\(runs[indexPath.row].date.pretty)"
+        cell.textLabel?.text = "\(runs[indexPath.row].date.prettyDate)"
         cell.detailTextLabel?.text = "\(runs[indexPath.row].distance) miles"
         return cell
     }

@@ -57,7 +57,7 @@ extension Date {
     }
     
     /// Get the date as a string formatted MM/dd/yyyy
-    public var pretty: String {
+    public var prettyDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         return dateFormatter.string(from: self)

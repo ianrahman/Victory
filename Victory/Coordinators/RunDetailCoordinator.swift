@@ -51,10 +51,8 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private var running = false
     private var newRun = false
     private var timer: Timer?
-    private var seconds: Int = 0
-    private var distance = Measurement(value: 0, unit: UnitLength.meters)
-    private lazy var measurementFormatter = MeasurementFormatter()
-    private lazy var dateFormatter = DateComponentsFormatter()
+    private var duration: Int = 0
+    private var distance = Measurement(value: 0, unit: UnitLength.miles)
     private lazy var locationList = [CLLocation]()
     
     // MARK: - Init
@@ -101,7 +99,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private func saveRun() {
         let run = Run()
         run.id = Date().id ?? Int(Date().timeIntervalSince1970)
-        run.duration = seconds
+        run.duration = duration
         run.distance = distance.value
         
         for location in locationList {
@@ -166,18 +164,18 @@ extension RunDetailCoordinator {
         
         switch type {
         case .previousRun(let run):
-            viewController.title = run.date.pretty
-            let formattedDistance = measurementFormatter.string(from: distance)
-            viewController.distanceLabel.text = "Distance: \(formattedDistance)"
-            let formattedTime = dateFormatter.string(from: TimeInterval(run.duration))!
-            viewController.timeLabel.text = "Distance: \(formattedTime)"
+            viewController.title = run.date.prettyDate
+            duration = run.duration
+            distance = Measurement<UnitLength>(value: run.distance, unit: UnitLength.miles)
+            viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
+            viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
             viewController.startStopButton.isEnabled = false
             viewController.startStopButton.isHidden = true
             loadMap(for: viewController, run: run)
         case .newRun(_):
             viewController.title = "Let's go!"
             viewController.distanceLabel.text = "Distance"
-            viewController.timeLabel.text = "Duration"
+            viewController.timeLabel.text = "Time"
             viewController.startStopButton.isEnabled = true
             viewController.startStopButton.isHidden = false
             viewController.startStopButton.setTitle("Start", for: .normal)
@@ -221,32 +219,36 @@ extension RunDetailCoordinator {
     }
     
     private func eachSecond(_ viewController: RunDetailViewController) {
-        seconds += 1
+        duration += 1
         updateDisplay(for: viewController)
     }
     
     private func updateDisplay(for viewController: RunDetailViewController) {
         updateDistanceLabel(for: viewController)
-        updateDurationLabel(for: viewController)
+        updateTimeLabel(for: viewController)
         updateButtonTitle(for: viewController)
     }
     
     private func updateDistanceLabel(for viewController: RunDetailViewController) {
-        let formattedDistance = measurementFormatter.string(from: distance)
+        let formattedDistance = services.formatter.measurement.string(from: distance)
         viewController.distanceLabel.text = "Distance: \(formattedDistance)"
     }
     
-    private func updateDurationLabel(for viewController: RunDetailViewController) {
-        dateFormatter.allowedUnits = [.hour, .minute, .second]
-        dateFormatter.unitsStyle = .positional
-        dateFormatter.zeroFormattingBehavior = .pad
-        let formattedTime = dateFormatter.string(from: TimeInterval(seconds))!
-        viewController.timeLabel.text = "Time: \(formattedTime)"
+    private func updateTimeLabel(for viewController: RunDetailViewController) {
+        viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
     }
     
     private func updateButtonTitle(for viewController: RunDetailViewController) {
         let title = running ?  "Stop" : "Continue"
         viewController.startStopButton.setTitle(title, for: .normal)
+    }
+    
+    private func formattedTime(for time: TimeInterval) -> String {
+        return services.formatter.date.string(from: time) ?? ""
+    }
+    
+    private func formattedDistance(for distance: Measurement<UnitLength>) -> String {
+        return services.formatter.measurement.string(from: distance)
     }
     
 }
@@ -289,9 +291,7 @@ extension RunDetailCoordinator: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for newLocation in locations {
-//            let howRecent = newLocation.timestamp.timeIntervalSinceNow
             guard newLocation.horizontalAccuracy < 20
-//                && abs(howRecent) < 10
                 else { continue }
             
             if let lastLocation = locationList.last,
@@ -390,10 +390,10 @@ extension RunDetailCoordinator {
             return location.longitude
         }
         
-        let maxLat = latitudes.max()!
-        let minLat = latitudes.min()!
-        let maxLong = longitudes.max()!
-        let minLong = longitudes.min()!
+        let maxLat = latitudes.max() ?? 0.0
+        let minLat = latitudes.min() ?? 0.0
+        let maxLong = longitudes.max() ?? 0.0
+        let minLong = longitudes.min() ?? 0.0
         
         let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
                                             longitude: (minLong + maxLong) / 2)
