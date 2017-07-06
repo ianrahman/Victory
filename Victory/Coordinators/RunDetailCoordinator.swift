@@ -167,7 +167,7 @@ extension RunDetailCoordinator {
         case .previousRun(let run):
             viewController.title = run.date.prettyDate
             duration = run.duration
-            distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.miles)
+            distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.meters)
             viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
             viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
             viewController.startStopButton.isEnabled = false
