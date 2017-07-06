@@ -126,14 +126,15 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     }
     
     private func requestLocationAccess() {
-        services.location.manager.requestWhenInUseAuthorization()
+        services.location.manager.requestAlwaysAuthorization()
     }
     
     private func setUpLocationManager() {
         services.location.manager.delegate = self
-        services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
-        services.location.manager.activityType = .fitness
         services.location.manager.distanceFilter = 10
+        services.location.manager.activityType = .fitness
+        services.location.manager.allowsBackgroundLocationUpdates = true
+        services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     private func startLocationUpdates(_ viewController: RunDetailViewController) {
@@ -373,8 +374,8 @@ extension RunDetailCoordinator {
                 return
         }
         
-        viewController.mapView.addOverlays(polyLine(for: run))
         viewController.mapView.setRegion(region, animated: true)
+        viewController.mapView.addOverlays(polyLine(for: run))
     }
     
     private func mapRegion(for run: Run) -> MKCoordinateRegion? {
@@ -427,14 +428,13 @@ extension RunDetailCoordinator {
         
         var segments: [MulticolorPolyline] = []
         for ((start, end), speed) in zip(coordinates, speeds) {
-            let coords = [start.coordinate, end.coordinate]
-            let segment = MulticolorPolyline(coordinates: coords, count: 2)
+            let coordinates = [start.coordinate, end.coordinate]
+            let segment = MulticolorPolyline(coordinates: coordinates, count: 2)
             segment.color = UIColor.performanceColor(value: Int(speed),
                                                      mid: Int(midSpeed),
                                                      low: Int(minSpeed),
                                                      high: Int(maxSpeed))
             segments.append(segment)
-            print(segment.color)
         }
         return segments
     }
