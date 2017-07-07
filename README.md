@@ -28,4 +28,4 @@ There's a lot of room for improvement. You'll get a big thanks and much apprecia
 * Save and display thumbnails of the run maps on the run list.
 * Allow users to select alternate units.
 * Add language localization.
-* **Bug**: Map doesn't load polyline until moved.
+* **Bug**: Polyline may not load until map is manually moved.

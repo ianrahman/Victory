@@ -63,7 +63,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         self.type = type
     }
     
-    // MARK: - Functions
+    // MARK: - General Functions
     
     func start() {
         let storyboard = UIStoryboard(.RunDetail)
@@ -76,7 +76,10 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         navigationController.viewControllers = [viewController]
     }
     
+    // MARK: - Run Functions
+    
     private func startRun(_ viewController: RunDetailViewController) {
+        viewController.mapView.removeOverlays(viewController.mapView.overlays)
         locationList.removeAll()
         continueRun(viewController)
     }
@@ -112,7 +115,11 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         try! services.realm.write {
             services.realm.add(run)
         }
+        
+        services.av.playTada()
     }
+    
+    // MARK: - Timer Functions
     
     private func startTimer(_ viewController: RunDetailViewController) {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -125,13 +132,20 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         timer = nil
     }
     
+    private func eachSecond(_ viewController: RunDetailViewController) {
+        duration += 1
+        updateDisplay(for: viewController)
+    }
+    
+    // MARK: - Location Functions
+    
     private func requestLocationAccess() {
         services.location.manager.requestAlwaysAuthorization()
     }
     
     private func setUpLocationManager() {
         services.location.manager.delegate = self
-        services.location.manager.distanceFilter = 10
+        services.location.manager.distanceFilter = 1
         services.location.manager.activityType = .fitness
         services.location.manager.allowsBackgroundLocationUpdates = true
         services.location.manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -203,14 +217,12 @@ extension RunDetailCoordinator {
         let alertController = UIAlertController(title: "Nice Run!",
                                                 message: "Want to keep going?",
                                                 preferredStyle: .actionSheet)
+        
         alertController.addAction(UIAlertAction(title: "Continue Run", style: .default) { _ in
-            self.running = true
-            self.startTimer(viewController)
-            self.startLocationUpdates(viewController)
+            self.continueRun(viewController)
         })
         alertController.addAction(UIAlertAction(title: "Stop and Save", style: .default) { _ in
             self.saveRun()
-            self.services.av.playTada()
             self.delegate?.didTapCloseButton(runDetailCoordinator: self)
         })
         alertController.addAction(UIAlertAction(title: "Discard Run", style: .destructive) { _ in
@@ -218,11 +230,6 @@ extension RunDetailCoordinator {
         })
         
         viewController.present(alertController, animated: true)
-    }
-    
-    private func eachSecond(_ viewController: RunDetailViewController) {
-        duration += 1
-        updateDisplay(for: viewController)
     }
     
     private func updateDisplay(for viewController: RunDetailViewController) {
@@ -269,6 +276,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func didTapStartStopButton(on viewController: RunDetailViewController) {
         if running {
+            running = false
             stopLocationUpdates()
             stopTimer()
             askUserIfDone(with: viewController)
@@ -282,6 +290,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
             askUserIfDone(with: viewController)
         } else {
             delegate?.didTapCloseButton(runDetailCoordinator: self)
+            viewController.mapView.removeOverlays(viewController.mapView.overlays)
         }
     }
     
@@ -328,10 +337,7 @@ extension RunDetailCoordinator: MKMapViewDelegate {
         switch type {
         case .newRun:
             if !running {
-                var region = MKCoordinateRegion()
-                region.center = userLocation.coordinate
-                region.span.latitudeDelta = 0.1
-                region.span.longitudeDelta = 0.1
+                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 200, 200)
                 mapView.setRegion(region, animated: true)
             }
         default:
@@ -340,13 +346,18 @@ extension RunDetailCoordinator: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        guard let polyline = overlay as? MulticolorPolyline else {
-            return MKOverlayRenderer(overlay: overlay)
+        if let polyline = overlay as? MulticolorPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = polyline.color
+            renderer.lineWidth = 3
+            return renderer
+        } else if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+            renderer.lineWidth = 3
+            return renderer
         }
-        let renderer = MKPolylineRenderer(polyline: polyline)
-        renderer.strokeColor = polyline.color
-        renderer.lineWidth = 3
-        return renderer
+        return MKOverlayRenderer(overlay: overlay)
     }
     
 }
@@ -357,7 +368,7 @@ extension RunDetailCoordinator {
     
     func updateMap(on viewController: RunDetailViewController, with coordinates: [CLLocationCoordinate2D], newLocation: CLLocation) {
         viewController.mapView.add(MKPolyline(coordinates: coordinates, count: 2))
-        let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 500, 500)
+        let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 200, 200)
         viewController.mapView.setRegion(region, animated: true)
     }
     
