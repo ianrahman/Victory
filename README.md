@@ -8,6 +8,8 @@ Victory tracks and displays a your location, distance traveled, and run duration
 
 Feel free to use the source code for projects of your own, or submit issues and pull requests to help me keep this project current and bugless.
 
+> **Note:** Victory is built in and designed for Swift 4 / Xcode 9 and later.
+
 #### Victory uses the following:
 
 * App Coordinator pattern
