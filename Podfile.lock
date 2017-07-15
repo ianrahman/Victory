@@ -6,12 +6,33 @@ PODS:
     - Realm (= 2.8.3)
 
 DEPENDENCIES:
-  - RealmSwift
+  - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  Realm:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  Realm:
+    :commit: 9fe17040e96d3d8acf9e19ad90967303c9c0e663
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+  RealmSwift:
+    :commit: 9fe17040e96d3d8acf9e19ad90967303c9c0e663
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
 
 SPEC CHECKSUMS:
   Realm: 3601ef091c8c499a31101d8563b991e75546cdce
-  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
+  RealmSwift: 8bba39ad585bfee78123d8e3536496698274d549
 
-PODFILE CHECKSUM: 511ff473e0306e7fd01b269dd3f4e90d8c67c224
+PODFILE CHECKSUM: ce66fcedf44fc26c6c24e1b2c2b8410b08fdb90e
 
 COCOAPODS: 1.2.1

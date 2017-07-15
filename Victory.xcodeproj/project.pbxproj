@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2ADF2C57D27F9406F42A730A /* Pods_VictoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447831D7F05D16B2E10AB92E /* Pods_VictoryTests.framework */; };
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
 		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ADF2C57D27F9406F42A730A /* Pods_VictoryTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,9 +244,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B475F8F01F1ABA840053CC9F /* Build configuration list for PBXNativeTarget "VictoryTests" */;
 			buildPhases = (
+				E094EBD04EB3FE82EA446567 /* [CP] Check Pods Manifest.lock */,
 				B475F8E51F1ABA840053CC9F /* Sources */,
 				B475F8E61F1ABA840053CC9F /* Frameworks */,
 				B475F8E71F1ABA840053CC9F /* Resources */,
+				016968D29D7AD4728EDA9219 /* [CP] Embed Pods Frameworks */,
+				3FD6F9D09554362EC139CDE8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -347,6 +352,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		016968D29D7AD4728EDA9219 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VictoryTests/Pods-VictoryTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3FD6F9D09554362EC139CDE8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VictoryTests/Pods-VictoryTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		44DD263DAF2E2F223790CD65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,6 +425,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Victory/Pods-Victory-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E094EBD04EB3FE82EA446567 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -448,6 +498,7 @@
 /* Begin XCBuildConfiguration section */
 		B475F8F11F1ABA840053CC9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CD2F568C8193AB3EE246F70 /* Pods-VictoryTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -467,6 +518,7 @@
 		};
 		B475F8F21F1ABA840053CC9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3E0F4A01F832959A82426FB /* Pods-VictoryTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
