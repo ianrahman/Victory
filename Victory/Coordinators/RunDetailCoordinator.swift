@@ -188,8 +188,10 @@ extension RunDetailCoordinator {
         viewController.title = previousRun.date.prettyDate
         duration = previousRun.duration
         distance = Measurement<UnitLength>(value: Double(previousRun.distance), unit: UnitLength.meters)
-        viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
-        viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
+        let formattedTimeString = formattedTime(for: TimeInterval(duration))
+        let formattedDistanceString = formattedDistance(for: distance)
+        viewController.timeLabel.text = "Time: \(formattedTimeString)"
+        viewController.distanceLabel.text = "Distance: \(formattedDistanceString)"
         viewController.startStopButton.isEnabled = false
         viewController.startStopButton.isHidden = true
         loadMap(for: viewController, run: previousRun)

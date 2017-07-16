@@ -148,11 +148,11 @@ extension AppCoordinator: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let run = runs[indexPath.row]
         let distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.meters)
-        let formattedDistance = services.formatter.measurement.string(from: distance)
+        let formattedDistanceString = services.formatter.measurement.string(from: distance)
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         
         cell.textLabel?.text = "\(run.date.prettyDate)"
-        cell.detailTextLabel?.text = "\(formattedDistance)"
+        cell.detailTextLabel?.text = "\(formattedDistanceString)"
         cell.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         
         return cell
