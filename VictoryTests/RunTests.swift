@@ -7,29 +7,37 @@
 //
 
 import XCTest
+import RealmSwift
+@testable import Victory
 
 class RunTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testRunModel() {
+        let testDistance = 1
+        let testDuration = 2
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        guard let testDate = formatter.date(from: "1989/12/30 12:34:56") else { fatalError() }
+        
+        let testLocations = List<Location>()
+        testLocations.append(Location())
+        
+        let run = Run()
+        run.distance = testDistance
+        run.duration = testDuration
+        run.date = testDate
+        run.locations = testLocations
+
+        let distance = run.distance
+        let duration = run.duration
+        let date = run.date
+        let locations = run.locations
+        
+        XCTAssertEqual(distance, testDistance, "Distance property incorrect")
+        XCTAssertEqual(duration, testDuration, "Duration property incorrect")
+        XCTAssertEqual(date, testDate, "Date property incorrect")
+        XCTAssertEqual(locations, testLocations, "Locations property incorrect")
     }
     
 }

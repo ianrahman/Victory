@@ -44,7 +44,7 @@ class ProtocolTests: XCTestCase {
         appCoordinator.addChildCoordinator(childCoordinator2)
         appCoordinator.addChildCoordinator(childCoordinator3)
         
-        XCTAssert(appCoordinator.childCoordinators.count == 3, "Failed to add child coordinators")
+        XCTAssertEqual(appCoordinator.childCoordinators.count, 3, "Failed to add child coordinators")
         XCTAssert(appCoordinator.childCoordinators.first === childCoordinator1, "First child coordinator incorrect after adding child coordinators")
         XCTAssert(appCoordinator.childCoordinators.last === childCoordinator3, "Last child coordinator incorrect after adding child coordinators")
     }
@@ -60,7 +60,7 @@ class ProtocolTests: XCTestCase {
         
         guard let firstChild = appCoordinator.childCoordinators.first else { XCTFail("Failed to access first child coordinator"); return }
         appCoordinator.removeChildCoordinator(firstChild)
-        XCTAssert(appCoordinator.childCoordinators.count == 2, "Failed to remove child coordinators")
+        XCTAssertEqual(appCoordinator.childCoordinators.count, 2, "Failed to remove child coordinators")
         XCTAssert(appCoordinator.childCoordinators.first === childCoordinator2, "Wrong child coordinator removed")
     }
     

@@ -56,12 +56,12 @@ class UIKitExtensionsTests: XCTestCase {
         let performanceColor3 = UIColor.performanceColor(value: val3, low: low, mid: mid, high: high)
         let performanceColor4 = UIColor.performanceColor(value: val4, low: low, mid: mid, high: high)
         
-        XCTAssert(uniformPerformanceColor == baseColor, "Failed to return base color for uniform speed")
-        XCTAssert(performanceColor0 == baseColor, "Failed to return base color for value outside expected range")
-        XCTAssert(performanceColor1 == lowPerformanceColor, "Failed to return low performance color for low value")
-        XCTAssert(performanceColor2 == midPerformanceColor, "Failed to return mid performance color for mid value")
-        XCTAssert(performanceColor3 == highPerformanceColor, "Failed to return high performance color for high value")
-        XCTAssert(performanceColor4 == baseColor, "Failed to return base color for value outside expected range")
+        XCTAssertEqual(uniformPerformanceColor, baseColor, "Failed to return base color for uniform speed")
+        XCTAssertEqual(performanceColor0, baseColor, "Failed to return base color for value outside expected range")
+        XCTAssertEqual(performanceColor1, lowPerformanceColor, "Failed to return low performance color for low value")
+        XCTAssertEqual(performanceColor2, midPerformanceColor, "Failed to return mid performance color for mid value")
+        XCTAssertEqual(performanceColor3, highPerformanceColor, "Failed to return high performance color for high value")
+        XCTAssertEqual(performanceColor4, baseColor, "Failed to return base color for value outside expected range")
     }
     
 }

@@ -177,9 +177,9 @@
 				B4F4798E1F1BC34B00AF1124 /* ProtocolTests.swift */,
 				B42D46B21F1BD4480080CBBC /* UIKitExtensionsTests.swift */,
 				B42D46B41F1BD45A0080CBBC /* FoundationExtensionsTests.swift */,
-				B43A42141F1ACE9F000084B8 /* AppCoordinatorTests.swift */,
 				B4B176401F1C021600CFDF11 /* RunTests.swift */,
 				B4B176421F1C022000CFDF11 /* LocationTests.swift */,
+				B43A42141F1ACE9F000084B8 /* AppCoordinatorTests.swift */,
 			);
 			path = VictoryTests;
 			sourceTree = SOURCE_ROOT;
