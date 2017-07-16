@@ -35,25 +35,3 @@ extension StoryboardIdentifiable where Self: UITableViewCell {
     }
     
 }
-
-// MARK: - Storyboard Identifiable Error
-
-enum StoryboardIdentifiableError: Error {
-    
-    case unrecognizedIdentifier
-    case unrecognizedType
-    
-}
-
-// MARK: - Localized Error
-
-extension StoryboardIdentifiableError: LocalizedError {
-    
-    public var errorDescription: String? {
-        switch self {
-        case .unrecognizedIdentifier: return "Unrecognized Identifier"
-        case .unrecognizedType: return "Unrecognized Type"
-        }
-    }
-    
-}
