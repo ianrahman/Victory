@@ -46,7 +46,7 @@ class UIKitExtensionsTests: XCTestCase {
     // MARK: - Color
     
     func testPerformanceColor() {
-        let baseColor = UIColor.primaryRed
+        let baseColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         let val0 = 0
         let val1 = 1
         let val2 = 2

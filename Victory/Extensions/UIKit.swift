@@ -119,10 +119,8 @@ extension UINavigationController {
 
 extension UIColor {
     
-    static let primaryRed = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
-    
     static func performanceColor(value: Int, mid: Int, low: Int, high: Int) -> UIColor {
-        guard low != high else { return UIColor.primaryRed }
+        guard low != high, value >= low, value <= high else { return #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1) }
         
         enum BaseColors {
             static let r_red: CGFloat = 84/100
