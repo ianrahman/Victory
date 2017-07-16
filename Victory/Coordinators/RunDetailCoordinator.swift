@@ -173,32 +173,33 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
 
 extension RunDetailCoordinator {
     
-    private func setUI(for viewController: RunDetailViewController) {
+    private func setSharedUI(for viewController: RunDetailViewController) {
         viewController.navigationItem.leftBarButtonItem = viewController.closeBarButtonItem
         viewController.view.backgroundColor = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
         viewController.distanceLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         viewController.timeLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         viewController.startStopButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         viewController.startStopButton.backgroundColor = #colorLiteral(red: 0.6399999857, green: 0, blue: 0, alpha: 1)
-        
-        switch type {
-        case .previousRun(let run):
-            viewController.title = run.date.prettyDate
-            duration = run.duration
-            distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.meters)
-            viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
-            viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
-            viewController.startStopButton.isEnabled = false
-            viewController.startStopButton.isHidden = true
-            loadMap(for: viewController, run: run)
-        case .newRun(_):
-            viewController.title = "Let's go!"
-            viewController.distanceLabel.text = "Distance"
-            viewController.timeLabel.text = "Time"
-            viewController.startStopButton.isEnabled = true
-            viewController.startStopButton.isHidden = false
-            viewController.startStopButton.setTitle("Start", for: .normal)
-        }
+    }
+    
+    private func setPreviousRunUI(for viewController: RunDetailViewController, previousRun: Run) {
+        viewController.title = previousRun.date.prettyDate
+        duration = previousRun.duration
+        distance = Measurement<UnitLength>(value: Double(previousRun.distance), unit: UnitLength.meters)
+        viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
+        viewController.distanceLabel.text = "Distance: \(formattedDistance(for: distance))"
+        viewController.startStopButton.isEnabled = false
+        viewController.startStopButton.isHidden = true
+        loadMap(for: viewController, run: previousRun)
+    }
+    
+    private func setNewRunUI(for viewController: RunDetailViewController) {
+        viewController.title = "Let's go!"
+        viewController.distanceLabel.text = "Distance"
+        viewController.timeLabel.text = "Time"
+        viewController.startStopButton.isEnabled = true
+        viewController.startStopButton.isHidden = false
+        viewController.startStopButton.setTitle("Start", for: .normal)
     }
     
     private func setUpMapView(for viewController: RunDetailViewController) {
@@ -272,7 +273,15 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
     
     func viewDidLoad(_ viewController: RunDetailViewController) {
         runDetailViewController = viewController
-        setUI(for: viewController)
+        setSharedUI(for: viewController)
+        
+        switch type {
+        case .previousRun(let run):
+            setPreviousRunUI(for: viewController, previousRun: run)
+        case .newRun(_):
+            setNewRunUI(for: viewController)
+        }
+        
         requestLocationAccess()
         setUpLocationManager()
         setUpMapView(for: viewController)

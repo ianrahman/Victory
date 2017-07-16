@@ -27,8 +27,8 @@ extension StoryboardIdentifiableError: LocalizedError {
     
     public var errorDescription: String? {
         switch self {
-        case .unrecognizedIdentifier: return "Uncrecognized Identifier"
-        case .unrecognizedType: return "Uncrecognized Type"
+        case .unrecognizedIdentifier: return "Unrecognized Identifier"
+        case .unrecognizedType: return "Unrecognized Type"
         }
     }
     
