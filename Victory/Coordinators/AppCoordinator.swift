@@ -54,6 +54,7 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         showInitialViewController()
+        setGeneralAppearance()
     }
     
     /// Populate navigation controller with initial view controller

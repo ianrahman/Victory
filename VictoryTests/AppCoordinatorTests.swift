@@ -29,21 +29,31 @@ class AppCoordinatorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testAppCoordinatorStart() {
+    func testAppCoordinator_SetsRootViewController() {
         let rootViewController = appCoordinator.rootViewController
-        let appCoordinatorWindow = appCoordinator.window
+        
+        XCTAssert(rootViewController is UINavigationController, "Root view controller is incorrect type")
+    }
+    
+    func testAppCoordinator_HasCorrectNumberOfInitialChildViewControllers() {
+        let rootViewController = appCoordinator.rootViewController
         let childViewControllers = rootViewController.childViewControllers
         
-        guard
-            let appDelegate = UIApplication.shared.delegate,
-            let appDelegateWindowOptional = appDelegate.window,
-            let appDelegateWindow = appDelegateWindowOptional
-            else { fatalError("Could not access app delegate's window") }
-
-        XCTAssert(rootViewController is UINavigationController, "Root view controller is incorrect type")
         XCTAssertEqual(childViewControllers.count, 1, "Unexpected number of child view controllers")
+    }
+    
+    func testAppCoordinator_HasCorrectInitialChildViewController() {
+        let rootViewController = appCoordinator.rootViewController
+        let childViewControllers = rootViewController.childViewControllers
+        
         XCTAssert(childViewControllers.first is RunListViewController, "Child view controller is incorrect type")
-//        XCTAssertEqual(appCoordinatorWindow, appDelegateWindow, "App coordinator window is incorrect")
+    }
+    
+    func testAppCoordinator_SetsUILabelFont() {
+        let labelFont = UILabel.appearance().font
+        let bodyFont = appCoordinator.services.configuration.bodyFont
+        
+        XCTAssertEqual(labelFont, bodyFont, "Failed to set label font")
     }
     
 }
