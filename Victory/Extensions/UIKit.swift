@@ -33,7 +33,6 @@ extension UIStoryboard {
         guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             fatalError("Couldn't instantiate view controller with identifier \(T.storyboardIdentifier) ")
         }
-        
         return viewController
     }
     

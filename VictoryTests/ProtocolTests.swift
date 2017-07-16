@@ -64,4 +64,10 @@ class ProtocolTests: XCTestCase {
         XCTAssert(appCoordinator.childCoordinators.first === childCoordinator2, "Wrong child coordinator removed")
     }
     
+    // MARK: - Storyboard Identifiable
+    
+    func testStoryboardIdentifiable() {
+        // TODO: - Add test coverage
+    }
+    
 }

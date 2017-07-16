@@ -206,10 +206,10 @@
 			children = (
 				B4794D6B1F0B1C470002F179 /* Core */,
 				B44D1EE71F07478100A37106 /* Protocols */,
+				B44D1EE21F07417700A37106 /* Extensions */,
 				B40E5EB81F06886200C37AFE /* Coordinators */,
 				B48EE02C1F0499E800668DFD /* ViewControllers */,
 				B48EE02D1F049A3700668DFD /* Models */,
-				B44D1EE21F07417700A37106 /* Extensions */,
 				B40E5EC81F068B9A00C37AFE /* Supplementary */,
 			);
 			path = Victory;
