@@ -25,6 +25,8 @@ class UIKitExtensionsTests: XCTestCase {
         
     }
     
-    func test
+    func test() {
+        
+    }
     
 }

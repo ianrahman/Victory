@@ -78,14 +78,18 @@ final class AVService {
 }
 
 private enum avError: Error {
+        
         case assetError
+    
 }
 
 extension avError: LocalizedError {
+    
     public var errorDescription: String? {
         switch self {
         case .assetError:
             return NSLocalizedString("Error loading asset.", comment: "Check that provided name is correct.")
         }
     }
+    
 }

@@ -19,5 +19,17 @@ protocol StoryboardIdentifiable {
 enum StoryboardIdentifiableError: Error {
     
     case unrecognizedIdentifier
+    case unrecognizedType
+    
+}
+
+extension StoryboardIdentifiableError: LocalizedError {
+    
+    public var errorDescription: String? {
+        switch self {
+        case .unrecognizedIdentifier: return "Uncrecognized Identifier"
+        case .unrecognizedType: return "Uncrecognized Type"
+        }
+    }
     
 }

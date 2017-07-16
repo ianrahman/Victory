@@ -53,14 +53,13 @@ extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) throws -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.storyboardIdentifier, for: indexPath) as? T else {
             throw StoryboardIdentifiableError.unrecognizedIdentifier
-            fatalError("Could not find table view cell with identifier \(T.storyboardIdentifier)")
         }
         return cell
     }
     
-    func cellForRow<T: UITableViewCell>(at indexPath: IndexPath) -> T {
+    func cellForRow<T: UITableViewCell>(at indexPath: IndexPath) throws -> T {
         guard let cell = cellForRow(at: indexPath) as? T else {
-            fatalError("Could not get cell as type \(T.self)")
+            throw StoryboardIdentifiableError.unrecognizedType
         }
         return cell
     }
