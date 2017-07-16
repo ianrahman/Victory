@@ -16,6 +16,7 @@ extension UIStoryboard {
     enum Storyboard: String {
         case RunList
         case RunDetail
+        case FailTest
         
         /// The name of the storyboard's file, returned with capitalization applied
         var filename: String {
@@ -23,7 +24,7 @@ extension UIStoryboard {
         }
     }
     
-    convenience init(_ storyboard: Storyboard, bundle: Bundle? = nil) {
+    convenience init(_ storyboard: Storyboard, bundle: Bundle? = nil) throws {
         self.init(name: storyboard.filename, bundle: bundle)
     }
     

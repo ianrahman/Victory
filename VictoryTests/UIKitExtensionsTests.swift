@@ -25,7 +25,11 @@ class UIKitExtensionsTests: XCTestCase {
     
     func testStoryboardExtension() {
         for storyboard in iterateEnum(UIStoryboard.Storyboard.self) {
-            
+            do {
+                let _ = try UIStoryboard(storyboard)
+            } catch {
+                XCTFail("Storyboard with identifier \(storyboard.rawValue) not found")
+            }
         }
     }
     
