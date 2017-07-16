@@ -1,5 +1,5 @@
 //
-//  VictoryTests.swift
+//  CoordinatorTests.swift
 //  VictoryTests
 //
 //  Created by Ian Rahman on 7/15/17.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class VictoryTests: XCTestCase {
+class CoordinatorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

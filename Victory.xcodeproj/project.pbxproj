@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		2ADF2C57D27F9406F42A730A /* Pods_VictoryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447831D7F05D16B2E10AB92E /* Pods_VictoryTests.framework */; };
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
+		B43A42151F1ACE9F000084B8 /* CoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43A42141F1ACE9F000084B8 /* CoordinatorTests.swift */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
 		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
 		B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */; };
 		B456AE211F074BC200627D8E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC11F06892E00C37AFE /* Coordinator.swift */; };
-		B475F8EC1F1ABA840053CC9F /* VictoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F8EB1F1ABA840053CC9F /* VictoryTests.swift */; };
+		B475F8EC1F1ABA840053CC9F /* ServicesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B475F8EB1F1ABA840053CC9F /* ServicesTest.swift */; };
 		B48EDFFF1F04963000668DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EDFFE1F04963000668DFD /* AppDelegate.swift */; };
 		B48EE0011F04963000668DFD /* RunListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48EE0001F04963000668DFD /* RunListViewController.swift */; };
 		B48EE0061F04963000668DFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48EE0051F04963000668DFD /* Assets.xcassets */; };
@@ -51,11 +52,12 @@
 		A837E05E42EFE837EDBD1952 /* Pods_Victory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Victory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40E5EC11F06892E00C37AFE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		B43A42141F1ACE9F000084B8 /* CoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTests.swift; sourceTree = "<group>"; };
 		B44D1EE31F07418200A37106 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		B44D1EE51F0745B900A37106 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewCoordinator.swift; sourceTree = "<group>"; };
 		B475F8E91F1ABA840053CC9F /* VictoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VictoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B475F8EB1F1ABA840053CC9F /* VictoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VictoryTests.swift; sourceTree = "<group>"; };
+		B475F8EB1F1ABA840053CC9F /* ServicesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTest.swift; sourceTree = "<group>"; };
 		B475F8ED1F1ABA840053CC9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B48EDFFB1F04963000668DFD /* Victory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Victory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48EDFFE1F04963000668DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,8 +162,9 @@
 		B475F8EA1F1ABA840053CC9F /* VictoryTests */ = {
 			isa = PBXGroup;
 			children = (
-				B475F8EB1F1ABA840053CC9F /* VictoryTests.swift */,
 				B475F8ED1F1ABA840053CC9F /* Info.plist */,
+				B475F8EB1F1ABA840053CC9F /* ServicesTest.swift */,
+				B43A42141F1ACE9F000084B8 /* CoordinatorTests.swift */,
 			);
 			path = VictoryTests;
 			sourceTree = SOURCE_ROOT;
@@ -449,7 +452,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B475F8EC1F1ABA840053CC9F /* VictoryTests.swift in Sources */,
+				B43A42151F1ACE9F000084B8 /* CoordinatorTests.swift in Sources */,
+				B475F8EC1F1ABA840053CC9F /* ServicesTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,7 +510,7 @@
 				DEVELOPMENT_TEAM = 2Z5R483MNF;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = VictoryTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.VictoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -526,7 +530,7 @@
 				DEVELOPMENT_TEAM = 2Z5R483MNF;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = VictoryTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.EvergreenLabs.VictoryTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
