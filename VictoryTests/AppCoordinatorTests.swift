@@ -11,28 +11,27 @@ import XCTest
 
 class AppCoordinatorTests: XCTestCase {
     
-    let coordinator: AppCoordinator!
+    var appCoordinator: AppCoordinator!
     
     override func setUp() {
         super.setUp()
-        coordinator = AppCoordinator()
+        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let services = Services()
+        
+        appCoordinator = AppCoordinator(window: window, services: services)
+        appCoordinator.start()
     }
     
     override func tearDown() {
-        coordinator = nil
+        appCoordinator = nil
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testAppCoordinatorStart() {
+        
+        
+        XCTAssertEqual("42 mi", "42 mi", "Formatted distance is incorrect")
     }
     
 }
