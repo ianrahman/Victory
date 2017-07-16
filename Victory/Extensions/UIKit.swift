@@ -76,6 +76,8 @@ extension UITableView {
     
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) throws -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.storyboardIdentifier, for: indexPath) as? T else {
+            let error = StoryboardIdentifiableError.unrecognizedIdentifier
+            print("\(error.errorDescription): \(T.storyboardIdentifier)")
             throw StoryboardIdentifiableError.unrecognizedIdentifier
         }
         return cell
@@ -83,6 +85,8 @@ extension UITableView {
     
     func cellForRow<T: UITableViewCell>(at indexPath: IndexPath) throws -> T {
         guard let cell = cellForRow(at: indexPath) as? T else {
+            let error = StoryboardIdentifiableError.unrecognizedType
+            print("\(error.errorDescription): \(T.self)")
             throw StoryboardIdentifiableError.unrecognizedType
         }
         return cell
@@ -115,8 +119,10 @@ extension UINavigationController {
 
 extension UIColor {
     
+    static let primaryRed = #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1)
+    
     static func performanceColor(value: Int, mid: Int, low: Int, high: Int) -> UIColor {
-        guard low != high else { return #colorLiteral(red: 0.8399999738, green: 0, blue: 0, alpha: 1) }
+        guard low != high else { return UIColor.primaryRed }
         
         enum BaseColors {
             static let r_red: CGFloat = 84/100
