@@ -7,25 +7,46 @@
 //
 
 import XCTest
+import RealmSwift
 @testable import Victory
 
 class LocationTests: XCTestCase {
     
-    func testLocationModel() {
-        let testLatitude: Double = 1.0
-        let testLongitude = 2.0
+    var testLatitude: Double!
+    var testLongitude: Double!
+    var testTimestamp: Date!
+    var testRunObject: Run!
+    var location: Location!
+    
+    override func setUp() {
+        super.setUp()
+        
+        testLatitude = 1.0
+        testLongitude = 2.0
+        testRunObject = Run()
+        
         let formatter = DateFormatter()
-        let testRun = Run()
-        
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        guard let testTimestamp = formatter.date(from: "1989/12/30 12:34:56") else { fatalError() }
+        testTimestamp = formatter.date(from: "1989/12/30 12:34:56")
         
-        let location = Location()
+        location = Location(latitude: testLatitude, longitude: testLongitude, timestamp: testTimestamp, run: testRunObject)
+    }
+    
+    override func tearDown() {
+        testLatitude = nil
+        testLongitude = nil
+        testTimestamp = nil
+        testRunObject = nil
+        location = nil
         
+        super.tearDown()
+    }
+    
+    func testLocationModel() {
         location.latitude = testLatitude
         location.longitude = testLongitude
         location.timestamp = testTimestamp
-        location.run = testRun
+        location.run = testRunObject
         
         let latitude = location.latitude
         let longitude = location.longitude
@@ -35,7 +56,7 @@ class LocationTests: XCTestCase {
         XCTAssertEqual(testLatitude, latitude, "Latitude property incorrect")
         XCTAssertEqual(testLongitude, longitude, "Longitude property incorrect")
         XCTAssertEqual(testTimestamp, timestamp, "Timestamp property incorrect")
-        XCTAssertEqual(testRun, run, "Run property incorrect")
+        XCTAssertEqual(testRunObject, run, "Run property incorrect")
     }
     
 }

@@ -67,7 +67,7 @@ class ProtocolTests: XCTestCase {
     // MARK: - Storyboard Identifiable
     
     func testStoryboardIdentifiable() {
-        // TODO: - Add test coverage
+        // TODO: - Add test coverage for View Controller and Table View Cell
     }
     
 }
