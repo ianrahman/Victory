@@ -27,7 +27,8 @@ class UIKitExtensionsTests: XCTestCase {
         for storyboard in iterateEnum(UIStoryboard.Storyboard.self) {
             do {
                 let _ = try UIStoryboard(storyboard)
-            } catch {
+            } catch let error {
+                print(error)
                 XCTFail("Storyboard with identifier \(storyboard.rawValue) not found")
             }
         }

@@ -66,8 +66,10 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     // MARK: - General Functions
     
     func start() {
-        guard let storyboard = try? UIStoryboard(.RunDetail) else { return }
-        let viewController: RunDetailViewController = storyboard.instantiateViewController()
+        guard
+            let storyboard = try? UIStoryboard(.RunDetail),
+            let viewController: RunDetailViewController = try? storyboard.instantiateViewController()
+            else { return }
         configureAndPresent(viewController: viewController)
     }
     

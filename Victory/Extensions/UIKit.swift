@@ -33,8 +33,8 @@ extension UIStoryboard {
     func instantiateViewController<T: UIViewController>() throws -> T {
         guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             let error = StoryboardIdentifiableError.unrecognizedIdentifier
-            print("\(error.errorDescription): \(T.sto)")
-            throw StoryboardIdentifiableError.unrecognizedIdentifier
+            print("\(error.errorDescription): \(T.storyboardIdentifier)")
+            throw error
         }
         return viewController
     }
