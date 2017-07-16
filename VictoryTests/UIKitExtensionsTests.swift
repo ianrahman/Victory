@@ -28,8 +28,7 @@ class UIKitExtensionsTests: XCTestCase {
             do {
                 let _ = try UIStoryboard(storyboard)
             } catch let error {
-                print(error)
-                XCTFail("Storyboard with identifier \(storyboard.rawValue) not found")
+                XCTFail(error.localizedDescription)
             }
         }
     }
