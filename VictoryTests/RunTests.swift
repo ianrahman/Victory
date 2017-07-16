@@ -15,29 +15,27 @@ class RunTests: XCTestCase {
     func testRunModel() {
         let testDistance = 1
         let testDuration = 2
+        let testLocation = Location()
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         guard let testDate = formatter.date(from: "1989/12/30 12:34:56") else { fatalError() }
         
-        let testLocations = List<Location>()
-        testLocations.append(Location())
-        
         let run = Run()
         run.distance = testDistance
         run.duration = testDuration
         run.date = testDate
-        run.locations = testLocations
+        run.locations.append(testLocation)
 
         let distance = run.distance
         let duration = run.duration
         let date = run.date
-        let locations = run.locations
+        let location = run.locations.first
         
         XCTAssertEqual(distance, testDistance, "Distance property incorrect")
         XCTAssertEqual(duration, testDuration, "Duration property incorrect")
         XCTAssertEqual(date, testDate, "Date property incorrect")
-        XCTAssertEqual(locations, testLocations, "Locations property incorrect")
+        XCTAssertEqual(location, testLocation, "Locations property incorrect")
     }
     
 }
