@@ -50,8 +50,9 @@ extension UITableViewCell: StoryboardIdentifiable { }
 
 extension UITableView {
     
-    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) throws -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.storyboardIdentifier, for: indexPath) as? T else {
+            throw StoryboardIdentifiableError.unrecognizedIdentifier
             fatalError("Could not find table view cell with identifier \(T.storyboardIdentifier)")
         }
         return cell

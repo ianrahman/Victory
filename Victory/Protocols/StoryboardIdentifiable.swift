@@ -16,22 +16,8 @@ protocol StoryboardIdentifiable {
     
 }
 
-// MARK: - View Controller
-
-extension StoryboardIdentifiable where Self: UIViewController {
+enum StoryboardIdentifiableError: Error {
     
-    static var storyboardIdentifier: String {
-        return String(describing: self)
-    }
-    
-}
-
-// MARK: - Table View Cell
-
-extension StoryboardIdentifiable where Self: UITableViewCell {
-    
-    static var storyboardIdentifier: String {
-        return String(describing: self)
-    }
+    case unrecognizedIdentifier
     
 }

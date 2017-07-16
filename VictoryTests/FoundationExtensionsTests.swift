@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Victory
 
 class FoundationExtensionsTests: XCTestCase {
     
