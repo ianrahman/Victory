@@ -46,4 +46,11 @@ class ServicesTests: XCTestCase {
         XCTAssertEqual(formattedDate, "0:00:42", "Formatted date is incorrect")
     }
     
+    func testAvService() {
+        let avService = services.av
+        
+        avService.playTada()
+        
+    }
+    
 }

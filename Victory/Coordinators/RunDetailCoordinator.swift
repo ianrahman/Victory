@@ -116,7 +116,11 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
             services.realm.add(run)
         }
         
-        services.av.playTada()
+        do {
+            try services.av.playTada()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     // MARK: - Timer Functions

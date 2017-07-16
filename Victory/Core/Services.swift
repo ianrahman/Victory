@@ -68,7 +68,7 @@ final class AVService {
     
     private var player: AVAudioPlayer?
     
-    func playTada() {
+    func playTada() throws {
         
         if let asset = NSDataAsset(name:"TADA") {
             
@@ -76,8 +76,8 @@ final class AVService {
                 player = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
                 player?.prepareToPlay()
                 player?.play()
-            } catch let error as NSError {
-                print(error.localizedDescription)
+            } catch let error {
+                throw error
             }
         }
     }
