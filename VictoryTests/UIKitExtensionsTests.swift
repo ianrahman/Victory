@@ -23,8 +23,8 @@ class UIKitExtensionsTests: XCTestCase {
     
     // MARK: - Storyboard
     
-    func testStoryboardExtension() {
-        for storyboard in iterateEnum(UIStoryboard.Storyboard.self) {
+    func testStoryboardInstantiation() {
+        for storyboard in iterateOverEnum(UIStoryboard.Storyboard.self) {
             do {
                 let _ = try UIStoryboard(storyboard)
             } catch let error {
@@ -33,7 +33,7 @@ class UIKitExtensionsTests: XCTestCase {
         }
     }
     
-    private func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
+    private func iterateOverEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
         var i = 0
         return AnyIterator {
             let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
@@ -43,8 +43,10 @@ class UIKitExtensionsTests: XCTestCase {
         }
     }
     
-    func testInstantiateViewController() {
-        
+    func testViewControllerInstantiation() {
+        guard let storyboard = try? UIStoryboard(.RunList) else { XCt}
+            let viewController: RunListViewController = try? storyboard.instantiateViewController()
+            else { return }
     }
     
     // MARK: - Navigation Controller

@@ -16,7 +16,6 @@ extension UIStoryboard {
     enum Storyboard: String {
         case RunList
         case RunDetail
-        case FailTest
         
         /// The name of the storyboard's file, returned with capitalization applied
         var filename: String {
