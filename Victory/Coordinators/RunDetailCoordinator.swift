@@ -34,19 +34,8 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     var services: Services
     var childCoordinators: [Coordinator] = []
-    var rootViewController: UIViewController {
-        return self.navigationController
-    }
-    
+    private weak var delegate: RunDetailCoordinatorDelegate?
     private var runDetailViewController: RunDetailViewController?
-    
-    private lazy var navigationController: UINavigationController = {
-        let navigationController = UINavigationController()
-        return navigationController
-    }()
-    
-    weak var delegate: RunDetailCoordinatorDelegate?
-    
     private let type: RunDetailType
     private var running = false
     private var newRun = false
@@ -54,6 +43,16 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     private var duration: Int = 0
     private var distance = Measurement(value: 0, unit: UnitLength.meters)
     private lazy var locationList = [CLLocation]()
+    
+    var rootViewController: UIViewController {
+        return self.navigationController
+    }
+    
+    
+    private lazy var navigationController: UINavigationController = {
+        let navigationController = UINavigationController()
+        return navigationController
+    }()
     
     // MARK: - Init
     
@@ -119,7 +118,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         }
         
         do {
-            try services.av.playTada()
+            try services.av.playSound()
         } catch let error {
             print(error.localizedDescription)
         }
@@ -188,8 +187,8 @@ extension RunDetailCoordinator {
         viewController.title = previousRun.date.prettyDate
         duration = previousRun.duration
         distance = Measurement<UnitLength>(value: Double(previousRun.distance), unit: UnitLength.meters)
-        let formattedTimeString = formattedTime(for: TimeInterval(duration))
-        let formattedDistanceString = formattedDistance(for: distance)
+        let formattedTimeString = services.formatter.formatted(time: TimeInterval(duration))
+        let formattedDistanceString = services.formatter.formatted(measurement: distance)
         viewController.timeLabel.text = "Time: \(formattedTimeString)"
         viewController.distanceLabel.text = "Distance: \(formattedDistanceString)"
         viewController.startStopButton.isEnabled = false
@@ -248,25 +247,18 @@ extension RunDetailCoordinator {
     }
     
     private func updateDistanceLabel(for viewController: RunDetailViewController) {
-        let formattedDistance = services.formatter.measurement.string(from: distance)
+        let formattedDistance = services.formatter.formatted(measurement: distance)
         viewController.distanceLabel.text = "Distance: \(formattedDistance)"
     }
     
     private func updateTimeLabel(for viewController: RunDetailViewController) {
-        viewController.timeLabel.text = "Time: \(formattedTime(for: TimeInterval(duration)))"
+        let formattedTime = services.formatter.formatted(time: TimeInterval(duration))
+        viewController.timeLabel.text = "Time: \(formattedTime)"
     }
     
     private func updateButtonTitle(for viewController: RunDetailViewController) {
         let title = running ?  "Stop" : "Continue"
         viewController.startStopButton.setTitle(title, for: .normal)
-    }
-    
-    private func formattedTime(for time: TimeInterval) -> String {
-        return services.formatter.date.string(from: time) ?? ""
-    }
-    
-    private func formattedDistance(for distance: Measurement<UnitLength>) -> String {
-        return services.formatter.measurement.string(from: distance)
     }
     
 }

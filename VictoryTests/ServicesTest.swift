@@ -12,45 +12,65 @@ import XCTest
 class ServicesTests: XCTestCase {
     
     var services: Services!
+    var formatterService: FormatterService!
+    var avService: AVService!
     
     override func setUp() {
         super.setUp()
+        
         services = Services()
+        formatterService = services.formatter
+        avService = services.av
     }
     
     override func tearDown() {
         services = nil
+        formatterService = nil
+        avService = nil
+        
         super.tearDown()
     }
     
+    // MARK: - Formatter Service
+    
     func testMeasurementFormatter() {
-        let formatter = services.formatter
-        let measurementFormatter = formatter.measurement
-        
         let distance = Measurement<UnitLength>(value: Double(42.0), unit: UnitLength.miles)
-        let formattedDistance = measurementFormatter.string(from: distance)
+        
+        let formattedDistance = formatterService.formatted(measurement: distance)
         
         XCTAssertEqual(formattedDistance, "42 mi", "Formatted distance is incorrect")
     }
     
+    
     func testDateFormatter() {
-        let formatter = services.formatter
-        let dateFormatter = formatter.date
         let seconds = 42
-        let timeInterval = TimeInterval(seconds)
+        let timeInterval1 = TimeInterval(seconds)
+        let timeInterval2 = TimeInterval()
         
-        let formattedDate = dateFormatter.string(from: timeInterval)
+        let formattedTime1 = formatterService.formatted(time: timeInterval1)
+        let formattedTime2 = formatterService.formatted(time: timeInterval2)
         
-        XCTAssertEqual(formattedDate, "0:00:42", "Formatted date is incorrect")
+        XCTAssertEqual(formattedTime1, "0:00:42", "Formatted date is incorrect")
+        XCTAssertEqual(formattedTime2, "0:00:00", "Blank formatted date is incorrect")
     }
     
-    func testAvService() {
-        let avService = services.av
-        
+    // MARK: - AV Service
+    
+    func testAVServicePlaysSound() {
         do {
-            try avService.playTada()
+            try avService.playSound()
         } catch let error {
             XCTFail("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func testAVError() {
+        let avAssetErrorDescription = "Asset not found."
+        
+        do {
+            try avService.playSound("Error")
+        } catch let error {
+            XCTAssertEqual(error.localizedDescription, avAssetErrorDescription, "Failed to generate correct AV Error")
         }
     }
     

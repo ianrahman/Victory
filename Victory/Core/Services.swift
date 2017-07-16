@@ -46,19 +46,27 @@ final class LocationService {
 
 final class FormatterService {
     
-    let measurement: MeasurementFormatter = {
+    private lazy var measurementFormatter: MeasurementFormatter = {
         let formatter = MeasurementFormatter()
         formatter.numberFormatter.maximumFractionDigits = 2
         return formatter
     }()
     
-    let date: DateComponentsFormatter = {
+    private lazy var dateFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }()
+    
+    func formatted(measurement: Measurement<UnitLength>) -> String {
+        return measurementFormatter.string(from: measurement)
+    }
+    
+    func formatted(time: TimeInterval) -> String {
+        return dateFormatter.string(from: time) ?? "0:00:00"
+    }
     
 }
 
@@ -68,8 +76,8 @@ final class AVService {
     
     private var player: AVAudioPlayer?
     
-    func playTada() throws {
-        guard let asset = NSDataAsset(name: "TADA") else { throw avError.assetError }
+    func playSound(_ name: String = "TADA") throws {
+        guard let asset = NSDataAsset(name: name) else { throw avError.assetError }
         player = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
         player?.prepareToPlay()
         player?.play()
@@ -85,10 +93,10 @@ private enum avError: Error {
 
 extension avError: LocalizedError {
     
-    public var errorDescription: String? {
+    var errorDescription: String? {
         switch self {
         case .assetError:
-            return NSLocalizedString("Error loading asset.", comment: "Check that provided name is correct.")
+            return NSLocalizedString("Asset not found.", comment: "Check that provided name is correct.")
         }
     }
     

@@ -25,13 +25,25 @@ class AppCoordinatorTests: XCTestCase {
     
     override func tearDown() {
         appCoordinator = nil
+        
         super.tearDown()
     }
     
     func testAppCoordinatorStart() {
+        let rootViewController = appCoordinator.rootViewController
+        let appCoordinatorWindow = appCoordinator.window
+        let childViewControllers = rootViewController.childViewControllers
         
-        
-        XCTAssertEqual("42 mi", "42 mi", "Formatted distance is incorrect")
+        guard
+            let appDelegate = UIApplication.shared.delegate,
+            let appDelegateWindowOptional = appDelegate.window,
+            let appDelegateWindow = appDelegateWindowOptional
+            else { fatalError("Could not access app delegate's window") }
+
+        XCTAssert(rootViewController is UINavigationController, "Root view controller is incorrect type")
+        XCTAssertEqual(childViewControllers.count, 1, "Unexpected number of child view controllers")
+        XCTAssert(childViewControllers.first is RunListViewController, "Child view controller is incorrect type")
+//        XCTAssertEqual(appCoordinatorWindow, appDelegateWindow, "App coordinator window is incorrect")
     }
     
 }

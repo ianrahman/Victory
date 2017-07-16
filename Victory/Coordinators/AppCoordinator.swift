@@ -16,10 +16,14 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
     
     let services: Services
     var childCoordinators: [Coordinator] = []
-    var runs: [Run] {
+    private let window: UIWindow
+    private let runCellIdentifier = "runCell"
+    
+    private var runs: [Run] {
         return Array(services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
     }
-    var distanceRange: (low: Int, mid: Int, high: Int) {
+    
+    private var distanceRange: (low: Int, mid: Int, high: Int) {
         let runs = services.realm.objects(Run.self).sorted(byKeyPath: "distance")
         let low = runs.first?.distance ?? 0
         let high = runs.last?.distance ?? 0
@@ -27,13 +31,10 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         return (low, mid, high)
     }
     
-    private let runCellIdentifier = "runCell"
     
     var rootViewController: UIViewController {
         return self.navigationController
     }
-    
-    let window: UIWindow
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
@@ -148,7 +149,7 @@ extension AppCoordinator: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let run = runs[indexPath.row]
         let distance = Measurement<UnitLength>(value: Double(run.distance), unit: UnitLength.meters)
-        let formattedDistanceString = services.formatter.measurement.string(from: distance)
+        let formattedDistanceString = services.formatter.formatted(measurement: distance)
         let cell = tableView.dequeueReusableCell(withIdentifier: runCellIdentifier, for: indexPath)
         
         cell.textLabel?.text = "\(run.date.prettyDate)"
