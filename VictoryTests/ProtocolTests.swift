@@ -36,15 +36,32 @@ class ProtocolTests: XCTestCase {
     // MARK: - Coordinator Protocol
     
     func testAddChildCoordinator() {
-        let childCoordinator = AppCoordinator(window: window, services: services) as Coordinator
+        let childCoordinator1 = AppCoordinator(window: window, services: services) as Coordinator
+        let childCoordinator2 = AppCoordinator(window: window, services: services) as Coordinator
+        let childCoordinator3 = AppCoordinator(window: window, services: services) as Coordinator
         
-//        appCoordinator.addChildCoordinator(childCoordinator)
+        appCoordinator.addChildCoordinator(childCoordinator1)
+        appCoordinator.addChildCoordinator(childCoordinator2)
+        appCoordinator.addChildCoordinator(childCoordinator3)
         
-        XCTAssert(appCoordinator.childCoordinators.first === childCoordinator, "Failed to add child coordinator")
+        XCTAssert(appCoordinator.childCoordinators.count == 3, "Failed to add child coordinators")
+        XCTAssert(appCoordinator.childCoordinators.first === childCoordinator1, "First child coordinator incorrect after adding child coordinators")
+        XCTAssert(appCoordinator.childCoordinators.last === childCoordinator3, "Last child coordinator incorrect after adding child coordinators")
     }
     
     func testRemoveChildCoordinator() {
+        let childCoordinator1 = AppCoordinator(window: window, services: services) as Coordinator
+        let childCoordinator2 = AppCoordinator(window: window, services: services) as Coordinator
+        let childCoordinator3 = AppCoordinator(window: window, services: services) as Coordinator
         
+        appCoordinator.addChildCoordinator(childCoordinator1)
+        appCoordinator.addChildCoordinator(childCoordinator2)
+        appCoordinator.addChildCoordinator(childCoordinator3)
+        
+        guard let firstChild = appCoordinator.childCoordinators.first else { XCTFail("Failed to access first child coordinator"); return }
+        appCoordinator.removeChildCoordinator(firstChild)
+        XCTAssert(appCoordinator.childCoordinators.count == 2, "Failed to remove child coordinators")
+        XCTAssert(appCoordinator.childCoordinators.first === childCoordinator2, "Wrong child coordinator removed")
     }
     
 }
