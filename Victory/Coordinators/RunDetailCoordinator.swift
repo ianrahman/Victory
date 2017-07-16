@@ -456,8 +456,8 @@ extension RunDetailCoordinator {
             let coordinates = [start.coordinate, end.coordinate]
             let segment = MulticolorPolyline(coordinates: coordinates, count: 2)
             segment.color = UIColor.performanceColor(value: Int(speed),
-                                                     mid: Int(midSpeed),
                                                      low: Int(minSpeed),
+                                                     mid: Int(midSpeed),
                                                      high: Int(maxSpeed))
             segments.append(segment)
         }

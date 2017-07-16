@@ -56,15 +56,15 @@ class UIKitExtensionsTests: XCTestCase {
         let mid = 2
         let high = 3
         
-        let uniformPerformanceColor = UIColor.performanceColor(value: val0, mid: mid, low: low, high: low)
-        let lowPerformanceColor = UIColor.performanceColor(value: low, mid: mid, low: low, high: high)
-        let midPerformanceColor = UIColor.performanceColor(value: mid, mid: mid, low: low, high: high)
-        let highPerformanceColor = UIColor.performanceColor(value: high, mid: mid, low: low, high: high)
-        let performanceColor0 = UIColor.performanceColor(value: val0, mid: mid, low: low, high: high)
-        let performanceColor1 = UIColor.performanceColor(value: val1, mid: mid, low: low, high: high)
-        let performanceColor2 = UIColor.performanceColor(value: val2, mid: mid, low: low, high: high)
-        let performanceColor3 = UIColor.performanceColor(value: val3, mid: mid, low: low, high: high)
-        let performanceColor4 = UIColor.performanceColor(value: val4, mid: mid, low: low, high: high)
+        let uniformPerformanceColor = UIColor.performanceColor(value: val0, low: low, mid: mid, high: low)
+        let lowPerformanceColor = UIColor.performanceColor(value: low, low: low, mid: mid, high: high)
+        let midPerformanceColor = UIColor.performanceColor(value: mid, low: low, mid: mid, high: high)
+        let highPerformanceColor = UIColor.performanceColor(value: high, low: low, mid: mid, high: high)
+        let performanceColor0 = UIColor.performanceColor(value: val0, low: low, mid: mid, high: high)
+        let performanceColor1 = UIColor.performanceColor(value: val1, low: low, mid: mid, high: high)
+        let performanceColor2 = UIColor.performanceColor(value: val2, low: low, mid: mid, high: high)
+        let performanceColor3 = UIColor.performanceColor(value: val3, low: low, mid: mid, high: high)
+        let performanceColor4 = UIColor.performanceColor(value: val4, low: low, mid: mid, high: high)
         
         XCTAssert(uniformPerformanceColor == baseColor, "Failed to return base color for uniform speed")
         XCTAssert(performanceColor0 == baseColor, "Failed to return base color for value outside expected range")
