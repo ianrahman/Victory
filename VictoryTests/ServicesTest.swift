@@ -49,8 +49,11 @@ class ServicesTests: XCTestCase {
     func testAvService() {
         let avService = services.av
         
-        avService.playTada()
-        
+        do {
+            try avService.playTada()
+        } catch let error {
+            XCTFail("Error: \(error.localizedDescription)")
+        }
     }
     
 }

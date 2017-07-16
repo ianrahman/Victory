@@ -70,16 +70,24 @@ final class AVService {
     
     func playTada() throws {
         
-        if let asset = NSDataAsset(name:"TADA") {
-            
-            do {
-                player = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
-                player?.prepareToPlay()
-                player?.play()
-            } catch let error {
-                throw error
-            }
-        }
+        guard let asset = NSDataAsset(name:"TADA") else { throw avError.assetError }
+                
+        player = try AVAudioPlayer(data:asset.data, fileTypeHint:"wav")
+        player?.prepareToPlay()
+        player?.play()
     }
     
+}
+
+private enum avError: Error {
+        case assetError
+}
+
+extension avError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .assetError:
+            return NSLocalizedString("Error loading asset.", comment: "Check that provided name is correct.")
+        }
+    }
 }
