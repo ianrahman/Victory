@@ -15,13 +15,11 @@ class ServicesTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
         services = Services()
     }
     
     override func tearDown() {
         services = nil
-        
         super.tearDown()
     }
     
