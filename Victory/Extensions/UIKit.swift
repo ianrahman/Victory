@@ -13,7 +13,7 @@ import UIKit
 extension UIStoryboard {
     
     // Enumeration of all storyboard names used in the app
-    enum Storyboard: String, EnumCollection {
+    enum Storyboard: String {
         case RunList
         case RunDetail
         

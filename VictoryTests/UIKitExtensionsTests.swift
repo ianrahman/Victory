@@ -24,8 +24,18 @@ class UIKitExtensionsTests: XCTestCase {
     // MARK: - Storyboard
     
     func testStoryboardExtension() {
-        for storyboard in UIStoryboard.Storyboard.allValues {
+        for storyboard in iterateEnum(UIStoryboard.Storyboard.self) {
             
+        }
+    }
+    
+    private func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
+        var i = 0
+        return AnyIterator {
+            let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
+            if next.hashValue != i { return nil }
+            i += 1
+            return next
         }
     }
     

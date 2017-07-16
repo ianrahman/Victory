@@ -11,7 +11,6 @@
 		B40E5EC31F06896900C37AFE /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E5EC21F06896800C37AFE /* Services.swift */; };
 		B42D46B31F1BD4480080CBBC /* UIKitExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D46B21F1BD4480080CBBC /* UIKitExtensionsTests.swift */; };
 		B42D46B51F1BD45A0080CBBC /* FoundationExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D46B41F1BD45A0080CBBC /* FoundationExtensionsTests.swift */; };
-		B42D46BB1F1BDF070080CBBC /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D46BA1F1BDF070080CBBC /* EnumCollection.swift */; };
 		B43A42151F1ACE9F000084B8 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43A42141F1ACE9F000084B8 /* AppCoordinatorTests.swift */; };
 		B44D1EE41F07418200A37106 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE31F07418200A37106 /* UIKit.swift */; };
 		B44D1EE61F0745B900A37106 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D1EE51F0745B900A37106 /* AppCoordinator.swift */; };
@@ -58,7 +57,6 @@
 		B40E5EC21F06896800C37AFE /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		B42D46B21F1BD4480080CBBC /* UIKitExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensionsTests.swift; sourceTree = "<group>"; };
 		B42D46B41F1BD45A0080CBBC /* FoundationExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationExtensionsTests.swift; sourceTree = "<group>"; };
-		B42D46BA1F1BDF070080CBBC /* EnumCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		B43A42141F1ACE9F000084B8 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		B44D1EE31F07418200A37106 /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		B44D1EE51F0745B900A37106 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				B40E5EC11F06892E00C37AFE /* Coordinator.swift */,
 				B44D1EE81F07479B00A37106 /* RootViewCoordinator.swift */,
 				B4B1A9131F07FB64000E3639 /* StoryboardIdentifiable.swift */,
-				B42D46BA1F1BDF070080CBBC /* EnumCollection.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -484,7 +481,6 @@
 				B48EE0311F049BF000668DFD /* Location.swift in Sources */,
 				B4C34CEC1F09368500644A23 /* RunDetailCoordinator.swift in Sources */,
 				B4ACE4CA1F0D4DB30084A6F3 /* MulticolorPolyline.swift in Sources */,
-				B42D46BB1F1BDF070080CBBC /* EnumCollection.swift in Sources */,
 				B44D1EE91F07479B00A37106 /* RootViewCoordinator.swift in Sources */,
 				B40E5EC31F06896900C37AFE /* Services.swift in Sources */,
 				B4B95A5C1F054FB200FE8C22 /* RunDetailViewController.swift in Sources */,
