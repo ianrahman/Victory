@@ -21,12 +21,22 @@ class UIKitExtensionsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testStoryboardExtensions() {
+    // MARK: - Storyboard
+    
+    func testStoryboardExtension() {
+        for storyboard in UIStoryboard.Storyboard.allValues {
+            
+        }
+    }
+    
+    func testInstantiateViewController() {
         
     }
     
-    func test() {
-        
-    }
+    // MARK: - Navigation Controller
+    
+    
+    // MARK: - Color
+    
     
 }
