@@ -23,15 +23,6 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         return Array(services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
     }
     
-    private var distanceRange: (low: Int, mid: Int, high: Int) {
-        let runs = services.realm.objects(Run.self).sorted(byKeyPath: "distance")
-        let low = runs.first?.distance ?? 0
-        let high = runs.last?.distance ?? 0
-        let mid = (low + high) / 2
-        return (low, mid, high)
-    }
-    
-    
     var rootViewController: UIViewController {
         return self.navigationController
     }
