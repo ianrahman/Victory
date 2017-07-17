@@ -48,7 +48,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
         return self.navigationController
     }
     
-    
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController()
         return navigationController

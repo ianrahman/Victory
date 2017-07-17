@@ -35,7 +35,7 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssert(rootViewController is UINavigationController, "Root view controller is incorrect type")
     }
     
-    func testAppCoordinator_HasCorrectNumberOfInitialChildViewControllers() {
+    func testAppCoordinator_HasOneInitialChildViewControllers() {
         let rootViewController = appCoordinator.rootViewController
         let childViewControllers = rootViewController.childViewControllers
         
@@ -54,6 +54,30 @@ class AppCoordinatorTests: XCTestCase {
         let bodyFont = appCoordinator.services.configuration.bodyFont
         
         XCTAssertEqual(labelFont, bodyFont, "Failed to set label font")
+    }
+    
+    func testAppCoordinator_DidTapNewRunButtonAddsOneChildCoordinator() {
+        appCoordinator.didTapNewRunButton()
+        
+        XCTAssertEqual(appCoordinator.childCoordinators.count, 1, "Failed to add correct number of child coordinators")
+    }
+    
+    func testAppCoordinator_DidTapNewRunButtonAddsCorrectChildCoordinator() {
+        appCoordinator.didTapNewRunButton()
+        
+        let firstChildCoordinator = appCoordinator.childCoordinators.first as? RunDetailCoordinator
+        
+        XCTAssertNotNil(firstChildCoordinator, "Failed to add correct child coordinator")
+    }
+    
+    func testAppCoordinator_DidTapNewRunButtonPresentsChildRootViewController() {
+        appCoordinator.didTapNewRunButton()
+        
+        let childNavigationController = appCoordinator.childCoordinators.first?.rootViewController as? UINavigationController
+        let topViewController = childNavigationController?.childViewControllers.first as? RunDetailViewController
+        
+        XCTAssertNotNil(childNavigationController?.view, "Failed to load Run Detail navigation controller")
+        XCTAssertNotNil(topViewController?.view, "Failed to load Run Detail view controller")
     }
     
 }
