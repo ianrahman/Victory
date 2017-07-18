@@ -64,8 +64,8 @@ extension Date {
     }
     
     /// Get the year, month, day, hour, minute, and second concatinated as an Int
-    public var id: Int? {
+    public var id: Int {
         let s = "\(year)\(month)\(day)\(hour)\(minute)\(second)"
-        return Int(s)
+        return Int(s) ?? 0
     }
 }

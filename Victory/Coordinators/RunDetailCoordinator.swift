@@ -23,6 +23,7 @@ enum RunDetailType {
 protocol RunDetailCoordinatorDelegate: class {
     
     func didTapCloseButton(runDetailCoordinator: RunDetailCoordinator)
+    func didSaveRun(_ run: Run)
     
 }
 
@@ -101,7 +102,6 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
     
     private func saveRun() {
         let run = Run()
-        run.id = Date().id ?? Int(Date().timeIntervalSince1970)
         run.duration = duration
         run.distance = Int(distance.value)
         
@@ -112,9 +112,7 @@ class RunDetailCoordinator: NSObject, RootViewCoordinator {
             run.locations.append(locationObject)
         }
         
-        try! services.realm.write {
-            services.realm.add(run)
-        }
+        delegate?.didSaveRun(run)
         
         do {
             try services.av.playSound()

@@ -15,7 +15,21 @@ import AVFoundation
 
 final class Services {
     
-    let realm = try! Realm()
+    let realm: Realm = {
+        
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                    migration.enumerateObjects(ofType: Run.className()) { oldObject, newObject in
+                        let id = oldObject!["id"] as! Int
+                        newObject!["id"] = UUID().uuidString
+                    }
+                }
+        })
+        
+        return try! Realm()
+    }()
     let configuration = ConfigurationService()
     let location = LocationService()
     let formatter = FormatterService()

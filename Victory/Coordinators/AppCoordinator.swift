@@ -161,4 +161,10 @@ extension AppCoordinator: RunDetailCoordinatorDelegate {
         removeChildCoordinator(runDetailCoordinator)
     }
     
+    func didSaveRun(_ run: Run) {
+        try! services.realm.write {
+            services.realm.add(run)
+        }
+    }
+    
 }

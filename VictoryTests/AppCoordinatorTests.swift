@@ -80,4 +80,25 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertNotNil(topViewController?.view, "Failed to load Run Detail view controller")
     }
     
+    func testAppCoordinator_DidSaveRunAddsRun() {
+        let runs: [Run] = Array(appCoordinator.services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
+        let initialRunCount = runs.count
+        let run = Run()
+        
+        appCoordinator.didSaveRun(run)
+        let newRunCount = runs.count
+        
+        XCTAssert(initialRunCount == newRunCount - 1, "Failed to save new run")
+    }
+    
+    func testAppCoordinator_RemovesRun() {
+        let runs: [Run] = Array(appCoordinator.services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
+        let tableView = UITableView()
+        tableView.delegate = appCoordinator
+        tableView.dataSource = appCoordinator
+        tableView.reloadData()
+        
+        
+    }
+    
 }

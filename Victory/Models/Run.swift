@@ -35,13 +35,13 @@ class Run: Object {
     @objc dynamic var date: Date = Date()
     
     /// Concatenation of date components
-    @objc dynamic var id: Int = 0
+    @objc dynamic var id: String = UUID().uuidString
     
     var locations = List<Location>()
     
     // MARK: - Functions
     
-    override class func primaryKey() -> String? {
+    override class func primaryKey() -> String {
         return "id"
     }
     

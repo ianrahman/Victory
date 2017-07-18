@@ -50,11 +50,13 @@ class RunTests: XCTestCase {
         let duration = run.duration
         let date = run.date
         let location = run.locations.first
+        let id = run.id
         
         XCTAssertEqual(distance, testDistance, "Distance property incorrect")
         XCTAssertEqual(duration, testDuration, "Duration property incorrect")
         XCTAssertEqual(date, testDate, "Date property incorrect")
         XCTAssertEqual(location, testLocations.first, "Locations property incorrect")
+        XCTAssertNotNil(id, "ID property not set")
     }
     
 }
