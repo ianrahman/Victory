@@ -61,12 +61,10 @@ final class AppCoordinator: NSObject, RootViewCoordinator {
         UILabel.appearance().font = services.configuration.bodyFont
     }
     
-    private func removeRun(for tableView: UITableView, at indexPath: IndexPath) {
-        let runToDelete = runs[indexPath.row]
+    private func removeRun(_ run: Run) {
         try! services.realm.write {
-            services.realm.delete(runToDelete)
+            services.realm.delete(run)
         }
-        reloadData(for: tableView)
     }
     
 }
@@ -90,10 +88,6 @@ extension AppCoordinator: RunListCoordinator {
         runDetailCoordinator.start()
         addChildCoordinator(runDetailCoordinator)
         rootViewController.present(runDetailCoordinator.rootViewController, animated: true)
-    }
-    
-    private func reloadData(for tableView: UITableView) {
-        tableView.reloadData()
     }
     
     private func setUI(for viewController: RunListViewController) {
@@ -122,7 +116,10 @@ extension AppCoordinator: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            removeRun(for: tableView, at: indexPath)
+            let runToDelete = runs[indexPath.row]
+            removeRun(runToDelete)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         default:
             break
         }

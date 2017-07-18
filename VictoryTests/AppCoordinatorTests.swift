@@ -12,19 +12,25 @@ import XCTest
 class AppCoordinatorTests: XCTestCase {
     
     var appCoordinator: AppCoordinator!
+    var services: Services!
+    var run: Run!
     
     override func setUp() {
         super.setUp()
         
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let services = Services()
+        let serv = Services()
         
-        appCoordinator = AppCoordinator(window: window, services: services)
+        appCoordinator = AppCoordinator(window: window, services: serv)
         appCoordinator.start()
+        services = serv
+        run = Run()
     }
     
     override func tearDown() {
         appCoordinator = nil
+        services = nil
+        run = nil
         
         super.tearDown()
     }
@@ -51,7 +57,7 @@ class AppCoordinatorTests: XCTestCase {
     
     func testAppCoordinator_SetsUILabelFont() {
         let labelFont = UILabel.appearance().font
-        let bodyFont = appCoordinator.services.configuration.bodyFont
+        let bodyFont = services.configuration.bodyFont
         
         XCTAssertEqual(labelFont, bodyFont, "Failed to set label font")
     }
@@ -80,28 +86,36 @@ class AppCoordinatorTests: XCTestCase {
         XCTAssertNotNil(topViewController?.view, "Failed to load Run Detail view controller")
     }
     
+    func testAppCoordinator_DidTapCloseButtonRemovesChildCoordinator() {
+        let runDetailCoordinator = RunDetailCoordinator(with: services, delegate: appCoordinator, type: .newRun)
+        appCoordinator.addChildCoordinator(runDetailCoordinator)
+        
+        var childCoordinator = appCoordinator.childCoordinators.first
+        
+        XCTAssertNotNil(childCoordinator, "Failed to load child coordinator")
+        
+        appCoordinator.didTapCloseButton(runDetailCoordinator: runDetailCoordinator)
+        
+        childCoordinator = appCoordinator.childCoordinators.first
+        
+        XCTAssertNil(childCoordinator, "Failed to remove child coordinator")
+    }
+    
     func testAppCoordinator_DidSaveRunAddsRun() {
-        let oldRuns: [Run] = Array(appCoordinator.services.realm.objects(Run.self))
+        let oldRuns: [Run] = Array(services.realm.objects(Run.self))
         let initialRunCount = oldRuns.count
         
-        let run = Run()
         appCoordinator.didSaveRun(run)
         
-        let newRuns: [Run] = Array(appCoordinator.services.realm.objects(Run.self))
+        let newRuns: [Run] = Array(services.realm.objects(Run.self))
         let newRunCount = newRuns.count
         
         XCTAssert(initialRunCount == newRunCount - 1, "Failed to add run to realm")
         XCTAssert(newRuns.contains(run), "Failed to save new run")
-    }
-    
-    func testAppCoordinator_RemovesRun() {
-        let runs: [Run] = Array(appCoordinator.services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
-        let tableView = UITableView()
-        tableView.delegate = appCoordinator
-        tableView.dataSource = appCoordinator
-        tableView.reloadData()
         
-        
+        try! services.realm.write {
+            services.realm.delete(run)
+        }
     }
     
 }
