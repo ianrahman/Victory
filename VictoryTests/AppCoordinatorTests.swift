@@ -81,14 +81,17 @@ class AppCoordinatorTests: XCTestCase {
     }
     
     func testAppCoordinator_DidSaveRunAddsRun() {
-        let runs: [Run] = Array(appCoordinator.services.realm.objects(Run.self).sorted(byKeyPath: "date")).reversed()
-        let initialRunCount = runs.count
+        let oldRuns: [Run] = Array(appCoordinator.services.realm.objects(Run.self))
+        let initialRunCount = oldRuns.count
+        
         let run = Run()
-        
         appCoordinator.didSaveRun(run)
-        let newRunCount = runs.count
         
-        XCTAssert(initialRunCount == newRunCount - 1, "Failed to save new run")
+        let newRuns: [Run] = Array(appCoordinator.services.realm.objects(Run.self))
+        let newRunCount = newRuns.count
+        
+        XCTAssert(initialRunCount == newRunCount - 1, "Failed to add run to realm")
+        XCTAssert(newRuns.contains(run), "Failed to save new run")
     }
     
     func testAppCoordinator_RemovesRun() {
