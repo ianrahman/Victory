@@ -12,7 +12,8 @@ Feel free to use the source code for projects of your own, or submit issues and 
 
 #### Victory uses the following:
 
-* App Coordinator pattern
+* Coordinator Pattern
+* Functional Design
 * Dependency Injection
 * Protocol Oriented Programming
 * Realm Mobile Database
