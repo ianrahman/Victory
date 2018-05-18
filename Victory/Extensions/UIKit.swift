@@ -32,7 +32,7 @@ extension UIStoryboard {
     func instantiateViewController<T: UIViewController>() throws -> T {
         guard let viewController = self.instantiateViewController(withIdentifier: T.storyboardIdentifier) as? T else {
             let error = StoryboardIdentifiableError.unrecognizedIdentifier
-            print("\(error.errorDescription): \(T.storyboardIdentifier)")
+            print("\(error.storyboardErrorDescription): \(T.storyboardIdentifier)")
             throw error
         }
         return viewController
@@ -53,7 +53,7 @@ enum StoryboardIdentifiableError: Error {
 
 extension StoryboardIdentifiableError: LocalizedError {
     
-    public var errorDescription: String {
+    public var storyboardErrorDescription: String {
         switch self {
         case .unrecognizedIdentifier: return "Unrecognized Identifier"
         case .unrecognizedType: return "Unrecognized Type"
@@ -77,7 +77,7 @@ extension UITableView {
     func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) throws -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.storyboardIdentifier, for: indexPath) as? T else {
             let error = StoryboardIdentifiableError.unrecognizedIdentifier
-            print("\(error.errorDescription): \(T.storyboardIdentifier)")
+            print("\(error.storyboardErrorDescription): \(T.storyboardIdentifier)")
             throw StoryboardIdentifiableError.unrecognizedIdentifier
         }
         return cell
@@ -86,7 +86,7 @@ extension UITableView {
     func cellForRow<T: UITableViewCell>(at indexPath: IndexPath) throws -> T {
         guard let cell = cellForRow(at: indexPath) as? T else {
             let error = StoryboardIdentifiableError.unrecognizedType
-            print("\(error.errorDescription): \(T.self)")
+            print("\(error.storyboardErrorDescription): \(T.self)")
             throw StoryboardIdentifiableError.unrecognizedType
         }
         return cell
@@ -104,8 +104,8 @@ extension UINavigationController {
         self.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let configuration = Services().configuration
         self.navigationBar.titleTextAttributes = [
-            NSAttributedStringKey.font.rawValue: configuration.titleFont,
-            NSAttributedStringKey.foregroundColor.rawValue: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            NSAttributedStringKey.font: configuration.titleFont,
+            NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         ]
     }
     

@@ -271,7 +271,7 @@ extension RunDetailCoordinator: RunDetailViewControllerDelegate {
         switch type {
         case .previousRun(let run):
             setPreviousRunUI(for: viewController, previousRun: run)
-        case .newRun(_):
+        case .newRun:
             setNewRunUI(for: viewController)
         }
         
